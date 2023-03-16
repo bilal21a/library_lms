@@ -1,9 +1,11 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,7 +16,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-// Create admin user
+        // Create admin user
         DB::table('users')->insert([
             'personal_id' => Str::random(10),
             'name' => 'Admin User',
@@ -27,6 +29,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user=User::find(1);
+        $role=Role::find(1);
+        $user->assignRole($role);
 
         // Create regular user
         DB::table('users')->insert([
@@ -41,6 +46,9 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+        $user=User::find(2);
+        $role=Role::find(2);
+        $user->assignRole($role);
 
 
     }
