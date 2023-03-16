@@ -1,5 +1,5 @@
 <div id="nav" class="nav-container d-flex" data-vertical-unpinned="10000" data-vertical-mobile="600"
-    data-disable-pinning="true">
+     data-disable-pinning="true">
 
 
     <div class="nav-content d-flex">
@@ -18,7 +18,7 @@
         <!-- Language Switch Start -->
         <div class="language-switch-container">
             <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">EN</button>
+                    aria-expanded="false">EN</button>
             <div class="dropdown-menu">
                 <a href="#" class="dropdown-item">DE</a>
                 <a href="#" class="dropdown-item active">EN</a>
@@ -38,10 +38,10 @@
             $avatar = 'https://ui-avatars.com/api/?background=' . $background . '&color=' . $text . '&name=' . $user_name;
 
         @endphp
-        <!-- User Menu Start -->
+            <!-- User Menu Start -->
         <div class="user-container d-flex">
             <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+               aria-expanded="false">
                 <img src="{{ $avatar }}" class="img-fluid rounded-xl profile" alt="thumb" id="contactImage">
                 <div class="name mt-1">Dummy </div>
             </a>
@@ -90,19 +90,19 @@
             <ul id="menu" class="menu">
                 <li>
                     <a class="{{ request()->is('customer') ? 'active' : '' }}" href="{{ route('customer') }}">
-                        {{-- <i data-acorn-icon="mobile" class="mobile" data-acorn-size="18"></i> --}}
+                        <i class="bi bi-person" data-acorn-size="18"></i>
                         <span class="label">Customer</span>
                     </a>
                 </li>
                 <li>
                     <a class="{{ request()->is('product') ? 'active' : '' }}" href="{{ route('product') }}">
-                        {{-- <i data-acorn-icon="mobile" class="mobile" data-acorn-size="18"></i> --}}
+                        <i class="bi bi-cart3" data-acorn-size="18"></i>
                         <span class="label">Products</span>
                     </a>
                 </li>
                 <li>
                     <a class="{{ request()->is('stores') ? 'active' : '' }}" href="{{ route('stores_view') }}">
-                        {{-- <i data-acorn-icon="mobile" class="mobile" data-acorn-size="18"></i> --}}
+                        <i class="bi bi-shop" data-acorn-size="18"></i>
                         <span class="label">Store</span>
                     </a>
                 </li>
@@ -114,14 +114,14 @@
                     <ul id="user_management">
                         <li>
                             <a class="{{ request()->is('user_management') ? 'active' : '' }}"
-                                href="{{ route('user_management') }}">
-                                {{-- <i data-acorn-icon="mobile" class="mobile" data-acorn-size="18"></i> --}}
+                               href="{{ route('user_management') }}">
+                                <i class="bi bi-person" data-acorn-size="18"></i>
                                 <span class="label">User Management</span>
                             </a>
                         </li>
                         <li>
-                            <a class="{{ request()->is('role') ? 'active' : '' }}" href="{{route('role_view')}}">
-                                {{-- <i data-acorn-icon="mobile" class="mobile" data-acorn-size="18"></i> --}}
+                            <a class="{{ request()->is('role') ? 'active' : '' }}" href="{{ route('role_view') }}">
+                                <i class="bi bi-cash" data-acorn-size="18"></i>
                                 <span class="label">Roles</span>
                             </a>
                         </li>
