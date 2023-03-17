@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -18,15 +21,70 @@ class UserController extends Controller
 
         return DataTables::of($users)
             ->addColumn('action', function ($user) {
-               return $this->get_buttons();
+               return $this->get_buttons($user->id);
             })
             ->make(true);
     }
 
-    public function get_buttons()
+    public function add_user(Request $request)
     {
-        return '        
-        <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+        // dd($request->all());
+
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'email' => ['required', Rule::unique('users')],
+                'password' => 'required|min:8',
+                'role' => 'required',
+            ],
+        );
+
+        if ($validate->fails()) {
+            return response()->json( $validate->errors()->first(),500);
+        }
+
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password= Hash::make($request->password);
+        // $user->role= $request->role;
+        $user->save();
+        return 'Success';
+    }
+
+    public function edit_user($id)
+    {
+        $user=User::find($id);
+        return view('user.users.editUser' , compact('user'));
+    }
+
+    public function update_user(Request $request)
+    {
+        $agent=User::find($request->id);
+        $agent->name=$request->name;
+        // $agent->role=$request->role;
+        $agent->password=$request->password != null?  Hash::make($request->password) : $agent->password;
+        $agent->save();
+        return 'User Updated Successfully';
+    }
+
+    public function delete_user($id)
+    {
+
+            $agent=User::find($id);
+
+            $agent->delete();
+            return 'User Deleted Succesfully';
+    }
+
+
+
+
+    public function get_buttons( $id)
+    {
+        return '
+        <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="editUser(' . $id . ')" type="button" data-bs-toggle="modal" data-bs-target="#EditModal">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                 class="acorn-icons acorn-icons-edit-square undefined">
@@ -39,7 +97,7 @@ class UserController extends Controller
             </svg>
             <span class="d-none d-xxl-inline-block">Edit</span>
         </button>
-        <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" type="button">
+        <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="deleteUser(' . $id . ')" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                 class="acorn-icons acorn-icons-bin undefined">
