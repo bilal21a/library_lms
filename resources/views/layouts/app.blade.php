@@ -154,29 +154,6 @@
             }
         })
     </script>
-    {{-- accordian js --}}
-    <script>
-        const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
-
-
-        accordionItemHeaders.forEach(accordionItemHeader => {
-            accordionItemHeader.addEventListener("click", event => {
-                accordionItemHeader.classList.toggle("active");
-                const accordionItemBody = accordionItemHeader.nextElementSibling;
-                if (accordionItemHeader.classList.contains("active")) {
-                    accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
-                } else {
-                    accordionItemBody.style.maxHeight = 0;
-                }
-
-            });
-        });
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js">
-    </script>
-    <script src="{{ asset('acron/notificationnew.js') }}"></script>
 
 
     @yield('js_after')

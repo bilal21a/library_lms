@@ -192,14 +192,9 @@
                     <div></div>
                     </form>
                 </div>
-                {{-- <div class="modal-footer">
-                    <button type="button" onclick="load_table()" class="btn btn-primary">Save changes</button>
-                </div> --}}
             </div>
         </div>
     </div>
-    {{-- Edit User End  --}}
-    <!-- Content End -->
 @endsection
 
 @section('js_after')
