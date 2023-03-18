@@ -37,6 +37,7 @@ Route::get('/product/edit_product', [ProductsController::class, 'edit_product'])
 
 Route::get('/user_management', [UserController::class, 'user_management'])->name('user_management');
 Route::get('/get_users', [UserController::class, 'get_users'])->name('get_users');
+Route::get('/user_add_show', [UserController::class, 'user_add_show'])->name('user_add_show');
 Route::post('/add_user', [UserController::class, 'add_user'])->name('add_user');
 Route::get('/edit_user/{id}', [UserController::class, 'edit_user'])->name('edit_user');
 Route::post('/update_user', [UserController::class, 'update_user'])->name('update_user');
