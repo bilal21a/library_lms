@@ -23,6 +23,10 @@
             let singleDeleteDraw = {
                 ...dataTable
             };
+            let id =$('#edit_id').val()
+            console.log('id: ', id);
+            url = update_data_url.replace(':id', id);
+
 
             var formData = new FormData(this);
             console.log('formData: ', formData);
@@ -32,9 +36,9 @@
                 }
             });
             $.ajax({
-                type: "POST",
-                url: "{{ route('update_user') }}",
-                data: formData,
+                type: "PUT",
+                url: url,
+                data: $(this).serialize(),
                 success: function(response) {
                     console.log('response: ', response);
                     singleDeleteDraw._fnDraw();
@@ -45,9 +49,6 @@
                     console.log('error: ', xhr.responseJSON);
                     myalert("error", xhr.responseJSON, 10000);
                 },
-                cache: false,
-                contentType: false,
-                processData: false
             });
         });
 </script>

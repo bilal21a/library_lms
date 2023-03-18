@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,23 +18,30 @@ Route::get('/', function () {
 });
 
 
-// user Management
-Route::get('/user_management', [UserController::class, 'index'])->name('user_management');
-Route::get('/get_users', [UserController::class, 'get_data'])->name('get_users');
-Route::get('/user_add_show', [UserController::class, 'add_form'])->name('user_add_show');
-Route::post('/add_user', [UserController::class, 'save_data'])->name('add_user');
-Route::get('/edit_user/{id}', [UserController::class, 'edit_form'])->name('edit_user');
-Route::post('/update_user', [UserController::class, 'update_data'])->name('update_user');
-Route::get('/delete_user/{id}', [UserController::class, 'delete_data'])->name('delete_user');
+// // user Management
+// Route::get('/user_management', [UserController::class, 'index'])->name('user_management');
+// Route::get('/get_users', [UserController::class, 'get_data'])->name('get_users');
+// Route::get('/user_add_show', [UserController::class, 'add_form'])->name('user_add_show');
+// Route::post('/add_user', [UserController::class, 'save_data'])->name('add_user');
+// Route::get('/edit_user/{id}', [UserController::class, 'edit_form'])->name('edit_user');
+// Route::post('/update_user', [UserController::class, 'update_data'])->name('update_user');
+// Route::get('/delete_user/{id}', [UserController::class, 'delete_data'])->name('delete_user');
 
+// Users Crud
+Route::resource('users', UserController::class);
+Route::get('get_users', [App\Http\Controllers\UserController::class, 'get_data'])->name('get_users');
 // Author Crud
-// Route::get('/authors', [UserController::class, 'authors'])->name('authors');
-// Route::get('/get_users', [UserController::class, 'get_users'])->name('get_users');
-// Route::get('/user_add_show', [UserController::class, 'user_add_show'])->name('user_add_show');
-// Route::post('/add_user', [UserController::class, 'add_user'])->name('add_user');
-// Route::get('/edit_user/{id}', [UserController::class, 'edit_user'])->name('edit_user');
-// Route::post('/update_user', [UserController::class, 'update_user'])->name('update_user');
-// Route::get('/delete_user/{id}', [UserController::class, 'delete_user'])->name('delete_user');
+Route::resource('author', AuthorController::class);
+Route::get('get_author', [App\Http\Controllers\AuthorController::class, 'get_data'])->name('get_author');
+
+
+
+// Route::get('/authors', [UserController::class, 'index'])->name('authors');
+// Route::get('/user_add_show', [UserController::class, 'add_form'])->name('user_add_show');
+// Route::post('/add_user', [UserController::class, 'save_data'])->name('add_user');
+// Route::get('/edit_user/{id}', [UserController::class, 'edit_form'])->name('edit_user');
+// Route::post('/update_user', [UserController::class, 'update_data'])->name('update_user');
+// Route::get('/delete_user/{id}', [UserController::class, 'delete_data'])->name('delete_user');
 
 
 

@@ -8,6 +8,7 @@
                 <div class="modal-body scroll-y mx-5">
                     <form method="post" enctype="multipart/form-data" id="edit_data_form">
                         @csrf
+                        @method('PUT')
                     </form>
                     <form method="post" enctype="multipart/form-data" id="add_data_form">
                         @csrf

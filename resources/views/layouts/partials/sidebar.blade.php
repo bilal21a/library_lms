@@ -113,8 +113,8 @@
                     </a>
                     <ul id="user_management">
                         <li>
-                            <a class="{{ request()->is('user_management') ? 'active' : '' }}"
-                               href="{{ route('user_management') }}">
+                            <a class="{{ request()->is('users.index') ? 'active' : '' }}"
+                               href="{{ route('users.index') }}">
                                 <i class="bi bi-person" data-acorn-size="18"></i>
                                 <span class="label">User Management</span>
                             </a>

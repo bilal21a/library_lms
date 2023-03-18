@@ -14,16 +14,20 @@
                 if (result.isConfirmed) {
                     url = delete_data_url.replace(':id', id);
 
-                    axios.get(url)
+                    axios({
+                            method: 'delete',
+                            url: url
+                        })
                         .then(function(response) {
                             singleDeleteDraw._fnDraw();
                             Swal.fire(
                                 'Deleted!',
-                                'Your data has been Deleted.',
+                                'Your data has been deleted.',
                                 'success'
                             )
                         })
                         .catch(function(error) {});
+
                 }
             })
         }

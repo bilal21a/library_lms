@@ -2,7 +2,7 @@
             function addFormShow() {
             event.preventDefault();
             $('#edit_data_form').html('');
-            $('#modalTitle').html('Add User');
+            $('#modalTitle').html(add_title);
             $.ajax({
                 type: 'GET',
                 url: add_form_url,
