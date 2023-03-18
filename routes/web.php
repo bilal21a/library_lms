@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +21,11 @@ Route::get('/', function () {
 });
 
 // Users Management
-Route::resource('users', UserController::class);
-Route::get('get_users', [App\Http\Controllers\UserController::class, 'get_data'])->name('get_users');
+Route::resource('users', 'UserController');
+Route::get('get_users', [UserController::class, 'get_data'])->name('get_users');
 // Author Management
-Route::resource('author', AuthorController::class);
-Route::get('get_author', [App\Http\Controllers\AuthorController::class, 'get_data'])->name('get_author');
+Route::resource('author', 'AuthorController');
+Route::get('get_author', [AuthorController::class, 'get_data'])->name('get_author');
 
 Auth::routes();
 
