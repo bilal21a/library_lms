@@ -1,4 +1,5 @@
-$(function() {
+<script>
+    $(function() {
             var dynamicObjectArray = tabelDataArray.map(function(item) {
                 return {
                     data: item,
@@ -10,10 +11,11 @@ $(function() {
                     responsive: true,
                     processing: true,
                     serverSide: true,
-                    ajax: data_url,
+                    ajax: get_data_url,
                     aaSorting: [
                         [0, "desc"]
                     ],
                     columns: dynamicObjectArray
                 });
         });
+</script>

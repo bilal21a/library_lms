@@ -29,136 +29,32 @@
 @endsection
 
 @section('js_after')
+    {{-- **Show Data** --}}
     <script>
         var tabelDataArray = ['id', 'name', 'email', 'created_at', 'updated_at', 'action'];
-        var data_url="{{ route('get_users') }}"
+        var get_data_url = "{{ route('get_users') }}"
+    </script>
         @include('common.js.get_data')
 
-        function addFormShow() {
-            event.preventDefault();
-            $('#edit_data_form').html('');
-            $('#modalTitle').html('Add User');
-            var url = "{{ route('user_add_show') }}";
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    $('#add_data_form').html(data);
-                },
-            });
-        }
-        $('#add_data_form').on('submit', function(e) {
-            e.preventDefault();
-            let singleDeleteDraw = {
-                ...dataTable
-            };
-            var formData = new FormData(this);
-            console.log('formData: ', formData);
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: "{{ route('add_user') }}",
-                data: formData,
-                success: function(response) {
-                    console.log('response: ', response);
-                    singleDeleteDraw._fnDraw();
-                    myalert("success", response, 5000);
-                    $('#myModal').modal('hide')
-                },
-                error: function(xhr, status, error) {
-                    console.log('error: ', xhr.responseJSON);
-                    myalert("error", xhr.responseJSON, 10000);
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-
-        function editFormShow(id) {
-            event.preventDefault();
-            $('#modalTitle').html('Edit User');
-            $('#add_data_form').html('');
-            var url = '{{ route('edit_user', ':id') }}';
-            url = url.replace(':id', id);
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(data) {
-                    $('#edit_data_form').html(data);
-                },
-            });
-        }
-        $('#edit_data_form').on('submit', function(e) {
-            e.preventDefault();
-            let singleDeleteDraw = {
-                ...dataTable
-            };
-
-            var formData = new FormData(this);
-            console.log('formData: ', formData);
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: "{{ route('update_user') }}",
-                data: formData,
-                success: function(response) {
-                    console.log('response: ', response);
-                    singleDeleteDraw._fnDraw();
-                    myalert("success", response, 5000);
-                    $('#myModal').modal('hide')
-                },
-                error: function(xhr, status, error) {
-                    console.log('error: ', xhr.responseJSON);
-                    myalert("error", xhr.responseJSON, 10000);
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-
-        function deleteData(id) {
-            let singleDeleteDraw = {
-                ...dataTable
-            };
-            Swal.fire({
-                title: 'Are you sure?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.get(`{{ url('/delete_user') }}/` + id)
-                        .then(function(response) {
-                            singleDeleteDraw._fnDraw();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your data has been Deleted.',
-                                'success'
-                            )
-                        })
-                        .catch(function(error) {});
-                }
-            })
-        }
+    {{-- **Save Data** --}}
+    <script>
+        var add_form_url = "{{ route('user_add_show') }}"
+        var save_data_url = "{{ route('add_user') }}"
     </script>
+        @include('common.js.add_data')
+
+
+    {{-- **Update Data** --}}
+    <script>
+        var edit_form_url = '{{ route('edit_user', ':id') }}'
+        var update_data_url = "{{ route('update_user') }}"
+    </script>
+        @include('common.js.edit_data')
+
+
+    {{-- **Delete Data** --}}
+    <script>
+        var delete_data_url = '{{ route('delete_user', ':id') }}'
+    </script>
+        @include('common.js.delete_data')
 @endsection
