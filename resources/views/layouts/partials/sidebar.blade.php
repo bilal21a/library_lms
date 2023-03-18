@@ -89,19 +89,19 @@
         <div class="menu-container flex-grow-1">
             <ul id="menu" class="menu">
                 <li>
-                    <a class="{{ request()->is('customer') ? 'active' : '' }}" href="{{ route('customer') }}">
+                    <a class="{{ request()->is('customer') ? 'active' : '' }}" href="#">
                         <i class="bi bi-person" data-acorn-size="18"></i>
                         <span class="label">Customer</span>
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('product') ? 'active' : '' }}" href="{{ route('product') }}">
+                    <a class="{{ request()->is('product') ? 'active' : '' }}" href="#">
                         <i class="bi bi-cart3" data-acorn-size="18"></i>
                         <span class="label">Products</span>
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('stores') ? 'active' : '' }}" href="{{ route('stores_view') }}">
+                    <a class="{{ request()->is('stores') ? 'active' : '' }}" href="#">
                         <i class="bi bi-shop" data-acorn-size="18"></i>
                         <span class="label">Store</span>
                     </a>
@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="{{ request()->is('role') ? 'active' : '' }}" href="{{ route('role_view') }}">
+                            <a class="{{ request()->is('role') ? 'active' : '' }}" href="#">
                                 <i class="bi bi-cash" data-acorn-size="18"></i>
                                 <span class="label">Roles</span>
                             </a>

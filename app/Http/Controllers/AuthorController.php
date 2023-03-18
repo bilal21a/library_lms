@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
-class UserController extends Controller
+class AuthorController extends Controller
 {
     public function index()
     {
@@ -72,5 +67,5 @@ class UserController extends Controller
         $agent = User::find($id);
         $agent->delete();
         return 'User Deleted Succesfully';
-    }  
+    }
 }

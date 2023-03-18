@@ -25,67 +25,14 @@
         @include('common.table.table')
     </div>
 
-
-    {{-- -----Modal----- --}}
-    <div class="modal modal-right large fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="modalTitle"></h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body scroll-y mx-5">
-                    <form method="post" enctype="multipart/form-data" id="edit_data_form">
-                        @csrf
-                    </form>
-                    <form method="post" enctype="multipart/form-data" id="add_data_form">
-                        @csrf
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('common.modal.add_edit_modal')
 @endsection
 
 @section('js_after')
     <script>
-        $(function() {
-            dataTable =
-                $('#datatable').dataTable({
-                    responsive: true,
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('get_users') }}",
-                    aaSorting: [
-                        [0, "desc"]
-                    ],
-                    columns: [{
-                            data: 'id',
-                            name: 'id'
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'email',
-                            name: 'email'
-                        },
-                        {
-                            data: 'created_at',
-                            name: 'created_at'
-                        },
-                        {
-                            data: 'updated_at',
-                            name: 'updated_at'
-                        },
-                        {
-                            data: 'action',
-                            name: 'action'
-                        },
-                    ]
-                });
-        });
+        var tabelDataArray = ['id', 'name', 'email', 'created_at', 'updated_at', 'action'];
+        var data_url="{{ route('get_users') }}"
+        @include('common.js.get_data')
 
         function addFormShow() {
             event.preventDefault();
