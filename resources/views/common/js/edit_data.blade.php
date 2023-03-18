@@ -1,7 +1,7 @@
 <script>
     function editFormShow(id) {
             event.preventDefault();
-            $('#modalTitle').html('Edit User');
+            $('#modalTitle').html(edit_title);
             $('#add_data_form').html('');
             url = edit_form_url.replace(':id', id);
 
