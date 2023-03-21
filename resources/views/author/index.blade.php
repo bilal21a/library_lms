@@ -20,7 +20,7 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['ID', 'Name', 'Email', 'Created At', 'Updated At', 'Actions'];
+            $tableData = ['ID', 'Name', 'Actions'];
         @endphp
         @include('common.table.table')
     </div>
@@ -31,7 +31,7 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'name', 'email', 'created_at', 'updated_at', 'action'];
+        var tabelDataArray = ['id', 'name','action'];
         var get_data_url = "{{ route('get_author') }}"
     </script>
         @include('common.js.get_data')

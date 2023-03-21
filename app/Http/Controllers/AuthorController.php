@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,10 +24,10 @@ class AuthorController extends Controller
 
     public function get_data()
     {
-        $users = User::select(['id', 'name', 'email', 'created_at', 'updated_at']);
-        return DataTables::of($users)
-            ->addColumn('action', function ($user) {
-                return $this->get_buttons($user->id);
+        $data = Author::select(['id', 'name']);
+        return DataTables::of($data)
+            ->addColumn('action', function ($data) {
+                return $this->get_buttons($data->id);
             })
             ->make(true);
     }
@@ -38,7 +39,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('users.modal.add');
+        return view('author.modal.add');
     }
 
     /**
@@ -53,19 +54,13 @@ class AuthorController extends Controller
             $request->all(),
             [
                 'name' => 'required',
-                'email' => ['required', Rule::unique('users')],
-                'password' => 'required|min:8',
-                'role' => 'required',
             ],
         );
         if ($validate->fails()) {
             return response()->json($validate->errors()->first(), 500);
         }
-        $user = new User();
+        $user = new Author();
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        // $user->role= $request->role;
         $user->save();
         return 'Success';
     }
@@ -89,8 +84,8 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('author.modal.edit', compact('user'));
+        $data = Author::find($id);
+        return view('author.modal.edit', compact('data'));
     }
 
     /**
@@ -102,12 +97,10 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agent = User::find($request->id);
-        $agent->name = $request->name;
-        // $agent->role=$request->role;
-        $agent->password = $request->password != null ?  Hash::make($request->password) : $agent->password;
-        $agent->save();
-        return 'User Updated Successfully';
+        $data = Author::find($request->id);
+        $data->name = $request->name;
+        $data->save();
+        return 'Author Updated Successfully';
     }
 
     /**
@@ -118,8 +111,8 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        $agent = User::find($id);
-        $agent->delete();
-        return 'User Deleted Succesfully';
+        $data = Author::find($id);
+        $data->delete();
+        return 'Author Deleted Succesfully';
     }
 }

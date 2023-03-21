@@ -63,6 +63,14 @@
     <link rel="stylesheet" href="{{ asset('acron/css/customAccordian.css') }}">
     <script src="{{ asset('acron/js/base/loader.js') }}"></script>
     @yield('css_after')
+    <style>
+        th{
+            text-align: center !important;
+        }
+        tr{
+            text-align: center !important;
+        }
+    </style>
 
 
 </head>
