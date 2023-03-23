@@ -123,6 +123,13 @@ class CategoryController extends Controller
         $slug = Str::slug($request->name);
 
         if ($request->hasFile('image')) {
+            //check for old image file
+            $imagePath = 'public/category/images/' . $data->image;
+
+            if (Storage::exists($imagePath)) {
+                Storage::delete($imagePath);
+            }
+            //save image file
             $image = $request->file('image');
             $randomString = Str::random(5);
             $imageName = $slug . '_' . $randomString . '.' . $image->getClientOriginalExtension();
