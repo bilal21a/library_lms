@@ -17,4 +17,9 @@ class Category extends Model
         }
         return null;
     }
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }
