@@ -30,6 +30,8 @@ Route::get('get_author', [AuthorController::class, 'get_data'])->name('get_autho
 // category Management
 Route::resource('categories', 'CategoryController');
 Route::get('get_categories', [CategoryController::class, 'get_data'])->name('get_categories');
+Route::post('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+
 
 Auth::routes();
 

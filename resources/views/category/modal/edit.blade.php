@@ -8,6 +8,20 @@
     @enderror
 </div>
 
+<div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Category Image</label>
+    <input type="file" name="image" class="form-control form-control-solid mb-3 mb-lg-0"
+        placeholder="Category Image" value="">
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('name')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+@if ($data->image_url != null)
+    <img src="{{ $data->image_url }}" class="card-img sh-15 sh-sm-25 scale mb-5" alt="">
+@endif
+
 <input type="hidden" id="edit_id" name="id" value="{{ $data->id }}">
 
 <div class="d-flex justify-content-end">
@@ -16,4 +30,3 @@
         <span class="indicator-label">Submit</span>
     </button>
 </div>
-

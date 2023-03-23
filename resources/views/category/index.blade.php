@@ -51,7 +51,7 @@
         var update_data_url = '{{ route('categories.update', ':id') }}'
         var edit_title = "Edit Category"
     </script>
-        @include('common.js.edit_data')
+        @include('common.js.edit_data_post')
 
 
     {{-- **Delete Data** --}}

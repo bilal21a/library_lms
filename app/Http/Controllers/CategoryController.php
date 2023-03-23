@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Category;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       return view('category.index');
+        return view('category.index');
     }
 
     public function get_data()
@@ -48,18 +49,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validate = Validator::make(
             $request->all(),
             [
-                'name' => 'required',
+                'name' => 'required|unique:categories,name',
+                'image' => 'required|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
             ],
         );
         if ($validate->fails()) {
             return response()->json($validate->errors()->first(), 500);
         }
-        $user = new Category();
-        $user->name = $request->name;
-        $user->save();
+
+        $data = new Category();
+        $data->name = $request->name;
+        $slug = Str::slug($request->name);
+
+        $image = $request->file('image');
+        $randomString = Str::random(5);
+        $imageName = $slug . '_' . $randomString . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/category/images', $imageName);
+        $data->image = $imageName;
+
+        $data->save();
         return 'Success';
     }
 
@@ -83,7 +95,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = Category::find($id);
-       return view('category.modal.edit',compact('data'));
+        return view('category.modal.edit', compact('data'));
     }
 
     /**
@@ -95,11 +107,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Category::find($request->id);
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|unique:categories,name,' . $id,
+                'image' => 'nullable|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
+            ],
+        );
+        if ($validate->fails()) {
+            return response()->json($validate->errors()->first(), 500);
+        }
+
+        $data = Category::find($id);
         $data->name = $request->name;
+        $slug = Str::slug($request->name);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $randomString = Str::random(5);
+            $imageName = $slug . '_' . $randomString . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/category/images', $imageName);
+            $data->image = $imageName;
+        }
+
         $data->save();
-        return 'Category Updated Successfully';
+        return 'Success';
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -109,8 +143,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data = Category::find($id);
+        $data = Category::findOrFail($id);
+        $imagePath = 'public/category/images/' . $data->image;
+
+        if (Storage::exists($imagePath)) {
+            Storage::delete($imagePath);
+        }
+
         $data->delete();
-        return 'Author Deleted Succesfully';
+        return 'Category Deleted Successfully';
     }
 }
