@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::get('get_users', [UserController::class, 'get_data'])->name('get_users');
 // Author Management
 Route::resource('author', 'AuthorController');
 Route::get('get_author', [AuthorController::class, 'get_data'])->name('get_author');
+// category Management
+Route::resource('categories', 'CategoryController');
+Route::get('get_categories', [CategoryController::class, 'get_data'])->name('get_categories');
 
 Auth::routes();
 
