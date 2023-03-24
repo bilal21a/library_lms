@@ -21,6 +21,8 @@ class CreateBooksTable extends Migration
             $table->integer('author_id');
             $table->string('isbn_number')->nullable();
             $table->string('price')->nullable();
+            $table->string('qty')->nullable();
+            $table->string('remaining')->nullable();
             $table->string('cover_image')->nullable();
 
             $table->timestamps();

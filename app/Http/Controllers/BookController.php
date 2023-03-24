@@ -29,9 +29,9 @@ class BookController extends Controller
     {
         $cat_id = $request->cat_id;
         if ($cat_id != null) {
-            $data = Book::where('category_id', $cat_id)->with('author', 'category')->select(['id', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+            $data = Book::where('category_id', $cat_id)->with('author', 'category')->select(['id','qty','remaining', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         } else {
-            $data = Book::with('author', 'category')->select(['id', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+            $data = Book::with('author', 'category')->select(['id', 'qty', 'remaining', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         }
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
@@ -77,7 +77,8 @@ class BookController extends Controller
                 'name' => 'required|unique:books,name',
                 'isbn_number' => 'required',
                 'desc' => 'required',
-                'price' => 'required',
+                'price' => 'required|integer',
+                'qty' => 'required|integer',
                 'category' => 'required',
                 'author' => 'required',
                 'image' => 'required|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
@@ -92,6 +93,8 @@ class BookController extends Controller
         $data->name = $request->name;
         $data->desc = $request->desc;
         $data->price = $request->price;
+        $data->qty = $request->qty;
+        $data->remaining = $request->qty;
         $data->category_id = $request->category;
         $data->author_id = $request->author;
 

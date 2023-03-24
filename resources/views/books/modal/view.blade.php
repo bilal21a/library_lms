@@ -15,13 +15,21 @@
 
 <div class="mb-3">
     <h4>Description</h4>
-    <p>{{ $data->desc }}</p>
+    <p class="text-alternate">{{ $data->desc }}</p>
+</div>
+<div class="mb-3">
+    <h4>Total Quantity</h4>
+    <p class="text-alternate">{{ $data->qty }}</p>
+</div>
+<div class="mb-3">
+    <h4>Remaining Quantity</h4>
+    <p class="text-alternate">{{ $data->remaining }}</p>
 </div>
 <div class="mb-3">
     <h4>Category</h4>
-    <p>{{ $data->category->name }}</p>
+    <p class="text-alternate"><span class="badge" style="background:{{ $data->category->background }}">&nbsp;&nbsp;</span>{{ $data->category->name }}</p>
 </div>
 <div class="mb-3">
     <h4>Author</h4>
-    <p>{{ $data->author->name }}</p>
+    <p class="text-alternate">{{ $data->author->name }}</p>
 </div>

@@ -39,6 +39,16 @@
 </div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Quantity</label>
+    <input type="text" name="qty" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Quantity"
+        value="">
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('name')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+<div class="fv-row mb-5 fv-plugins-icon-container">
     <label class="required fw-bold fs-6 mb-2">Category</label>
     <select id="inputState" name="category" class="form-select">
         <option selected="selected">Choose...</option>
