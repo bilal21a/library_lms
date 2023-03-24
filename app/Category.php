@@ -15,7 +15,7 @@ class Category extends Model
         if ($this->image) {
             return asset('storage/category/images/' . $this->image);
         } else {
-            return 'https://ui-avatars.com/api/?background=f9f9f9&color=1ea8e7&size=512&bold=true&name=' . $this->name;
+            return 'https://ui-avatars.com/api/?background=f9f9f9&color='. str_replace("#", "", $this->background).'&size=512&bold=true&name=' . $this->name;//1ea8e7
         }
     }
     public function getBackgroundAttribute()

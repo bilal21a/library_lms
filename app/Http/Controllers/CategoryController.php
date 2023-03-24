@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Category;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -168,5 +169,18 @@ class CategoryController extends Controller
 
         $data->delete();
         return 'Category Deleted Successfully';
+    }
+
+
+    public function user_categories(Request $request)
+    {
+        if ($request->name){
+            $data['categories']= Category::where('name', 'LIKE', '%' . $request->name . '%')->get();
+            $data['search_string']= $request->name;
+        }else{
+            $data['categories']=Category::get();
+        }
+        $data['popular_books']=Book::take(5)->get();
+        return view('category.user_categories',$data);
     }
 }

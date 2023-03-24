@@ -38,6 +38,9 @@ Route::get('get_books', [BookController::class, 'get_data'])->name('get_books');
 Route::post('book/{id}', [BookController::class, 'update'])->name('book.update');
 
 
+Route::match(['get', 'post'], 'category', [CategoryController::class, 'user_categories'])->name('categories.user');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
