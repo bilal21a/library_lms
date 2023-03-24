@@ -18,14 +18,21 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('books.index');
+        $cat_id = $request->cat_id;
+        $category=Category::find($cat_id);
+        return view('books.index',compact('cat_id', 'category'));
     }
 
-    public function get_data()
+    public function get_data(Request $request)
     {
-        $data = Book::with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+        $cat_id=$request->cat_id;
+        if ($cat_id!=null) {
+            $data = Book::where('category_id',$cat_id)->with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+        }else{
+            $data = Book::with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+        }
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 $view_btn=$this->viewButton($data->id);

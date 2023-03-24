@@ -31,10 +31,10 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'name','action'];
+        var tabelDataArray = ['id', 'name', 'action'];
         var get_data_url = "{{ route('get_categories') }}"
     </script>
-        @include('common.js.get_data')
+    @include('common.js.get_data')
 
     {{-- **Save Data** --}}
     <script>
@@ -42,7 +42,7 @@
         var save_data_url = "{{ route('categories.store') }}"
         var add_title = "Add Category"
     </script>
-        @include('common.js.add_data')
+    @include('common.js.add_data')
 
 
     {{-- **Update Data** --}}
@@ -51,12 +51,22 @@
         var update_data_url = '{{ route('categories.update', ':id') }}'
         var edit_title = "Edit Category"
     </script>
-        @include('common.js.edit_data_post')
+    @include('common.js.edit_data_post')
 
 
     {{-- **Delete Data** --}}
     <script>
         var delete_data_url = '{{ route('categories.destroy', ':id') }}'
     </script>
-        @include('common.js.delete_data')
+    @include('common.js.delete_data')
+
+
+    {{-- **View Books** --}}
+    <script>
+        function viewFormShow(id) {
+            event.preventDefault();
+            var cat_by_books_url = "{{ route('book.index') }}?cat_id=" + id
+            window.location.href = cat_by_books_url
+        }
+    </script>
 @endsection

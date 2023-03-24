@@ -5,8 +5,12 @@
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
-                <div class="col-12 col-sm-6">
-                    <h1 class="mb-0 pb-0 display-4" id="title">Books Managment</h1>
+                <div class="col-12 col-sm-6 mb-5">
+                    @if ($cat_id != null)
+                        <h1 class="mb-0 pb-0 display-4" id="title"><span class="text-primary fw-bold">{{ $category->name }}</span>&nbsp;<span>Books</span></h1>
+                    @else
+                        <h1 class="mb-0 pb-0 display-4" id="title">Books Managment</h1>
+                    @endif
                 </div>
             </div>
         </div>
@@ -31,8 +35,8 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['isbn_number', 'name', 'category', 'author',  'price', 'action'];
-        var get_data_url = "{{ route('get_books') }}"
+        var tabelDataArray = ['isbn_number', 'name', 'category', 'author', 'price', 'action'];
+        var get_data_url = "{{ route('get_books') }}?cat_id={{ $cat_id }}"
     </script>
     @include('common.js.get_data')
 

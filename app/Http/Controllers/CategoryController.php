@@ -26,7 +26,9 @@ class CategoryController extends Controller
         $data = Category::select(['id', 'name']);
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                return $this->get_buttons($data->id);
+                $view_btn = $data->books->count() > 0 ? $this->viewButton($data->id, "View Books"):'';
+                $edit_delete_btn = $this->get_buttons($data->id);
+                return $view_btn . $edit_delete_btn;
             })
             ->make(true);
     }
@@ -63,7 +65,7 @@ class CategoryController extends Controller
 
         $data = new Category();
         $data->name = $request->name;
-        
+
         if ($request->hasFile('image')) {
             $slug = Str::slug($request->name);
             $image = $request->file('image');

@@ -1,6 +1,7 @@
 <script>
     function viewFormShow(id) {
         event.preventDefault();
+        $('#myModal').modal('show');
         $('#modalTitle').html(view_title);
         $('#add_data_form').html('');
         url = show_form_url.replace(':id', id);

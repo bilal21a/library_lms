@@ -43,9 +43,9 @@ class Controller extends BaseController
         </button>';
     }
 
-    public function viewButton($id)
+    public function viewButton($id, $title = 'View')
     {
-        return '<button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="viewFormShow(' . $id . ')" type="button" data-bs-toggle="modal" data-bs-target="#myModal">
+        return '<button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="viewFormShow(' . $id . ')" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                 class="acorn-icons acorn-icons-bin undefined">
@@ -56,7 +56,7 @@ class Controller extends BaseController
                     d="M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z">
                 </path>
             </svg>
-            <span class="d-none d-xxl-inline-block">View</span>
+            <span class="d-none d-xxl-inline-block">' . $title . '</span>
         </button>';
     }
 }
