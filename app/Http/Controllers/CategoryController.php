@@ -54,7 +54,7 @@ class CategoryController extends Controller
             $request->all(),
             [
                 'name' => 'required|unique:categories,name',
-                'image' => 'required|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
+                'image' => 'image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
             ],
         );
         if ($validate->fails()) {
@@ -63,14 +63,15 @@ class CategoryController extends Controller
 
         $data = new Category();
         $data->name = $request->name;
-        $slug = Str::slug($request->name);
-
-        $image = $request->file('image');
-        $randomString = Str::random(5);
-        $imageName = $slug . '_' . $randomString . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/category/images', $imageName);
-        $data->image = $imageName;
-
+        
+        if ($request->hasFile('image')) {
+            $slug = Str::slug($request->name);
+            $image = $request->file('image');
+            $randomString = Str::random(5);
+            $imageName = $slug . '_' . $randomString . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/category/images', $imageName);
+            $data->image = $imageName;
+        }
         $data->save();
         return 'Success';
     }

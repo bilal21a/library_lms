@@ -15,7 +15,9 @@ class Category extends Model
         if ($this->image) {
             return asset('storage/category/images/'.$this->image);
         }
-        return null;
+        else{
+            return 'https://ui-avatars.com/api/?background=f9f9f9&color=1ea8e7&size=512&bold=true&name='.$this->name;
+        }
     }
 
     public function books()

@@ -20,7 +20,7 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['ISBN Number', 'Name', 'Description', 'Category', 'Author', 'Price', 'Actions'];
+            $tableData = ['ISBN Number', 'Name', 'Category', 'Author', 'Price', 'Actions'];
         @endphp
         @include('common.table.table')
     </div>
@@ -31,7 +31,7 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['isbn_number', 'name', 'desc', 'category', 'author',  'price', 'action'];
+        var tabelDataArray = ['isbn_number', 'name', 'category', 'author',  'price', 'action'];
         var get_data_url = "{{ route('get_books') }}"
     </script>
     @include('common.js.get_data')
@@ -43,6 +43,14 @@
         var add_title = "Add Book"
     </script>
     @include('common.js.add_data')
+
+
+    {{-- **View Data** --}}
+    <script>
+        var show_form_url = '{{ route('book.show', ':id') }}'
+        var view_title = "Book Info"
+    </script>
+    @include('common.js.view_data')
 
 
     {{-- **Update Data** --}}

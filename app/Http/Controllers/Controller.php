@@ -42,4 +42,21 @@ class Controller extends BaseController
             <span class="d-none d-xxl-inline-block">Delete</span>
         </button>';
     }
+
+    public function viewButton($id)
+    {
+        return '<button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="viewFormShow(' . $id . ')" type="button" data-bs-toggle="modal" data-bs-target="#myModal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                class="acorn-icons acorn-icons-bin undefined">
+                <path
+                    d="M2.47466 10.8418C2.15365 10.3203 2.15365 9.67971 2.47466 9.15822C3.49143 7.50643 6.10818 4 10 4C13.8918 4 16.5086 7.50644 17.5253 9.15822C17.8464 9.67971 17.8464 10.3203 17.5253 10.8418C16.5086 12.4936 13.8918 16 10 16C6.10818 16 3.49143 12.4936 2.47466 10.8418Z">
+                </path>
+                <path
+                    d="M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z">
+                </path>
+            </svg>
+            <span class="d-none d-xxl-inline-block">View</span>
+        </button>';
+    }
 }

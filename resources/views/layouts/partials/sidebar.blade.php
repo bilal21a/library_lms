@@ -89,43 +89,28 @@
         <div class="menu-container flex-grow-1">
             <ul id="menu" class="menu">
                 <li>
-                    <a class="{{ request()->is('customer') ? 'active' : '' }}" href="#">
+                    <a class="{{ request()->is('book*') ? 'active' : '' }}" href="{{ route('book.index') }}">
                         <i class="bi bi-person" data-acorn-size="18"></i>
-                        <span class="label">Customer</span>
+                        <span class="label">Books</span>
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('product') ? 'active' : '' }}" href="#">
+                    <a class="{{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
                         <i class="bi bi-cart3" data-acorn-size="18"></i>
-                        <span class="label">Products</span>
+                        <span class="label">Categories</span>
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('stores') ? 'active' : '' }}" href="#">
+                    <a class="{{ request()->is('author*') ? 'active' : '' }}" href="{{ route('author.index') }}">
                         <i class="bi bi-shop" data-acorn-size="18"></i>
-                        <span class="label">Store</span>
+                        <span class="label">Authors</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="#user_management" data-href="Dashboards.html">
-                        <span class="label">User Management</span>
+                    <a class="{{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                        <i class="bi bi-shop" data-acorn-size="18"></i>
+                        <span class="label">Users Management</span>
                     </a>
-                    <ul id="user_management">
-                        <li>
-                            <a class="{{ request()->is('users.index') ? 'active' : '' }}"
-                               href="{{ route('users.index') }}">
-                                <i class="bi bi-person" data-acorn-size="18"></i>
-                                <span class="label">User Management</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="{{ request()->is('role') ? 'active' : '' }}" href="#">
-                                <i class="bi bi-cash" data-acorn-size="18"></i>
-                                <span class="label">Roles</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </div>

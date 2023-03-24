@@ -25,10 +25,12 @@ class BookController extends Controller
 
     public function get_data()
     {
-        $data = Book::with('author','category')->select(['id','isbn_number', 'name', 'desc', 'category_id', 'author_id', 'price'])->latest();
+        $data = Book::with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                return $this->get_buttons($data->id);
+                $view_btn=$this->viewButton($data->id);
+                $edit_delete_btn=$this->get_buttons($data->id);
+                return $view_btn . $edit_delete_btn;
             })
             ->addColumn('category', function ($data) {
                 return $data->category->name;
@@ -104,7 +106,10 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['categories'] = Category::get();
+        $data['authors'] = Author::get();
+        $data['data'] = Book::find($id);
+        return view('books.modal.view', $data);
     }
 
     /**
