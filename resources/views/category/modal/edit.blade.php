@@ -9,6 +9,16 @@
 </div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Category Colour</label>
+    <input type="color" id="html5colorpicker" name="color" onchange="clickColor(0, -1, -1, 5)"
+        value="{{ $data->background }}" style="width:85%;">
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('name')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+<div class="fv-row mb-5 fv-plugins-icon-container">
     <label class="required fw-bold fs-6 mb-2">Category Image</label>
     <input type="file" name="image" class="form-control form-control-solid mb-3 mb-lg-0"
         placeholder="Category Image" value="">

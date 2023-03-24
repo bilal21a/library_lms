@@ -21,30 +21,31 @@ class BookController extends Controller
     public function index(Request $request)
     {
         $cat_id = $request->cat_id;
-        $category=Category::find($cat_id);
-        return view('books.index',compact('cat_id', 'category'));
+        $category = Category::find($cat_id);
+        return view('books.index', compact('cat_id', 'category'));
     }
 
     public function get_data(Request $request)
     {
-        $cat_id=$request->cat_id;
-        if ($cat_id!=null) {
-            $data = Book::where('category_id',$cat_id)->with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
-        }else{
-            $data = Book::with('author','category')->select(['id','isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+        $cat_id = $request->cat_id;
+        if ($cat_id != null) {
+            $data = Book::where('category_id', $cat_id)->with('author', 'category')->select(['id', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+        } else {
+            $data = Book::with('author', 'category')->select(['id', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         }
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $view_btn=$this->viewButton($data->id);
-                $edit_delete_btn=$this->get_buttons($data->id);
+                $view_btn = $this->viewButton($data->id);
+                $edit_delete_btn = $this->get_buttons($data->id);
                 return $view_btn . $edit_delete_btn;
             })
             ->addColumn('category', function ($data) {
-                return $data->category->name;
+                return '<span class="badge" style="background:' . $data->category->background . ';font-size: 1em;">'. $data->category->name.'</span>';
             })
             ->addColumn('author', function ($data) {
                 return $data->author->name;
             })
+            ->rawColumns(['action', 'category', 'author'])
             ->make(true);
     }
 
@@ -58,7 +59,7 @@ class BookController extends Controller
         $data['categories'] = Category::get();
         $data['authors'] = Author::get();
 
-        return view('books.modal.add',$data);
+        return view('books.modal.add', $data);
     }
 
     /**

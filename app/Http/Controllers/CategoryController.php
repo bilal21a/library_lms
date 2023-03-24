@@ -23,13 +23,17 @@ class CategoryController extends Controller
 
     public function get_data()
     {
-        $data = Category::select(['id', 'name']);
+        $data = Category::select(['id', 'name', 'color']);
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                $view_btn = $data->books->count() > 0 ? $this->viewButton($data->id, "View Books"):'';
+                $view_btn = $data->books->count() > 0 ? $this->viewButton($data->id, "View Books") : '';
                 $edit_delete_btn = $this->get_buttons($data->id);
                 return $view_btn . $edit_delete_btn;
             })
+            ->addColumn('bg_color', function ($data) {
+                return '<span class="badge" style="background:'.$data->background.'">&nbsp;&nbsp;</span>';
+            })
+            ->rawColumns(['action','bg_color'])
             ->make(true);
     }
 
@@ -65,6 +69,7 @@ class CategoryController extends Controller
 
         $data = new Category();
         $data->name = $request->name;
+        $data->color = $request->color;
 
         if ($request->hasFile('image')) {
             $slug = Str::slug($request->name);
@@ -123,8 +128,9 @@ class CategoryController extends Controller
 
         $data = Category::find($id);
         $data->name = $request->name;
-        $slug = Str::slug($request->name);
+        $data->color = $request->color;
 
+        $slug = Str::slug($request->name);
         if ($request->hasFile('image')) {
             //check for old image file
             $imagePath = 'public/category/images/' . $data->image;
