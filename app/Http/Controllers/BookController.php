@@ -29,7 +29,7 @@ class BookController extends Controller
     {
         $cat_id = $request->cat_id;
         if ($cat_id != null) {
-            $data = Book::where('category_id', $cat_id)->with('author', 'category')->select(['id','qty','remaining', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
+            $data = Book::where('category_id', $cat_id)->with('author', 'category')->select(['id', 'qty', 'remaining', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         } else {
             $data = Book::with('author', 'category')->select(['id', 'qty', 'remaining', 'isbn_number', 'name', 'category_id', 'author_id', 'price'])->latest();
         }
@@ -40,7 +40,7 @@ class BookController extends Controller
                 return $view_btn . $edit_delete_btn;
             })
             ->addColumn('category', function ($data) {
-                return '<span class="badge" style="background:' . $data->category->background . ';font-size: 1em;">'. $data->category->name.'</span>';
+                return '<span class="badge" style="background:' . $data->category->background . ';font-size: 1em;">' . $data->category->name . '</span>';
             })
             ->addColumn('author', function ($data) {
                 return $data->author->name;
@@ -208,5 +208,25 @@ class BookController extends Controller
 
         $data->delete();
         return 'Book Deleted Successfully';
+    }
+
+
+    public function user_books(Request $request)
+    {
+        $data['books'] =
+        Book::query()->when($request->name != null, function ($query) use ($request) {
+            return $query->where('name', 'LIKE', '%' . $request->name . '%');
+        })->when($request->category, function ($query) use ($request){
+            return $query->where('category_id', $request->category);
+        })
+        ->get();
+        if ($request->name != null) {
+            $data['search_string'] = $request->name;
+        } 
+        if ($request->category) {
+            $data['search_category'] = Category::find($request->category)->name;
+        }
+        $data['categories'] = Category::get();
+        return view('books.user_books', $data);
     }
 }

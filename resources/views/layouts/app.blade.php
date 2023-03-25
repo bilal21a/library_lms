@@ -64,11 +64,20 @@
     <script src="{{ asset('acron/js/base/loader.js') }}"></script>
     @yield('css_after')
     <style>
-        th{
+        th {
             text-align: center !important;
         }
-        tr{
+
+        tr {
             text-align: center !important;
+        }
+
+        .dot {
+            height: 16px;
+            width: 16px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
         }
     </style>
 
