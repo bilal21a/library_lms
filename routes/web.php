@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IssuedBooksController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::post('return_issuedBooks', [IssuedBooksController::class, 'return_issuedB
 Route::get('return_book/{id}', [IssuedBooksController::class, 'return_book'])->name('return_book');
 Route::post('return_book_data', [IssuedBooksController::class, 'return_book_data'])->name('return_book_data');
 
+
+// profile routes
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
 
 Auth::routes();
