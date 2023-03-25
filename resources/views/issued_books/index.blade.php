@@ -16,6 +16,10 @@
             <i data-acorn-icon="plus"></i>
             <span>Issue Book</span>
         </button>
+        <button class="btn btn-icon btn-icon-start btn-outline-primary mb-4" type="button" data-bs-toggle="modal" data-bs-target="#returnModal">
+            <i data-acorn-icon="rotate-left"></i>
+            <span>Return Book</span>
+        </button>
 
         {{-- -----Table----- --}}
         @php
@@ -25,6 +29,7 @@
         @include('common.table.table')
     </div>
 
+    @include('issued_books.modal.returnBook')
 
     @include('common.modal.add_edit_modal')
 @endsection
@@ -32,7 +37,9 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['lib_id',  'book_name','user_name', 'issued_date', 'return_date', 'return_status', 'fine', 'action'];
+        var tabelDataArray = ['lib_id', 'book_name', 'user_name', 'issued_date', 'return_date', 'return_status', 'fine',
+            'action'
+        ];
         var get_data_url = "{{ route('get_issuedBooks') }}"
     </script>
     @include('common.js.get_data')
@@ -41,7 +48,7 @@
     <script>
         var add_form_url = "{{ route('issuedBooks.create') }}"
         var save_data_url = "{{ route('issuedBooks.store') }}"
-        var add_title = "Add Author"
+        var add_title = "Issue Book"
     </script>
     @include('common.js.add_data')
 
@@ -50,7 +57,7 @@
     <script>
         var edit_form_url = '{{ route('issuedBooks.edit', ':id') }}'
         var update_data_url = '{{ route('issuedBooks.update', ':id') }}'
-        var edit_title = "Edit Author"
+        var edit_title = "Edit Record"
     </script>
     @include('common.js.edit_data')
 
@@ -60,4 +67,21 @@
         var delete_data_url = '{{ route('issuedBooks.destroy', ':id') }}'
     </script>
     @include('common.js.delete_data')
+
+
+    <script>
+        $('input[name="returnRadio"]').change(function() {
+            // Get the value of the selected radio button
+            const selectedValue = $('input[name="returnRadio"]:checked').val();
+
+            // Show or hide the appropriate section based on the selected value
+            if (selectedValue === 'issueid') {
+                $('#issueid-section').show();
+                $('#user-name-section').hide();
+            } else if (selectedValue === 'user_name') {
+                $('#issueid-section').hide();
+                $('#user-name-section').show();
+            }
+        });
+    </script>
 @endsection
