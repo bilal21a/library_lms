@@ -441,7 +441,6 @@
 
 @section('js_after')
     <script>
-        console.log('yaba daba doooo');
         $.ajax({
             url: '{{ route('profile.get_issued_books') }}',
             success: function(html) {
