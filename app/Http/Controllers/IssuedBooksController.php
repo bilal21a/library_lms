@@ -180,6 +180,9 @@ class IssuedBooksController extends Controller
     public function destroy($id)
     {
         $data = IssuedBooks::find($id);
+        $book=Book::find($data->book_id);
+        $book->remaining=$book->remaining+1;
+        $book->save();
         $data->delete();
         return 'Deleted Succesfully';
     }
