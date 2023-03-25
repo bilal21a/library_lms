@@ -156,6 +156,14 @@ class IssuedBooksController extends Controller
 
         return $issued_books;
     }
+    public function return_book($id)
+    {
+        $return_book=IssuedBooks::find($id);
+        $data=Book::find($return_book->book_id);
+        // dd($return_book);
+
+        return view('issued_books.modal.returnBookDetail', compact('return_book','data'));
+    }
 
     /**
      * Remove the specified resource from storage.

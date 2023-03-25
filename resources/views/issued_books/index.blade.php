@@ -107,7 +107,7 @@
                     response.forEach(element => {
                         console.log('element: ', element);
 
-                        filter_data.append(`<div class="card mb-2  border-primary">
+                        filter_data.append(`<div class="card mb-2  border-primary"  onclick="book_detail(${element.id})">
                         <a href="#" class="row g-0 sh-10">
                             <div class="col-auto">
                                 <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
@@ -125,8 +125,6 @@
                             </div>
                         </a>
                     </div>`);
-
-
                     });
                 },
                 error: function(xhr, status, error) {
@@ -138,5 +136,30 @@
                 processData: false
             });
         });
+
+        function book_detail(id) {
+            console.log('id: ', id);
+            var show_status_url = '{{ route('return_book', ':id') }}'
+
+            $('#modalTitle').html('View Status');
+            $('#add_data_form').html('');
+            url = show_status_url.replace(':id', id);
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    $('#returnModal').modal('hide');
+                    $('#myModal').modal('show');
+                    console.log('data: ', data);
+                    $('#add_data_form').html(data);
+                },
+            });
+        }
+
+
     </script>
 @endsection
