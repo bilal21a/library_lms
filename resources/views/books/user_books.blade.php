@@ -14,7 +14,6 @@
         <div class="row">
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-2 mb-5">
-
                     @foreach ($books as $book)
                         <div class="col">
                             <div class="card h-100">
@@ -117,6 +116,44 @@
                                         @endforeach
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h2 class="small-title">Must Popular Books</h2>
+                        <div class="mb-5">
+                            <div class="row mb-n2">
+                                @foreach ($popular_books as $book)
+                                    <div class="col-12 col-md-6 col-xl-12 mb-2">
+                                        <div class="card sh-11 sh-sm-14">
+                                            <div class="row g-0 h-100">
+                                                <div class="col-auto">
+                                                    <img src="{{ $book->image_url }}" alt="books"
+                                                        class="card-img card-img-horizontal sw-10 sw-sm-14">
+                                                </div>
+                                                <div class="col position-static">
+                                                    <div class="card-body ">
+                                                        <div class="d-flex flex-column">
+                                                            <a href="#" class="stretched-link body-link">
+                                                                <div class="clamp-line" data-line="2"
+                                                                    style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">
+                                                                    {{ $book->name }}</div>
+                                                                <div class="text-muted mb-3">
+                                                                    @if (strlen($book->desc) > 30)
+                                                                        {{ substr($book->desc, 0, 30) . '...' }}
+                                                                    @else
+                                                                        {{ $book->desc }}
+                                                                    @endif
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>

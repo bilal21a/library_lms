@@ -227,6 +227,7 @@ class BookController extends Controller
             $data['search_category'] = Category::find($request->category)->name;
         }
         $data['categories'] = Category::get();
+        $data['popular_books'] = Book::take(5)->get();
         return view('books.user_books', $data);
     }
 }
