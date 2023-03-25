@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-12 col-xl-8 col-xxl-9 mb-5">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-2 mb-5">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-2 mb-5">
 
                     @foreach ($books as $book)
                         <div class="col">
