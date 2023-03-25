@@ -39,6 +39,7 @@ Route::resource('book', 'BookController');
 Route::get('get_books', [BookController::class, 'get_data'])->name('get_books');
 Route::post('book/{id}', [BookController::class, 'update'])->name('book.update');
 Route::match(['get', 'post'], 'books', [BookController::class, 'user_books'])->name('book.user');
+Route::get('books/view_book/{id}', [BookController::class, 'view_book'])->name('book.view_book');
 // Author Management
 Route::resource('issuedBooks', 'IssuedBooksController');
 Route::get('get_issuedBooks', [IssuedBooksController::class, 'get_data'])->name('get_issuedBooks');

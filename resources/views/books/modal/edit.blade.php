@@ -29,6 +29,15 @@
 </div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="form-label">Published Date</label>
+    <input type="date" class="form-control" name="published_date" id="datePickerBasic"  value="{{$data->published_date}}"/>
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('name')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+<div class="fv-row mb-5 fv-plugins-icon-container">
     <label class="required fw-bold fs-6 mb-2">Price</label>
     <input type="text" name="price" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Price"
         value="{{ $data->price }}">

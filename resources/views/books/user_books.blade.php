@@ -16,7 +16,7 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-2 mb-5">
                     @foreach ($books as $book)
                         <div class="col">
-                            <div class="card h-100">
+                            <div class="card h-100" onclick="book_detail({{ $book->id }})">
                                 <img src="{{ $book->image_url }}" class="card-img-top sh-19" alt="card image">
                                 <div class="card-body pb-0">
                                     <h5 class="heading mb-3">
@@ -120,11 +120,11 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <h2 class="small-title">Must Popular Books</h2>
+                        <h2 class="small-title">Most Popular Books</h2>
                         <div class="mb-5">
                             <div class="row mb-n2">
                                 @foreach ($popular_books as $book)
-                                    <div class="col-12 col-md-6 col-xl-12 mb-2">
+                                    <div class="col-12 col-md-6 col-xl-12 mb-2" onclick="book_detail({{ $book->id }})">
                                         <div class="card sh-11 sh-sm-14">
                                             <div class="row g-0 h-100">
                                                 <div class="col-auto">
@@ -171,4 +171,21 @@
 @endsection
 
 @section('js_after')
+    <script>
+        function book_detail(id) {
+            $('#myModal').modal('show');
+            $('#modalTitle').html('Book Details');
+
+            var url = '{{ route('book.view_book', ':id') }}';
+            url = url.replace(':id', id);
+
+            $.ajax({
+                url:url,
+                success: function(html) {
+                    console.log('html: ', html);
+                    $('#edit_data_form').html(html);
+                }
+            });
+        }
+    </script>
 @endsection

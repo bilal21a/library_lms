@@ -17,16 +17,12 @@
     <h4>Description</h4>
     <p class="text-alternate">{{ $data->desc }}</p>
 </div>
-<div class="mb-3">
-    <h4>Published Date</h4>
-    <p class="text-alternate">{{ $data->published_date }}</p>
-</div>
-<div class="mb-3">
+{{-- <div class="mb-3">
     <h4>Total Quantity</h4>
     <p class="text-alternate">{{ $data->qty }}</p>
-</div>
+</div> --}}
 <div class="mb-3">
-    <h4>Remaining Quantity</h4>
+    <h4>Availability</h4>
     <p class="text-alternate">{{ $data->remaining }}</p>
 </div>
 <div class="mb-3">
@@ -36,4 +32,15 @@
 <div class="mb-3">
     <h4>Author</h4>
     <p class="text-alternate">{{ $data->author->name }}</p>
+</div>
+<div class="mb-3">
+    <h4>Published Date</h4>
+    <p class="text-alternate">{{ $data->published_date }}</p>
+</div>
+
+<div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Request Book</button>
+    <button class="btn btn-primary" type="submit">
+        <span class="indicator-label">Reserve Book</span>
+    </button>
 </div>

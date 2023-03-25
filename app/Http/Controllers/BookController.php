@@ -80,6 +80,7 @@ class BookController extends Controller
                 'price' => 'required|integer',
                 'qty' => 'required|integer',
                 'category' => 'required',
+                'published_date' => 'required',
                 'author' => 'required',
                 'image' => 'required|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
             ],
@@ -95,6 +96,7 @@ class BookController extends Controller
         $data->price = $request->price;
         $data->qty = $request->qty;
         $data->remaining = $request->qty;
+        $data->published_date = $request->published_date;
         $data->category_id = $request->category;
         $data->author_id = $request->author;
 
@@ -154,6 +156,7 @@ class BookController extends Controller
                 'desc' => 'required',
                 'price' => 'required',
                 'category' => 'required',
+                'published_date' => 'required',
                 'author' => 'required',
                 'image' => 'nullable|image|max:2048' // validate that the uploaded file is an image and its size is less than or equal to 2MB
             ],
@@ -167,6 +170,7 @@ class BookController extends Controller
         $data->name = $request->name;
         $data->desc = $request->desc;
         $data->price = $request->price;
+        $data->published_date = $request->published_date;
         $data->category_id = $request->category;
         $data->author_id = $request->author;
 
@@ -222,12 +226,18 @@ class BookController extends Controller
         ->get();
         if ($request->name != null) {
             $data['search_string'] = $request->name;
-        } 
+        }
         if ($request->category) {
             $data['search_category'] = Category::find($request->category)->name;
         }
         $data['categories'] = Category::get();
         $data['popular_books'] = Book::take(5)->get();
         return view('books.user_books', $data);
+    }
+
+    public function view_book($id)
+    {
+        $data=Book::find($id);
+        return view('books.modal.user_book', compact('data'));
     }
 }
