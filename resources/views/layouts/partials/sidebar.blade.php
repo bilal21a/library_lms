@@ -89,9 +89,27 @@
         <div class="menu-container flex-grow-1">
             <ul id="menu" class="menu">
                 <li>
+                    <a class="{{ request()->is('category') ? 'active' : '' }}" href="{{ route('categories.user') }}">
+                        <i class="bi bi-person" data-acorn-size="18"></i>
+                        <span class="label">User Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="{{ request()->is('books') ? 'active' : '' }}" href="{{ route('book.user') }}">
+                        <i class="bi bi-person" data-acorn-size="18"></i>
+                        <span class="label">User Books</span>
+                    </a>
+                </li>
+                <li>
                     <a class="{{ request()->is('book*') ? 'active' : '' }}" href="{{ route('book.index') }}">
                         <i class="bi bi-person" data-acorn-size="18"></i>
                         <span class="label">Books</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="{{ request()->is('issuedBooks*') ? 'active' : '' }}" href="{{ route('issuedBooks.index') }}">
+                        <i class="bi bi-person" data-acorn-size="18"></i>
+                        <span class="label">Issued books</span>
                     </a>
                 </li>
                 <li>
