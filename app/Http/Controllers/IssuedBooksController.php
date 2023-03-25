@@ -77,6 +77,11 @@ class IssuedBooksController extends Controller
         if ($validate->fails()) {
             return response()->json($validate->errors()->first(), 500);
         }
+        $book=Book::find($request->book_name);
+        // dd($book);
+        if ($book->remaining < 1) {
+            return response()->json('Currently Book not Available', 500);
+        }
         $user = new IssuedBooks();
         $user->book_id = $request->book_name;
         $user->user_id = $request->user_name;
@@ -84,6 +89,9 @@ class IssuedBooksController extends Controller
         $user->return_date = $request->return_date;
         $user->return_status = 'Issued';
         $user->save();
+        $book->remaining=$book->remaining-1;
+        $book->save();
+
         return 'Success';
     }
 
@@ -108,8 +116,8 @@ class IssuedBooksController extends Controller
     {
         $data = IssuedBooks::find($id);
         $users = User::get();
-        $books = Book::get();
-        return view('issued_books.modal.edit', compact('data', 'books', 'users'));
+        $book = Book::where('id', $data->book_id)->first();
+        return view('issued_books.modal.edit', compact('data', 'book', 'users'));
     }
 
     /**
@@ -178,6 +186,14 @@ class IssuedBooksController extends Controller
 
     public function return_book_data(Request $request)
     {
-        dd($request->all());
+        $issued_books=IssuedBooks::find($request->id);
+        $issued_books->fine=$request->fine;
+        $issued_books->return_status='return';
+        $issued_books->save();
+        $book=Book::where('id', $issued_books->book_id)->first();
+        $book->remaining= $book->remaining+1;
+        $book->save();
+
+        return 'Success';
     }
 }

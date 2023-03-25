@@ -167,7 +167,6 @@
             };
 
             var fine = $('#fine_save').val()
-            var qty = $('#quantity_save').val()
             var id = $('#issue_id').val()
 
             $.ajaxSetup({
@@ -187,7 +186,7 @@
                     console.log('response: ', response);
                     singleDeleteDraw._fnDraw();
                     myalert("success", response, 5000);
-                    $('#myModal').modal('hide')
+                    $('#myModal').modal('hide');
                 },
                 error: function(xhr, status, error) {
                     console.log('error: ', xhr.responseJSON);
@@ -196,6 +195,6 @@
             });
         }
 
-    
+
     </script>
 @endsection

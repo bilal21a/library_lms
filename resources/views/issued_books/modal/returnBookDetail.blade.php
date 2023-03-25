@@ -41,15 +41,7 @@
     @enderror
 </div>
 <input type="hidden" id="issue_id" value="{{ $return_book->id }}">
-<div class="fv-row mb-5 fv-plugins-icon-container">
-    <label class="required fw-bold fs-6 mb-2">Quantity</label>
-    <input type="number" id="quantity_save" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Quantity" value="0"
-        value="">
-    <div class="fv-plugins-message-container invalid-feedback"></div>
-    @error('quantity')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
+
 
 
 <button class="btn btn-primary " onclick="fine_save()" >Submit</button>

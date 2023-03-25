@@ -1,16 +1,8 @@
 <div class="fv-row mb-5 fv-plugins-icon-container">
-    <label class="required fw-bold fs-6 mb-2">Select Book</label>
-    <select id="inputState" name="book_name" class="form-select">
-        <option value="" selected disabled>Choose...</option>
-        @foreach ($books as $book)
-            <option value="{{ $book->id }}"{{ $data->book_id == $book->id ? 'selected' : '' }}>{{ $book->name }}
-            </option>
-        @endforeach
-    </select>
-    <div class="fv-plugins-message-container invalid-feedback"></div>
-    @error('book_name')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
+    <div class="mb-3">
+        <h4>Selected Book</h4>
+        <p class="text-alternate">{{ $book->name }}</p>
+    </div>
 </div>
 <div class="fv-row mb-5 fv-plugins-icon-container">
     <label class="required fw-bold fs-6 mb-2">Select User</label>
