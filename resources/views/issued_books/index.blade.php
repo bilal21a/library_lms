@@ -103,6 +103,7 @@
                 success: function(response) {
                     console.log('response: ', response);
                     var filter_data = $('.filter_books')
+                    filter_data.html('')
 
                     response.forEach(element => {
                         console.log('element: ', element);
