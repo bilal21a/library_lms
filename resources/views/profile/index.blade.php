@@ -40,7 +40,8 @@
                         <div class="d-flex align-items-center flex-column mb-4">
                             <div class="d-flex align-items-center flex-column">
                                 <div class="sw-13 position-relative mb-3 d-flex justify-content-center">
-                                    <img src="https://ui-avatars.com/api/?background=ECF5FF&color=1ea8e7&name={{ auth()->user()->name }}" class="img-fluid rounded-xl" alt="thumb" />
+                                    <img src="https://ui-avatars.com/api/?background=ECF5FF&color=1ea8e7&name={{ auth()->user()->name }}"
+                                        class="img-fluid rounded-xl" alt="thumb" />
                                 </div>
                                 <div class="h5 mb-0">{{ auth()->user()->name }}</div>
                                 <div class="text-muted">{{ auth()->user()->role }}</div>
@@ -134,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                         </div>
                     </div>
                     <!-- Stats End -->
@@ -143,509 +144,15 @@
 
                 <!-- Projects Tab Start -->
                 <div class="tab-pane fade" id="projectsTab" role="tabpanel">
-                    <h2 class="small-title">Projects</h2>
 
-                    <!-- Search Start -->
-                    <div class="row mb-3 g-2">
-                        <div class="col mb-1">
-                            <div
-                                class="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
-                                <input class="form-control" placeholder="Search" />
-                                <span class="search-magnifier-icon">
-                                    <i data-acorn-icon="search"></i>
-                                </span>
-                                <span class="search-delete-icon d-none">
-                                    <i data-acorn-icon="close"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-auto text-end mb-1">
-                            <div class="dropdown-as-select d-inline-block" data-childselector="span">
-                                <button class="btn p-0 shadow" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="btn btn-foreground-alternate dropdown-toggle sw-13">All</span>
-                                </button>
-                                <div class="dropdown-menu shadow dropdown-menu-end">
-                                    <a class="dropdown-item active" href="#">All</a>
-                                    <a class="dropdown-item" href="#">Active</a>
-                                    <a class="dropdown-item" href="#">Inactive</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Search End -->
+                    {{-- Issued Books Data will Render here --}}
 
-                    <!-- Projects Content Start -->
-                    <div class="row row-cols-1 row-cols-sm-2 g-2">
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Basic Introduction to Bread
-                                                Making</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 4</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="check-square" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Completed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">4 Facts About Old Baking
-                                                Techniques</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 3</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="clock" class="text-muted me-2" data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Pending</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Apple Cake Recipe for
-                                                Starters</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 8</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="lock-on" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Locked</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="sync-horizontal" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Continuing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">A Complete Guide to Mix Dough for
-                                                the Molds</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 12</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="check-square" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Completed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">14 Facts About Sugar
-                                                Products</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 2</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-down" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Inactive</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="archive" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Archived</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Easy and Efficient Tricks for
-                                                Baking Crispy Breads</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 2</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="clock" class="text-muted me-2" data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Pending</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Apple Cake Recipe for
-                                                Starters</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 6</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-down" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Inactive</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="archive" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Archived</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Simple Guide to Mix Dough</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 22</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="lock-on" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Locked</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="check-square" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Completed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">10 Secrets Every Southern Baker
-                                                Knows</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 3</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="sync-horizontal" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Continuing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Recipes for Sweet and Healty
-                                                Treats</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 1</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-down" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Inactive</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="clock" class="text-muted me-2" data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Pending</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Better Ways to Mix Dough for the
-                                                Molds</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 20</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="clock" class="text-muted me-2" data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Pending</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="heading mb-3">
-                                        <a href="#" class="stretched-link">
-                                            <span class="clamp-line sh-5" data-line="2">Introduction to Baking
-                                                Cakes</span>
-                                        </a>
-                                    </h6>
-                                    <div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="category" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Contributors: 13</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <i data-acorn-icon="trend-up" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Active</span>
-                                        </div>
-                                        <div>
-                                            <i data-acorn-icon="check-square" class="text-muted me-2"
-                                                data-acorn-size="17"></i>
-                                            <span class="align-middle text-alternate">Completed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Projects Content End -->
                 </div>
                 <!-- Projects Tab End -->
 
                 <!-- Permissions Tab Start -->
                 <div class="tab-pane fade" id="permissionsTab" role="tabpanel">
-                    <h2 class="small-title">Permissions</h2>
-                    <div class="row row-cols-1 g-2">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" checked />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Create</span>
-                                                <span class="d-block text-small text-muted">
-                                                    Chocolate cake biscuit donut cotton candy soufflé cake macaroon. Halvah
-                                                    chocolate cotton candy sweet roll jelly-o candy danish
-                                                    dragée.
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" checked />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Publish</span>
-                                                <span class="d-block text-small text-muted">Jelly beans wafer candy
-                                                    caramels fruitcake macaroon sweet roll.</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" checked />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Edit</span>
-                                                <span class="d-block text-small text-muted">Jelly cake jelly sesame snaps
-                                                    jelly beans jelly beans.</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Delete</span>
-                                                <span class="d-block text-small text-muted">Danish oat cake pudding.</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" checked />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Add User</span>
-                                                <span class="d-block text-small text-muted">Soufflé chocolate cake chupa
-                                                    chups danish brownie pudding fruitcake.</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Edit User</span>
-                                                <span class="d-block text-small text-muted">Biscuit powder brownie powder
-                                                    sesame snaps jelly-o dragée cake.</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <label class="form-check custom-icon mb-0 checked-opacity-100">
-                                        <input type="checkbox" class="form-check-input" />
-                                        <span class="form-check-label">
-                                            <span class="content opacity-50">
-                                                <span class="heading mb-1 lh-1-25">Delete User</span>
-                                                <span class="d-block text-small text-muted">
-                                                    Liquorice jelly powder fruitcake oat cake. Gummies tiramisu cake jelly-o
-                                                    bonbon. Marshmallow liquorice croissant.
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   {{-- Returned Books Data will Render Here --}}
                 </div>
                 <!-- Permissions Tab End -->
 
@@ -947,4 +454,25 @@
             <!-- Right Side End -->
         </div>
     </div>
+@endsection
+
+
+@section('js_after')
+    <script>
+        console.log('yaba daba doooo');
+        $.ajax({
+            url: '{{ route('profile.get_issued_books') }}',
+            success: function(html) {
+                console.log('html: ', html);
+                $('#projectsTab').html(html);
+            }
+        });
+        $.ajax({
+            url: '{{ route('profile.get_returned_books') }}',
+            success: function(html) {
+                console.log('html: ', html);
+                $('#permissionsTab').html(html);
+            }
+        });
+    </script>
 @endsection

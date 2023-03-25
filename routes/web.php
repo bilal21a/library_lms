@@ -51,6 +51,8 @@ Route::post('return_book_data', [IssuedBooksController::class, 'return_book_data
 
 // profile routes
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profile/get_issued_books', [ProfileController::class, 'get_issued_books'])->name('profile.get_issued_books');
+Route::get('profile/get_returned_books', [ProfileController::class, 'get_returned_books'])->name('profile.get_returned_books');
 
 
 Auth::routes();
