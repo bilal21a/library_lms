@@ -240,9 +240,9 @@ class BookController extends Controller
     {
         $data['data']=Book::find($id);
         if ($user_info!=null) {
+            $data['books'] = IssuedBooks::where('book_id',$id)->where('return_status','Issued')->get();
             return view('books.modal.view_status', $data);
         }else{
-            $data['books'] = IssuedBooks::where('book_id',$id)->get();
             return view('books.modal.user_book', $data);
         }
     }
