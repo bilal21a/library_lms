@@ -22,6 +22,14 @@
     <p class="text-alternate">{{ $data->published_date }}</p>
 </div>
 <div class="mb-3">
+    <h4>Category</h4>
+    <p class="text-alternate"><span class="badge" style="background:{{ $data->category->background }}">&nbsp;&nbsp;</span>{{ $data->category->name }}</p>
+</div>
+<div class="mb-3">
+    <h4>Author</h4>
+    <p class="text-alternate">{{ $data->author->name }}</p>
+</div>
+<div class="mb-3">
     <h4>Total Quantity</h4>
     <p class="text-alternate">{{ $data->qty }}</p>
 </div>
@@ -29,11 +37,7 @@
     <h4>Remaining Quantity</h4>
     <p class="text-alternate">{{ $data->remaining }}</p>
 </div>
-<div class="mb-3">
-    <h4>Category</h4>
-    <p class="text-alternate"><span class="badge" style="background:{{ $data->category->background }}">&nbsp;&nbsp;</span>{{ $data->category->name }}</p>
-</div>
-<div class="mb-3">
-    <h4>Author</h4>
-    <p class="text-alternate">{{ $data->author->name }}</p>
+
+<div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary me-2" onclick="view_issue_status({{ $data->id }})">view issue status</button>
 </div>

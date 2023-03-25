@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Author;
 use App\Book;
 use App\Category;
+use App\IssuedBooks;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -235,9 +236,14 @@ class BookController extends Controller
         return view('books.user_books', $data);
     }
 
-    public function view_book($id)
+    public function view_book($id, $user_info=null)
     {
-        $data=Book::find($id);
-        return view('books.modal.user_book', compact('data'));
+        $data['data']=Book::find($id);
+        if ($user_info!=null) {
+            return view('books.modal.view_status', $data);
+        }else{
+            $data['books'] = IssuedBooks::where('book_id',$id)->get();
+            return view('books.modal.user_book', $data);
+        }
     }
 }
