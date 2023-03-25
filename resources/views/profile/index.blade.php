@@ -5,27 +5,9 @@
         <!-- Title and Top Buttons Start -->
         <div class="page-title-container">
             <div class="row">
-                <!-- Title Start -->
                 <div class="col-12 col-md-7">
                     <h1 class="mb-0 pb-0 display-4" id="title">Profile</h1>
-                    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
-                        <ul class="breadcrumb pt-0">
-                            <li class="breadcrumb-item"><a href="Dashboards.Default.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="Pages.html">Pages</a></li>
-                            <li class="breadcrumb-item"><a href="Pages.Profile.html">Profile</a></li>
-                        </ul>
-                    </nav>
                 </div>
-                <!-- Title End -->
-
-                <!-- Top Buttons Start -->
-                <div class="col-12 col-md-5 d-flex align-items-start justify-content-end">
-                    <button type="button" class="btn btn-outline-primary btn-icon btn-icon-start w-100 w-md-auto">
-                        <i data-acorn-icon="edit-square"></i>
-                        <span>Edit</span>
-                    </button>
-                </div>
-                <!-- Top Buttons End -->
             </div>
         </div>
         <!-- Title and Top Buttons End -->
