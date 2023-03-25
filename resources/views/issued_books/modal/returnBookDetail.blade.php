@@ -18,7 +18,8 @@
 
 <div class="mb-3">
     <h4>Category</h4>
-    <p class="text-alternate"><span class="badge" style="background:{{ $data->category->background }}">&nbsp;&nbsp;</span>{{ $data->category->name }}</p>
+    <p class="text-alternate"><span class="badge"
+            style="background:{{ $data->category->background }}">&nbsp;&nbsp;</span>{{ $data->category->name }}</p>
 </div>
 <div class="mb-3">
     <h4>Issue Date</h4>
@@ -29,31 +30,26 @@
     <p class="text-alternate">{{ $return_book->return_date }}</p>
 </div>
 
-<form id="issued_book_filter" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="fv-row mb-5 fv-plugins-icon-container">
-        <label class="required fw-bold fs-6 mb-2">Fine</label>
-        <input type="text" name="fine" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Fine"
-            value="">
-        <div class="fv-plugins-message-container invalid-feedback"></div>
-        @error('fine')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
-    <div class="fv-row mb-5 fv-plugins-icon-container">
-        <label class="required fw-bold fs-6 mb-2">Quantity</label>
-        <input type="text" name="quantity" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Quantity"
-            value="">
-        <div class="fv-plugins-message-container invalid-feedback"></div>
-        @error('quantity')
-            <span class="text-danger">{{ $message }}</span>
-        @enderror
-    </div>
+
+<div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Fine</label>
+    <input type="number" id="fine_save" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Fine" value="0"
+        value="">
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('fine')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+<input type="hidden" id="issue_id" value="{{ $return_book->id }}">
+<div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Quantity</label>
+    <input type="number" id="quantity_save" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Quantity" value="0"
+        value="">
+    <div class="fv-plugins-message-container invalid-feedback"></div>
+    @error('quantity')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
 
 
-    <button class="btn btn-icon btn-icon-start btn-primary" type="submit">
-        <i data-acorn-icon="search"></i>
-        <span>Submit</span>
-    </button>
-</form>
-
+<button class="btn btn-primary " onclick="fine_save()" >Submit</button>

@@ -98,7 +98,7 @@
 
 
 
-        {{-- @include('newSpy.layouts.partials.footer') --}}
+        @include('common.modal.simple_modal')
     </div>
 
 

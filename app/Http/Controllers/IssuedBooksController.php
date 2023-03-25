@@ -160,8 +160,6 @@ class IssuedBooksController extends Controller
     {
         $return_book=IssuedBooks::find($id);
         $data=Book::find($return_book->book_id);
-        // dd($return_book);
-
         return view('issued_books.modal.returnBookDetail', compact('return_book','data'));
     }
 
@@ -176,5 +174,10 @@ class IssuedBooksController extends Controller
         $data = IssuedBooks::find($id);
         $data->delete();
         return 'Deleted Succesfully';
+    }
+
+    public function return_book_data(Request $request)
+    {
+        dd($request->all());
     }
 }

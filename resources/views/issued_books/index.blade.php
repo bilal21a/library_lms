@@ -102,7 +102,7 @@
                 data: formData,
                 success: function(response) {
                     console.log('response: ', response);
-                    var filter_data= $('.filter_books')
+                    var filter_data = $('.filter_books')
 
                     response.forEach(element => {
                         console.log('element: ', element);
@@ -141,8 +141,8 @@
             console.log('id: ', id);
             var show_status_url = '{{ route('return_book', ':id') }}'
 
-            $('#modalTitle').html('View Status');
-            $('#add_data_form').html('');
+            $('#modalTitle_simple').html('Return Book');
+            $('.simpleModal_body').html('');
             url = show_status_url.replace(':id', id);
 
             $.ajax({
@@ -153,13 +153,48 @@
                 },
                 success: function(data) {
                     $('#returnModal').modal('hide');
-                    $('#myModal').modal('show');
+                    $('#simpleModal').modal('show');
                     console.log('data: ', data);
-                    $('#add_data_form').html(data);
+                    $('.simpleModal_body').html(data);
                 },
             });
         }
 
+        function fine_save() {
+            let singleDeleteDraw = {
+                ...dataTable
+            };
 
+            var fine = $('#fine_save').val()
+            var qty = $('#quantity_save').val()
+            var id = $('#issue_id').val()
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('return_book_data') }}",
+                data: {
+                    fine: fine,
+                    qty: qty,
+                    id: id,
+                },
+                success: function(response) {
+                    console.log('response: ', response);
+                    singleDeleteDraw._fnDraw();
+                    myalert("success", response, 5000);
+                    $('#myModal').modal('hide')
+                },
+                error: function(xhr, status, error) {
+                    console.log('error: ', xhr.responseJSON);
+                    myalert("error", xhr.responseJSON, 10000);
+                },
+            });
+        }
+
+    
     </script>
 @endsection

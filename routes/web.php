@@ -45,6 +45,7 @@ Route::resource('issuedBooks', 'IssuedBooksController');
 Route::get('get_issuedBooks', [IssuedBooksController::class, 'get_data'])->name('get_issuedBooks');
 Route::post('return_issuedBooks', [IssuedBooksController::class, 'return_issuedBooks'])->name('return_issuedBooks');
 Route::get('return_book/{id}', [IssuedBooksController::class, 'return_book'])->name('return_book');
+Route::post('return_book_data', [IssuedBooksController::class, 'return_book_data'])->name('return_book_data');
 
 
 
