@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IssuedBooksController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,13 +33,15 @@ Route::get('get_author', [AuthorController::class, 'get_data'])->name('get_autho
 Route::resource('categories', 'CategoryController');
 Route::get('get_categories', [CategoryController::class, 'get_data'])->name('get_categories');
 Route::post('categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+Route::match(['get', 'post'], 'category', [CategoryController::class, 'user_categories'])->name('categories.user');
 // Books Management
 Route::resource('book', 'BookController');
 Route::get('get_books', [BookController::class, 'get_data'])->name('get_books');
 Route::post('book/{id}', [BookController::class, 'update'])->name('book.update');
+// Author Management
+Route::resource('issuedBooks', 'IssuedBooksController');
+Route::get('get_issuedBooks', [IssuedBooksController::class, 'get_data'])->name('get_issuedBooks');
 
-
-Route::match(['get', 'post'], 'category', [CategoryController::class, 'user_categories'])->name('categories.user');
 
 
 Auth::routes();
