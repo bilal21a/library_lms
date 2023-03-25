@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\IssuedBooks;
+use App\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -23,8 +25,20 @@ class IssuedBooksController extends Controller
     {
         $data = IssuedBooks::select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
         return DataTables::of($data)
+            ->addColumn('lib_id', function ($data) {
+                return 'lib_'. $data->id;
+            })
             ->addColumn('action', function ($data) {
                 return $this->get_buttons($data->id);
+            })
+            ->addColumn('user_name', function ($data) {
+                $user=User::find($data->user_id);
+
+                return $user->name;
+            })
+            ->addColumn('book_name', function ($data) {
+                $book=Book::find($data->book_id);
+                return $book->name;
             })
             ->make(true);
     }
@@ -36,7 +50,9 @@ class IssuedBooksController extends Controller
      */
     public function create()
     {
-        return view('issued_books.modal.add');
+        $users=User::get();
+        $books=Book::get();
+        return view('issued_books.modal.add',compact('users','books'));
     }
 
     /**
@@ -50,14 +66,21 @@ class IssuedBooksController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'name' => 'required',
+                'book_name' => 'required',
+                'user_name' => 'required',
+                'issue_date' => 'required',
+                'return_date' => 'required',
             ],
         );
         if ($validate->fails()) {
             return response()->json($validate->errors()->first(), 500);
         }
-        $user = new Author();
-        $user->name = $request->name;
+        $user = new IssuedBooks();
+        $user->book_id = $request->book_name;
+        $user->user_id = $request->user_name;
+        $user->issued_date = $request->issue_date;
+        $user->return_date = $request->return_date;
+        $user->return_status = 'Issued';
         $user->save();
         return 'Success';
     }
@@ -81,8 +104,10 @@ class IssuedBooksController extends Controller
      */
     public function edit($id)
     {
-        $data = Author::find($id);
-        return view('author.modal.edit', compact('data'));
+        $data = IssuedBooks::find($id);
+        $users=User::get();
+        $books=Book::get();
+        return view('issued_books.modal.edit', compact('data','books','users'));
     }
 
     /**
@@ -94,10 +119,26 @@ class IssuedBooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Author::find($request->id);
-        $data->name = $request->name;
-        $data->save();
-        return 'Author Updated Successfully';
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'book_name' => 'required',
+                'user_name' => 'required',
+                'issue_date' => 'required',
+                'return_date' => 'required',
+            ],
+        );
+        if ($validate->fails()) {
+            return response()->json($validate->errors()->first(), 500);
+        }
+        $user = IssuedBooks::find($request->id);
+        $user->book_id = $request->book_name;
+        $user->user_id = $request->user_name;
+        $user->issued_date = $request->issue_date;
+        $user->return_date = $request->return_date;
+        $user->return_status = 'Issued';
+        $user->save();
+        return 'Updated Successfully';
     }
 
     /**
@@ -108,8 +149,8 @@ class IssuedBooksController extends Controller
      */
     public function destroy($id)
     {
-        $data = Author::find($id);
+        $data = IssuedBooks::find($id);
         $data->delete();
-        return 'Author Deleted Succesfully';
+        return 'Deleted Succesfully';
     }
 }

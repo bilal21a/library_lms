@@ -32,7 +32,7 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine', 'action'];
+        var tabelDataArray = ['lib_id',  'book_name','user_name', 'issued_date', 'return_date', 'return_status', 'fine', 'action'];
         var get_data_url = "{{ route('get_issuedBooks') }}"
     </script>
     @include('common.js.get_data')
