@@ -16,7 +16,8 @@
             <i data-acorn-icon="plus"></i>
             <span>Issue Book</span>
         </button>
-        <button class="btn btn-icon btn-icon-start btn-outline-primary mb-4" type="button" data-bs-toggle="modal" data-bs-target="#returnModal">
+        <button class="btn btn-icon btn-icon-start btn-outline-primary mb-4" type="button" data-bs-toggle="modal"
+            data-bs-target="#returnModal">
             <i data-acorn-icon="rotate-left"></i>
             <span>Return Book</span>
         </button>
@@ -82,6 +83,60 @@
                 $('#issueid-section').hide();
                 $('#user-name-section').show();
             }
+        });
+
+
+        $('#issued_book_filter').on('submit', function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+            console.log('formData: ', formData);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: '{{ route('return_issuedBooks') }}',
+                data: formData,
+                success: function(response) {
+                    console.log('response: ', response);
+                    var filter_data= $('.filter_books')
+
+                    response.forEach(element => {
+                        console.log('element: ', element);
+
+                        filter_data.append(`<div class="card mb-2  border-primary">
+                        <a href="#" class="row g-0 sh-10">
+                            <div class="col-auto">
+                                <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="acorn-icons acorn-icons-search undefined"><circle cx="9" cy="9" r="7"></circle><path d="M14 14L17.5 17.5"></path></svg>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
+                                    <div class="d-flex flex-column">
+                                        <div class="text-primary book_name">${element.book_info.name}</div>
+                                        <div class="text-small text-muted issue_date">issued date: ${element.issued_date}</div>
+                                        <div class="text-small text-muted release_date">return date: ${element.return_date}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>`);
+
+
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log('error: ', xhr.responseJSON);
+                    myalert("error", xhr.responseJSON, 10000);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
         });
     </script>
 @endsection

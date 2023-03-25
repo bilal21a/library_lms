@@ -18,7 +18,9 @@ class IssuedBooksController extends Controller
      */
     public function index()
     {
-        return view('issued_books.index');
+
+        $users = User::get();
+        return view('issued_books.index', compact('users'));
     }
 
     public function get_data()
@@ -26,18 +28,18 @@ class IssuedBooksController extends Controller
         $data = IssuedBooks::select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
         return DataTables::of($data)
             ->addColumn('lib_id', function ($data) {
-                return 'lib_'. $data->id;
+                return 'lib_' . $data->id;
             })
             ->addColumn('action', function ($data) {
                 return $this->get_buttons($data->id);
             })
             ->addColumn('user_name', function ($data) {
-                $user=User::find($data->user_id);
+                $user = User::find($data->user_id);
 
                 return $user->name;
             })
             ->addColumn('book_name', function ($data) {
-                $book=Book::find($data->book_id);
+                $book = Book::find($data->book_id);
                 return $book->name;
             })
             ->make(true);
@@ -50,9 +52,9 @@ class IssuedBooksController extends Controller
      */
     public function create()
     {
-        $users=User::get();
-        $books=Book::get();
-        return view('issued_books.modal.add',compact('users','books'));
+        $users = User::get();
+        $books = Book::get();
+        return view('issued_books.modal.add', compact('users', 'books'));
     }
 
     /**
@@ -105,9 +107,9 @@ class IssuedBooksController extends Controller
     public function edit($id)
     {
         $data = IssuedBooks::find($id);
-        $users=User::get();
-        $books=Book::get();
-        return view('issued_books.modal.edit', compact('data','books','users'));
+        $users = User::get();
+        $books = Book::get();
+        return view('issued_books.modal.edit', compact('data', 'books', 'users'));
     }
 
     /**
@@ -139,6 +141,20 @@ class IssuedBooksController extends Controller
         $user->return_status = 'Issued';
         $user->save();
         return 'Updated Successfully';
+    }
+
+    public function return_issuedBooks(Request $request)
+    {
+        if ($request->returnRadio == 'user_name') {
+            $block ='user_id';
+        } else {
+            $block =  'id';
+            $request['id'] = explode("_", $request->id)[1];
+        }
+
+        $issued_books = IssuedBooks::where($block, $request->$block)->get();
+
+        return $issued_books;
     }
 
     /**
