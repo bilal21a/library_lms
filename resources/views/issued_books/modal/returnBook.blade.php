@@ -29,7 +29,6 @@
                                         placeholder="Search by Name">
                                 </div>
                             </div>
-
                         </div>
 
                         <div id="user-name-section" style="display: none;" class="mb-4">
@@ -53,32 +52,8 @@
                             <span>Fetch</span>
                         </button>
                     </form>
-
-
-                    <div class="filter_books">
-
+                    <div class="filter_books mt-5">
                     </div>
-                    {{-- <div class="card mb-2  border-primary">
-                        <a href="#" class="row g-0 sh-10">
-                            <div class="col-auto">
-                                <div class="sw-9 sh-10 d-inline-block d-flex justify-content-center align-items-center">
-                                    <i data-acorn-icon="search"></i>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
-                                    <div class="d-flex flex-column">
-                                        <div class="text-primary book_name">Deffoldil book</div>
-                                        <div class="text-small text-muted issue_date">issued date: 20 oct 2021</div>
-                                        <div class="text-small text-muted release_date">return date: 20 oct 2021</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div> --}}
-
-
-
                 </div>
             </div>
         </div>
