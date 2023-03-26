@@ -43,6 +43,11 @@
                     @endforeach
                 </div>
             </div>
+            @if ($books->count() == 0)
+                <div class="col-12 col-xl-8 col-xxl-9 mb-5">
+                    No books found
+                </div>
+            @endif
             <div class="col-12 col-xl-4 col-xxl-3">
                 <div class="row">
                     <div class="col-12">
@@ -105,13 +110,13 @@
                                 <div class="row g-0">
                                     <div class="col-12 col-sm-6 mb-n2">
                                         @foreach ($categories->chunk(ceil($categories->count() / 2))->first() as $category)
-                                            <a href="{{ route('categories.user', $category->id) }}"
+                                            <a href="{{ route('book.user', ['category' => $category->id]) }}"
                                                 class="body-link d-block mb-2">{{ $category->name }}</a>
                                         @endforeach
                                     </div>
                                     <div class="col-12 col-sm-6 mb-n2">
                                         @foreach ($categories->chunk(ceil($categories->count() / 2))->last() as $category)
-                                            <a href="{{ route('categories.user', $category->id) }}"
+                                            <a href="{{ route('book.user', ['category' => $category->id]) }}"
                                                 class="body-link d-block mb-2">{{ $category->name }}</a>
                                         @endforeach
                                     </div>
@@ -153,39 +158,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
-
-
     @include('common.modal.add_edit_modal')
-@endsection
-
-@section('js_after')
-    <script>
-        function book_detail(id) {
-            $('#myModal').modal('show');
-            $('#modalTitle').html('Book Details');
-
-            var url = '{{ route('book.view_book', ':id') }}';
-            url = url.replace(':id', id);
-
-            $.ajax({
-                url:url,
-                success: function(html) {
-                    console.log('html: ', html);
-                    $('#edit_data_form').html(html);
-                }
-            });
-        }
-    </script>
 @endsection

@@ -21,7 +21,7 @@
                                 <img src="{{ $category->image_url }}" class="card-img-top sh-19" alt="card image">
                                 <div class="card-body pb-0">
                                     <h5 class="heading mb-3">
-                                        <a href="#" class="body-link stretched-link">
+                                        <a href="{{ route('book.user',['category'=>$category->id]) }}" class="body-link stretched-link">
                                             <span class="clamp-line sh-5" data-line="2"
                                                 style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">
                                                 <span class="badge"
@@ -76,11 +76,11 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <h2 class="small-title">Must Popular Books</h2>
+                        <h2 class="small-title">Most Popular Books</h2>
                         <div class="mb-5">
                             <div class="row mb-n2">
                                 @foreach ($popular_books as $book)
-                                    <div class="col-12 col-md-6 col-xl-12 mb-2">
+                                    <div class="col-12 col-md-6 col-xl-12 mb-2" onclick="book_detail({{ $book->id }})">
                                         <div class="card sh-11 sh-sm-14">
                                             <div class="row g-0 h-100">
                                                 <div class="col-auto">
