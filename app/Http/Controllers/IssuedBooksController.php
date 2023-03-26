@@ -18,8 +18,7 @@ class IssuedBooksController extends Controller
      */
     public function index()
     {
-
-        $users = User::get();
+        $users = User::role(['student', 'faculty'])->get();
         return view('issued_books.index', compact('users'));
     }
 
@@ -50,7 +49,7 @@ class IssuedBooksController extends Controller
      */
     public function create()
     {
-        $users = User::get();
+        $users = User::role(['student', 'faculty'])->get();
         $books = Book::get();
         return view('issued_books.modal.add', compact('users', 'books'));
     }
@@ -113,7 +112,7 @@ class IssuedBooksController extends Controller
     public function edit($id)
     {
         $data = IssuedBooks::find($id);
-        $users = User::get();
+        $users = User::role(['student', 'faculty'])->get();
         $book = Book::where('id', $data->book_id)->first();
         return view('issued_books.modal.edit', compact('data', 'book', 'users'));
     }

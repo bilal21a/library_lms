@@ -26,7 +26,7 @@
                                         class="img-fluid rounded-xl" alt="thumb" />
                                 </div>
                                 <div class="h5 mb-0">{{ auth()->user()->name }}</div>
-                                <div class="text-muted">{{ auth()->user()->role }}</div>
+                                <div class="text-muted">{{ auth()->user()->getRolenames()[0] }}</div>
                                 <div class="text-muted">
                                     <i data-acorn-icon="email" class="me-1"></i>
                                     <span class="align-middle">{{ auth()->user()->email }}</span>

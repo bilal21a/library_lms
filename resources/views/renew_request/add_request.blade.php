@@ -69,7 +69,7 @@
                                             <select id="inputState" name="user_name" class="form-select">
                                                 <option value="" selected disabled>Choose...</option>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    <option value="{{ $user->id }}">{{ $user->complete_name() }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>

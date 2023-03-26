@@ -19,7 +19,7 @@ class RenewRequestController extends Controller
 
     public function get_renew_request(Request $request)
     {
-        $data = RenewRequest::with('issued_book')->select(['id', 'user_id', 'issued_book_id', 'return_date','approved']);
+        $data = RenewRequest::with('issued_book')->select(['id', 'user_id', 'issued_book_id', 'return_date', 'approved']);
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 if ($data->approved == 0) {
@@ -32,7 +32,7 @@ class RenewRequestController extends Controller
                 return  'lib_' . $data->issued_book->id;
             })
             ->addColumn('user_name', function ($data) {
-                return $data->issued_book-> user->complete_name_styled();
+                return $data->issued_book->user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 return $data->issued_book->book->name;
@@ -54,7 +54,7 @@ class RenewRequestController extends Controller
             $data['book_id'] = $book_id;
             $data['issued_book_info'] = IssuedBooks::with('book')->find($book_id);
         } else {
-            $data['users'] = User::get();
+            $data['users'] = User::role(['student', 'faculty'])->get();
             $data['books'] = IssuedBooks::where('return_status', 'Issued')->get();
         }
         return view('renew_request.add_request', $data);

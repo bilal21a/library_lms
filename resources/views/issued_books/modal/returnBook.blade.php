@@ -37,7 +37,7 @@
                                     <select id="inputState" name="user_id" class="form-select">
                                         <option value="" selected disabled>Select User</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->complete_name() }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -50,7 +50,7 @@ class ReserveRequestController extends Controller
 
     public function add_reserved_request()
     {
-        $users = User::get();
+        $users = User::role(['student', 'faculty'])->get();
         $books = Book::get();
         return view('reserve_request.add_request', compact('users', 'books'));
     }
