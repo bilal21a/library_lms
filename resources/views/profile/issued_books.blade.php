@@ -5,7 +5,10 @@
 <div class="row row-cols-1 row-cols-sm-2 g-2">
     <div class="col-12 col-xl-8 col-xxl-9 mb-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 g-2 mb-5">
-            @foreach ($books as $book)
+            @foreach ($books as $data)
+            @php
+                $book=$data->book_info;
+            @endphp
                 <div class="col">
                     <div class="card h-100" onclick="book_detail({{ $book->id }})">
                         <img src="{{ $book->image_url }}" class="card-img-top sh-19" alt="card image">
@@ -25,7 +28,7 @@
                                     </span>
                                 </div>
                             </h5>
-                            <a href="{{ route('renew_request.add_renew_request', $book->id) }}" class="">
+                            <a href="{{ route('renew_request.add_renew_request', $data->id) }}" class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"
                                     stroke-linecap="round" stroke-linejoin="round"

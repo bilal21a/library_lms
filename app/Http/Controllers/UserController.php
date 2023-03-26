@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -23,10 +24,16 @@ class UserController extends Controller
 
     public function get_data()
     {
-        $users = User::select(['id', 'name', 'email', 'created_at', 'updated_at']);
+        $users = User::select(['id', 'name', 'email', 'created_at']);
         return DataTables::of($users)
             ->addColumn('action', function ($user) {
                 return $this->get_buttons($user->id);
+            })
+            ->addColumn('role', function ($user) {
+                return $user->getRoleNames()[0] ?? null;
+            })
+            ->addColumn('registered_at', function ($user) {
+                return $user->created_at->format('d M,Y');
             })
             ->make(true);
     }
@@ -65,8 +72,10 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        // $user->role= $request->role;
         $user->save();
+        $role = $request->role;
+        $role = Role::findByName($role);
+        $user->assignRole($role);
         return 'Success';
     }
 
@@ -102,11 +111,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $agent = User::find($request->id);
-        $agent->name = $request->name;
-        // $agent->role=$request->role;
-        $agent->password = $request->password != null ?  Hash::make($request->password) : $agent->password;
-        $agent->save();
+        $user = User::with('roles')->find($request->id);
+        $user->name = $request->name;
+        $user->password = $request->password != null ?  Hash::make($request->password) : $user->password;
+        $user->save();
+
+        $role = $request->role;
+        $role = Role::findByName($role);
+        $user->removeRole($user->roles[0]);
+        $user->assignRole($role);
         return 'User Updated Successfully';
     }
 

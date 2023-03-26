@@ -22,6 +22,9 @@
                                     @csrf
 
                                     @if (isset($book_id) && $book_id != null)
+                                    @php
+                                        $book_info=$issued_book_info->book_info;
+                                    @endphp
                                         <div class="row g-0 align-items-center">
                                             @if ($book_info->image_url != null)
                                                 <div class="col-5 pe-5">
@@ -58,7 +61,7 @@
                                             <h4>Author</h4>
                                             <p class="text-alternate">{{ $book_info->author->name }}</p>
                                         </div>
-                                        <input type="hidden" name="book_name" value="{{ $book_id }}">
+                                        <input type="hidden" name="issued_book_id" value="{{ $book_id }}">
                                         <input type="hidden" name="user_name" value="{{ auth()->id() }}">
                                     @else
                                         <div class="fv-row mb-5 fv-plugins-icon-container">
@@ -74,12 +77,14 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                     
+
                                         <div class="fv-row mb-5 fv-plugins-icon-container">
-                                            <label class="required fw-bold fs-6 mb-2">Select Book</label>
-                                            <select id="inputState" name="book_name" class="form-select">
-                                                <option value="" selected disabled>Choose...</option>
+                                            <label class="required fw-bold fs-6 mb-2">Issue Record (issueId)</label>
+                                            <select id="inputState" name="issued_book_id" class="form-select">
+                                                <option value="" selected disabled>Select Issued Book ID</option>
                                                 @foreach ($books as $book)
-                                                    <option value="{{ $book->id }}">{{ $book->name }}</option>
+                                                    <option value="{{ $book->id }}">lib_{{ $book->id }}</option>
                                                 @endforeach
                                             </select>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>

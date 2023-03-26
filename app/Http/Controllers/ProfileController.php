@@ -18,8 +18,7 @@ class ProfileController extends Controller
 
     public function get_issued_books()
     {
-        $issuebook = IssuedBooks::where('user_id',auth()->id())->where('return_status', 'issued')->pluck('book_id');
-        $books=Book::whereIn('id', $issuebook)->get();
+        $books = IssuedBooks::where('user_id',auth()->id())->where('return_status', 'issued')->get();
         return view('profile.issued_books', compact('books'));
     }
     public function get_returned_books()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\IssuedBooks;
 use App\RenewRequest;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -57,24 +58,22 @@ class RenewRequestController extends Controller
 
     public function add_renew_request($book_id = null)
     {
-        if ($book_id!=null) {
-            $data['book_info'] = Book::find($book_id);
+        if ($book_id != null) {
             $data['book_id'] = $book_id;
-        }else{
+            $data['issued_book_info'] = IssuedBooks::find($book_id);
+        } else {
             $data['users'] = User::get();
-            $data['books'] = Book::get();
+            $data['books'] = IssuedBooks::where('return_status','Issued')->get();
         }
         return view('renew_request.add_request', $data);
     }
 
     public function save_renew_request(Request $request)
     {
-        // dd($request->all());
         $data = new RenewRequest();
         $data->user_id = $request->user_name;
-        $data->book_id = $request->book_name;
         $data->return_date = $request->return_date;
-        $data->issued_book_id =  1;
+        $data->issued_book_id =  $request->issued_book_id ;
         $data->save();
         return 'Success';
     }

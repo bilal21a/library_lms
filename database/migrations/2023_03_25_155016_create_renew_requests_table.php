@@ -16,7 +16,6 @@ class CreateRenewRequestsTable extends Migration
         Schema::create('renew_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('book_id');
             $table->integer('issued_book_id');
             $table->date('return_date');
             $table->timestamps();

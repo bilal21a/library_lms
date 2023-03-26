@@ -6,7 +6,7 @@
         <div class="page-title-container">
             <div class="row">
                 <div class="col-12 col-sm-6">
-                    <h1 class="mb-0 pb-0 display-4" id="title">Users  Managment</h1>
+                    <h1 class="mb-0 pb-0 display-4" id="title">Users Managment</h1>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['ID', 'Name', 'Email', 'Created At', 'Updated At', 'Actions'];
+            $tableData = ['Name', 'Email', 'Role', 'Registration Date', 'Actions'];
         @endphp
         @include('common.table.table')
     </div>
@@ -31,10 +31,10 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'name', 'email', 'created_at', 'updated_at', 'action'];
+        var tabelDataArray = ['name', 'email', 'role', 'registered_at', 'action'];
         var get_data_url = "{{ route('get_users') }}"
     </script>
-        @include('common.js.get_data')
+    @include('common.js.get_data')
 
     {{-- **Save Data** --}}
     <script>
@@ -42,7 +42,7 @@
         var save_data_url = "{{ route('users.store') }}"
         var add_title = "Add User"
     </script>
-        @include('common.js.add_data')
+    @include('common.js.add_data')
 
 
     {{-- **Update Data** --}}
@@ -51,12 +51,12 @@
         var update_data_url = '{{ route('users.update', ':id') }}'
         var edit_title = "Edit User"
     </script>
-        @include('common.js.edit_data')
+    @include('common.js.edit_data')
 
 
     {{-- **Delete Data** --}}
     <script>
         var delete_data_url = '{{ route('users.destroy', ':id') }}'
     </script>
-        @include('common.js.delete_data')
+    @include('common.js.delete_data')
 @endsection
