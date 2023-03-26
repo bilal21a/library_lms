@@ -11,17 +11,17 @@ use Illuminate\Http\Request;
 
 class RenewRequestController extends Controller
 {
-   public function index()
-   {
-    return view('renew_request.index');
-   }
+    public function index()
+    {
+        return view('renew_request.index');
+    }
 
-   public function get_renew_request(Request $request)
-   {
-    $data = RenewRequest::select(['id', 'user_id', 'book_id', 'return_date']);
-    return DataTables::of($data)
-        ->addColumn('action', function ($data) {
-            return  ' <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="deleteData(' . $data->id . ')" type="button">
+    public function get_renew_request(Request $request)
+    {
+        $data = RenewRequest::select(['id', 'user_id', 'book_id', 'return_date']);
+        return DataTables::of($data)
+            ->addColumn('action', function ($data) {
+                return  ' <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="deleteData(' . $data->id . ')" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                 class="acorn-icons acorn-icons-bin undefined">
@@ -35,49 +35,54 @@ class RenewRequestController extends Controller
             </svg>
             <span class="d-none d-xxl-inline-block">Delete</span>
         </button';
-        })
-        ->addColumn('user_name', function ($data) {
-            $user = User::find($data->user_id);
+            })
+            ->addColumn('user_name', function ($data) {
+                $user = User::find($data->user_id);
 
-            return $user->name;
-        })
-        ->addColumn('book_name', function ($data) {
-            $book = Book::find($data->book_id);
-            return $book->name;
-        })
-        ->addColumn('approved', function ($data) {
-            if ($data->approved==0) {
-               return "Pending" ;
-            }else {
-                return "Approved" ;
+                return $user->name;
+            })
+            ->addColumn('book_name', function ($data) {
+                $book = Book::find($data->book_id);
+                return $book->name;
+            })
+            ->addColumn('approved', function ($data) {
+                if ($data->approved == 0) {
+                    return "Pending";
+                } else {
+                    return "Approved";
+                }
+            })
+            ->make(true);
+    }
 
-            }
-        })
-        ->make(true);
-   }
+    public function add_renew_request($book_id = null)
+    {
+        if ($book_id!=null) {
+            $data['book_info'] = Book::find($book_id);
+            $data['book_id'] = $book_id;
+        }else{
+            $data['users'] = User::get();
+            $data['books'] = Book::get();
+        }
+        return view('renew_request.add_request', $data);
+    }
 
-   public function add_renew_request()
-   {
-    $users = User::get();
-    $books = Book::get();
-    return view('renew_request.add_request', compact('users','books'));
-   }
+    public function save_renew_request(Request $request)
+    {
+        // dd($request->all());
+        $data = new RenewRequest();
+        $data->user_id = $request->user_name;
+        $data->book_id = $request->book_name;
+        $data->return_date = $request->return_date;
+        $data->issued_book_id =  1;
+        $data->save();
+        return 'Success';
+    }
+    public function delete_renew_request($id)
+    {
+        $data = RenewRequest::find($id);
+        $data->delete();
 
-   public function save_renew_request(Request $request)
-   {
-    $data=new RenewRequest();
-    $data->user_id=$request->user_name;
-    $data->book_id=$request->book_name;
-    $data->return_date=$request->return_date;
-    $data->issued_book_id=  1;
-    $data->save();
-    return 'Success';
-   }
-   public function delete_renew_request($id)
-   {
-    $data=RenewRequest::find($id);
-    $data->delete();
-
-    return 'Deleted Successfully';
-   }
+        return 'Deleted Successfully';
+    }
 }

@@ -7,60 +7,108 @@
             <div class="row">
                 <div class="col-12 col-sm-6 mb-5">
 
-                    <h1 class="mb-0 pb-0 display-4" id="title">Add Requested</h1>
+                    <h1 class="mb-0 pb-0 display-4" id="title">Renew Book</h1>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-8 col-xxl-9 mb-5">
-            <div class="card mb-5">
-                <div class="card-body">
-                    <div class="row g-0 justify-content-center">
-                        <div class="col-8">
-                            <form method="POST" enctype="multipart/form-data" id="renew_books">
-                                @csrf
-                                <div class="fv-row mb-5 fv-plugins-icon-container">
-                                    <label class="required fw-bold fs-6 mb-2">Select User</label>
-                                    <select id="inputState" name="user_name" class="form-select">
-                                        <option value="" selected disabled>Choose...</option>
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    @error('user_name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="fv-row mb-5 fv-plugins-icon-container">
-                                    <label class="required fw-bold fs-6 mb-2">Select Book</label>
-                                    <select id="inputState" name="book_name" class="form-select">
-                                        <option value="" selected disabled>Choose...</option>
-                                        @foreach ($books as $book)
-                                            <option value="{{ $book->id }}">{{ $book->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    @error('book_name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+        <div class="row justify-content-center">
 
-                                <div class="fv-row mb-5 fv-plugins-icon-container">
-                                    <label class="form-label">Return Date</label>
-                                    <input type="date" class="form-control" name="return_date" id="datePickerBasic" />
-                                    <div class="fv-plugins-message-container invalid-feedback"></div>
-                                    @error('return_date')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+            <div class="col-12 col-xl-8 col-xxl-9 mb-5">
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <div class="row g-0 justify-content-center">
+                            <div class="col-8">
+                                <form method="POST" enctype="multipart/form-data" id="renew_books">
+                                    @csrf
 
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary" type="submit">
-                                        <span class="indicator-label">Submit</span>
-                                    </button>
-                                </div>
+                                    @if (isset($book_id) && $book_id != null)
+                                        <div class="row g-0 align-items-center">
+                                            @if ($book_info->image_url != null)
+                                                <div class="col-5 pe-5">
+                                                    <img src="{{ $book_info->image_url }}"
+                                                        class="card-img sh-15 sh-sm-25 scale mb-5"
+                                                        alt="vertical content image">
+                                                </div>
+                                            @endif
+                                            <div class="col ps-0">
+                                                <div class="card-body ps-0">
+                                                    <h2 class="text-primary mb-0">{{ $book_info->name }}</h2>
+                                                    <h6 class="text-alternate">{{ $book_info->isbn_number }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            </form>
+
+                                        <div class="mb-3">
+                                            <h4>Description</h4>
+                                            <p class="text-alternate">{{ $book_info->desc }}</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h4>Published Date</h4>
+                                            <p class="text-alternate">{{ $book_info->published_date }}</p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h4>Category</h4>
+                                            <p class="text-alternate"><span class="dot"
+                                                    style="background:{{ $book_info->category->background }}"></span>
+                                                &nbsp;{{ $book_info->category->name }}
+                                            </p>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h4>Author</h4>
+                                            <p class="text-alternate">{{ $book_info->author->name }}</p>
+                                        </div>
+                                        <input type="hidden" name="book_name" value="{{ $book_id }}">
+                                        <input type="hidden" name="user_name" value="{{ auth()->id() }}">
+                                    @else
+                                        <div class="fv-row mb-5 fv-plugins-icon-container">
+                                            <label class="required fw-bold fs-6 mb-2">Select User</label>
+                                            <select id="inputState" name="user_name" class="form-select">
+                                                <option value="" selected disabled>Choose...</option>
+                                                @foreach ($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            @error('user_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="fv-row mb-5 fv-plugins-icon-container">
+                                            <label class="required fw-bold fs-6 mb-2">Select Book</label>
+                                            <select id="inputState" name="book_name" class="form-select">
+                                                <option value="" selected disabled>Choose...</option>
+                                                @foreach ($books as $book)
+                                                    <option value="{{ $book->id }}">{{ $book->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            @error('book_name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    @endif
+
+
+
+                                    <div class="fv-row mb-5 fv-plugins-icon-container">
+                                        <label class="form-label">New Return Date</label>
+                                        <input type="date" class="form-control" name="return_date" id="datePickerBasic"
+                                            min="{{ date('Y-m-d') }}" />
+                                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                                        @error('return_date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary" type="submit">
+                                            <span class="indicator-label">Submit</span>
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,10 +134,11 @@
                 url: "{{ route('renew_request.save_renew_request') }}",
                 data: formData,
                 success: function(response) {
-
-                    myalert("success", response, 5000);
-
-                    document.getElementById("requested_books").reset();
+                    myalert("Renew Request Generated Successfully", response, 5000);
+                    setTimeout(function() {
+                        // Redirect back to the previous page
+                        window.location.href = document.referrer;
+                    }, 3000);
                 },
                 error: function(xhr, status, error) {
                     myalert("error", xhr.responseJSON, 10000);
