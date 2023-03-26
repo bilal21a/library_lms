@@ -29,7 +29,7 @@ class ProfileController extends Controller
     }
     public function get_requested_books()
     {
-        $books = RequestedBooks::with('book')->where('user_id',auth()->id())->get();
+        $books = RequestedBooks::where('user_id',auth()->id())->get();
         return view('profile.requested_books',compact('books'));
     }
     public function get_reserved_books()

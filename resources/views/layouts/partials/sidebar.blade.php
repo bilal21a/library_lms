@@ -75,6 +75,12 @@
                 @role('faculty')
                     @include('layouts.partials.roles_sidebars.faculty_sidebar')
                 @endrole
+                <li>
+                    <a class="" href="{{ route('logout') }}">
+                        <i data-acorn-icon="logout" class="d-inline-block"></i>
+                        <span class="label">Logout</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="mobile-buttons-container">
