@@ -153,14 +153,24 @@ class IssuedBooksController extends Controller
 
     public function return_issuedBooks(Request $request)
     {
+
         if ($request->returnRadio == 'user_name') {
             $block ='user_id';
         } else {
+            $validate = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ],
+            );
+            if ($validate->fails()) {
+                return response()->json($validate->errors()->first(), 500);
+            }
             $block =  'id';
             $request['id'] = explode("_", $request->id)[1];
         }
 
-        $issued_books = IssuedBooks::where($block, $request->$block)->get();
+        $issued_books = IssuedBooks::where('return_status','Issued')->where($block, $request->$block)->get();
 
         return $issued_books;
     }
@@ -192,6 +202,7 @@ class IssuedBooksController extends Controller
         $issued_books=IssuedBooks::find($request->id);
         $issued_books->fine=$request->fine;
         $issued_books->return_status='return';
+        $issued_books->return_date=now();
         $issued_books->save();
         $book=Book::where('id', $issued_books->book_id)->first();
         $book->remaining= $book->remaining+1;

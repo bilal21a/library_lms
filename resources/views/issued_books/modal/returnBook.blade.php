@@ -26,7 +26,7 @@
                             <div class="d-flex flex-column justify-content-start">
                                 <div class="text-muted mb-2">
                                     <input type="text" name="id" class="form-control"
-                                        placeholder="Search by Name">
+                                        placeholder="Search by issueID" value="lib_">
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="d-flex flex-column justify-content-start">
                                 <div class="text-muted mb-2">
                                     <select id="inputState" name="user_id" class="form-select">
-                                        <option value="" selected disabled>Choose...</option>
+                                        <option value="" selected disabled>Select User</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach

@@ -104,6 +104,9 @@
                     console.log('response: ', response);
                     var filter_data = $('.filter_books')
                     filter_data.html('')
+                    if (typeof response === "object" && response.length == 0) {
+                        filter_data.html('No Books found')
+                    }
 
                     response.forEach(element => {
                         console.log('element: ', element);
@@ -179,14 +182,13 @@
                 url: "{{ route('return_book_data') }}",
                 data: {
                     fine: fine,
-                    qty: qty,
                     id: id,
                 },
                 success: function(response) {
                     console.log('response: ', response);
                     singleDeleteDraw._fnDraw();
                     myalert("success", response, 5000);
-                    $('#myModal').modal('hide');
+                    $('#simpleModal').modal('hide');
                 },
                 error: function(xhr, status, error) {
                     console.log('error: ', xhr.responseJSON);
