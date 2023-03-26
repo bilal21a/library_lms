@@ -77,6 +77,14 @@ class RenewRequestController extends Controller
         return 'Deleted Successfully';
     }
 
+    public function get_issue_data_on_renew($id)
+    {
+        $data['issue'] = IssuedBooks::find($id);
+        $data['user'] = $data['issue']->user;
+        $data['book'] = $data['issue']->book;
+        return view('renew_request.modal.renew_add',$data);
+    }
+
     public function show_renew_approve_req($id)
     {
         $data['renew'] = RenewRequest::find($id);

@@ -89,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('delete_renew_request/{id}', [RenewRequestController::class, 'delete_renew_request'])->name('renew_request.delete_renew_request');
     Route::get('show_renew_approve_req/{id}', [RenewRequestController::class, 'show_renew_approve_req'])->name('renew_request.show_renew_approve_req');
     Route::post('approve_renew', [RenewRequestController::class, 'approve_renew'])->name('renew_request.approve_renew');
+    Route::get('get_issue_data_on_renew/{id}', [RenewRequestController::class, 'get_issue_data_on_renew'])->name('renew_request.get_issue_data_on_renew');
+
 });
 
 

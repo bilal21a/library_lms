@@ -22,9 +22,9 @@
                                     @csrf
 
                                     @if (isset($book_id) && $book_id != null)
-                                    @php
-                                        $book_info=$issued_book_info->book;
-                                    @endphp
+                                        @php
+                                            $book_info = $issued_book_info->book;
+                                        @endphp
                                         <div class="row g-0 align-items-center">
                                             @if ($book_info->image_url != null)
                                                 <div class="col-5 pe-5">
@@ -64,24 +64,14 @@
                                         <input type="hidden" name="issued_book_id" value="{{ $book_id }}">
                                         <input type="hidden" name="user_name" value="{{ auth()->id() }}">
                                     @else
-                                        <div class="fv-row mb-5 fv-plugins-icon-container">
-                                            <label class="required fw-bold fs-6 mb-2">Select User</label>
-                                            <select id="inputState" name="user_name" class="form-select">
-                                                <option value="" selected disabled>Choose...</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->complete_name() }}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="fv-plugins-message-container invalid-feedback"></div>
-                                            @error('user_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                     
+                                    
+
+                                        <div class="display_return_content"></div>
+
 
                                         <div class="fv-row mb-5 fv-plugins-icon-container">
                                             <label class="required fw-bold fs-6 mb-2">Issue Record (issueId)</label>
-                                            <select id="inputState" name="issued_book_id" class="form-select">
+                                            <select id="issue_id_select" name="issued_book_id" class="form-select">
                                                 <option value="" selected disabled>Select Issued Book ID</option>
                                                 @foreach ($books as $book)
                                                     <option value="{{ $book->id }}">lib_{{ $book->id }}</option>
@@ -124,6 +114,15 @@
 
 @section('js_after')
     <script>
+        $('#issue_id_select').change(function() {
+            var id = $(this).val();
+            const issue_url = '{{ route('renew_request.get_issue_data_on_renew', ':id') }}'
+            new_url = issue_url.replace(':id', id)
+
+            $.get(new_url, function(data) {
+                $('.display_return_content').html(data)
+            });
+        });
         $('#renew_books').on('submit', function(e) {
             e.preventDefault();
 
@@ -141,7 +140,6 @@
                 success: function(response) {
                     myalert("Renew Request Generated Successfully", response, 5000);
                     setTimeout(function() {
-                        // Redirect back to the previous page
                         window.location.href = document.referrer;
                     }, 3000);
                 },
