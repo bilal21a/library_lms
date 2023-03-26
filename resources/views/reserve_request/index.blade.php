@@ -21,7 +21,7 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['id', 'User Name', 'Book Name', 'Approved', 'Actions'];
+            $tableData = ['User Name', 'Book Name', 'Approved', 'Date', 'Actions'];
         @endphp
         @include('common.table.table')
     </div>
@@ -31,7 +31,7 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'user_name', 'book_name', 'approved', 'action'];
+        var tabelDataArray = ['user_name', 'book_name', 'approved', 'created_at', 'action'];
         var get_data_url = "{{ route('reserve_request.get_reserved_request') }}"
     </script>
     @include('common.js.get_data')

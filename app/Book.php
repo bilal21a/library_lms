@@ -24,6 +24,15 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function checkreserve()
+    {
+        $reserve=ReservedRequest::where('book_id',$this->id)->where('user_id',auth()->id())->where('approved',0)->count();
+        if ($reserve>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     protected $casts = [
         'qty' => 'integer',
         'remaining' => 'integer',

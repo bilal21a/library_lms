@@ -36,9 +36,41 @@
     <p class="text-alternate">{{ $data->published_date }}</p>
 </div>
 
-<div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Request Book</button>
-    <button class="btn btn-primary" type="submit">
-        <span class="indicator-label">Reserve Book</span>
-    </button>
-</div>
+
+@if ($data->remaining < 1)
+    @if ($data->checkreserve())
+        <div class="">
+            <div class="alert alert-primary" role="alert">You have reserved This Book</div>
+        </div>
+    @else
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-primary me-2 reserveMe"
+                onClick="reserveMe({{ $data->id }})">Reserve
+                Book</button>
+        </div>
+    @endif
+@endif
+<div class="reservebox"></div>
+
+<script>
+    function reserveMe(id) {
+        console.log('id: ', id);
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('reserve_request.save_reserved_request') }}",
+            data: {
+                book_name: id,
+                user_name: "{{ auth()->id() }}",
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                console.log('data: ', data);
+                $('.reserveMe').hide();
+                $('.reservebox').html(
+                    '<div class="alert alert-primary" role="alert">You have reserved This Book</div>');
+            },
+        });
+    }
+</script>

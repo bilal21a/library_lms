@@ -6,6 +6,7 @@ use App\Book;
 use App\IssuedBooks;
 use App\ReservedRequest;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -18,7 +19,7 @@ class ReserveRequestController extends Controller
     }
     public function get_reserved_request(Request $request)
     {
-        $data = ReservedRequest::select(['id', 'user_id', 'book_id', 'approved'])->get();
+        $data = ReservedRequest::select(['id', 'user_id', 'book_id', 'approved','created_at'])->get();
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 if ($data->approved == 0) {
@@ -27,14 +28,14 @@ class ReserveRequestController extends Controller
                     return $this->delete_button($data->id);
                 }
             })
+            ->addColumn('created_at', function ($data) {
+                return Carbon::parse($data->reserve_request)->format('d M,Y');
+            })
             ->addColumn('user_name', function ($data) {
-                $user = User::find($data->user_id);
-
-                return $user->name;
+                return $data->user->name;
             })
             ->addColumn('book_name', function ($data) {
-                $book = Book::find($data->book_id);
-                return $book->name;
+                return $data->book->name;
             })
             ->addColumn('approved', function ($data) {
                 if ($data->approved == 0) {

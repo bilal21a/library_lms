@@ -78,8 +78,9 @@
             console.log('id: ', id);
             var show_status_url = '{{ route('book.view_book', ':id') }}/true'
 
-            $('#modalTitle').html('View Status');
-            $('#add_data_form').html('');
+            $('#simpleModal').modal('show');
+            $('#modalTitle_simple').html('View Status');
+            $('.simpleModal_body').html('');
             url = show_status_url.replace(':id', id);
 
             $.ajax({
@@ -89,7 +90,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    $('#edit_data_form').html(data);
+                    $('.simpleModal_body').html(data);
                 },
             });
         }
