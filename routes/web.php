@@ -32,6 +32,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
+    Route::get('reports_get/{type}', [ReportsController::class, 'reports_getData'])->name('reports.getData');
 
     // Users Management
     Route::resource('users', 'UserController');

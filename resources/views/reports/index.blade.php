@@ -29,7 +29,9 @@
                             </div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-white">16</div>
+                            <div class="display-5 text-white total_books">
+                                <div class="spinner-border text-white" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,9 @@
                             </div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-white">16</div>
+                            <div class="display-5 text-white issued_books">
+                                <div class="spinner-border text-white" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +71,9 @@
                             </div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-white">16</div>
+                            <div class="display-5 text-white returned_books">
+                                <div class="spinner-border text-white" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +95,9 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Requested Books</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">235</div>
+                            <div class="display-5 text-primary requested_books">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +116,9 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Reserved Books</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">235</div>
+                            <div class="display-5 text-primary reserved_books">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,7 +137,9 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Renewed Books</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">235</div>
+                            <div class="display-5 text-primary renewed_books">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,7 +162,9 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Total Users</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">34</div>
+                            <div class="display-5 text-primary total_users">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,7 +183,9 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Total Students</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">34</div>
+                            <div class="display-5 text-primary total_students">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,11 +204,38 @@
                             <div class="heading mb-0 sh-8 d-flex align-items-center lh-1-25 ps-3">Total Faculty</div>
                         </div>
                         <div class="col-auto ps-3">
-                            <div class="display-5 text-primary">34</div>
+                            <div class="display-5 text-primary total_faculty">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('js_after')
+    <script>
+        var arr = ['total_books', 'issued_books', 'returned_books', 'requested_books', 'reserved_books', 'renewed_books',
+            'total_users', 'total_students', 'total_faculty'
+        ]
+
+        $.each(arr, function(index, value) {
+            var myUrl = '{{ route('reports.getData', ':value') }}'
+            url = myUrl.replace(':value', value);
+
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $(`.${value}`).html(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error getting ' + value + ': ' + textStatus + ' - ' + errorThrown);
+                }
+            });
+        });
+    </script>
 @endsection
