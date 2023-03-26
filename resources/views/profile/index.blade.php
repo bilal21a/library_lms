@@ -40,21 +40,21 @@
                                 <span class="align-middle">Overview</span>
                             </a>
                             <a class="nav-link px-0 border-bottom border-separator-light" data-bs-toggle="tab"
-                                href="#projectsTab" role="tab">
+                                href="#issuedBooksTab" role="tab">
                                 <i data-acorn-icon="book" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Issued Books</span>
                             </a>
                             <a class="nav-link px-0 border-bottom border-separator-light" data-bs-toggle="tab"
-                                href="#permissionsTab" role="tab">
+                                href="#returnedBooksTab" role="tab">
                                 <i data-acorn-icon="book" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Returned Books</span>
                             </a>
                             <a class="nav-link px-0 border-bottom border-separator-light" data-bs-toggle="tab"
-                                href="#friendsTab" role="tab">
+                                href="#requestedBooksTab" role="tab">
                                 <i data-acorn-icon="book" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Requested Books</span>
                             </a>
-                            <a class="nav-link px-0" data-bs-toggle="tab" href="#aboutTab" role="tab">
+                            <a class="nav-link px-0" data-bs-toggle="tab" href="#reservedBooksTab" role="tab">
                                 <i data-acorn-icon="book" class="me-2" data-acorn-size="17"></i>
                                 <span class="align-middle">Reserved Books</span>
                             </a>
@@ -124,314 +124,21 @@
                 </div>
                 <!-- Overview Tab End -->
 
-                <!-- Projects Tab Start -->
-                <div class="tab-pane fade" id="projectsTab" role="tabpanel">
-
-                    {{-- Issued Books Data will Render here --}}
-
+                {{-- Issued Books Data will Render here --}}
+                <div class="tab-pane fade" id="issuedBooksTab" role="tabpanel">
                 </div>
-                <!-- Projects Tab End -->
 
-                <!-- Permissions Tab Start -->
-                <div class="tab-pane fade" id="permissionsTab" role="tabpanel">
-                   {{-- Returned Books Data will Render Here --}}
+                {{-- Returned Books Data will Render Here --}}
+                <div class="tab-pane fade" id="returnedBooksTab" role="tabpanel">
                 </div>
-                <!-- Permissions Tab End -->
-
-                <!-- Friends Tab Start -->
-                <div class="tab-pane fade" id="friendsTab" role="tabpanel">
-                    <h2 class="small-title">Friends</h2>
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-2 mb-5">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-1.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Blaine Cottrell</div>
-                                                    <div class="text-small text-muted">Project Manager</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-4.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Cherish Kerr</div>
-                                                    <div class="text-small text-muted">Development Lead</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-8.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Kirby Peters</div>
-                                                    <div class="text-small text-muted">Accounting</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-5.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Olli Hawkins</div>
-                                                    <div class="text-small text-muted">Client Relations Lead</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-2.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Zayn Hartley</div>
-                                                    <div class="text-small text-muted">Customer Engagement</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-3.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Esperanza Lodge</div>
-                                                    <div class="text-small text-muted">UX Designer</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-4.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Kerr Jackson</div>
-                                                    <div class="text-small text-muted">Frontend Developer</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-6.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Kathryn Mengel</div>
-                                                    <div class="text-small text-muted">Team Leader</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-6.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Joisse Kaycee</div>
-                                                    <div class="text-small text-muted">Copywriter</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row g-0 sh-6">
-                                        <div class="col-auto">
-                                            <img src="img/profile/profile-7.webp" class="card-img rounded-xl sh-6 sw-6"
-                                                alt="thumb" />
-                                        </div>
-                                        <div class="col">
-                                            <div
-                                                class="card-body d-flex flex-row pt-0 pb-0 ps-3 pe-0 h-100 align-items-center justify-content-between">
-                                                <div class="d-flex flex-column">
-                                                    <div>Zayn Hartley</div>
-                                                    <div class="text-small text-muted">Visual Effect Designer</div>
-                                                </div>
-                                                <div class="d-flex">
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-sm ms-1">Follow</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
+                {{-- Requested Books Data will Render Here --}}
+                <div class="tab-pane fade" id="requestedBooksTab" role="tabpanel">
                 </div>
-                <!-- Friends Tab End -->
-
-                <!-- About Tab Start -->
-                <div class="tab-pane fade" id="aboutTab" role="tabpanel">
-                    <h2 class="small-title">About</h2>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mb-5">
-                                <p class="text-small text-muted mb-2">ME</p>
-                                <p>
-                                    Jujubes brownie marshmallow apple pie donut ice cream jelly-o jelly-o gummi bears.
-                                    Tootsie roll chocolate bar dragée bonbon cheesecake icing. Danish wafer donut cookie
-                                    caramels gummies topping.
-                                </p>
-                            </div>
-                            <div class="mb-5">
-                                <p class="text-small text-muted mb-2">INTERESTS</p>
-                                <p>
-                                    Chocolate cake biscuit donut cotton candy soufflé cake macaroon. Halvah chocolate cotton
-                                    candy sweet roll jelly-o candy danish dragée. Apple pie cotton candy tiramisu biscuit
-                                    cake muffin tootsie roll bear claw cake. Cupcake cake fruitcake.
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-small text-muted mb-2">CONTACT</p>
-                                <a href="#" class="d-block body-link mb-1">
-                                    <i data-acorn-icon="screen" class="me-2" data-acorn-size="17"></i>
-                                    <span class="align-middle">blainecottrell.com</span>
-                                </a>
-                                <a href="#" class="d-block body-link">
-                                    <i data-acorn-icon="email" class="me-2" data-acorn-size="17"></i>
-                                    <span class="align-middle">contact@blainecottrell.com</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                
+                {{-- Reserved Books Data will Render Here --}}
+                <div class="tab-pane fade" id="reservedBooksTab" role="tabpanel">
                 </div>
-                <!-- About Tab End -->
             </div>
             <!-- Right Side End -->
         </div>
@@ -445,14 +152,28 @@
             url: '{{ route('profile.get_issued_books') }}',
             success: function(html) {
                 console.log('html: ', html);
-                $('#projectsTab').html(html);
+                $('#issuedBooksTab').html(html);
             }
         });
         $.ajax({
             url: '{{ route('profile.get_returned_books') }}',
             success: function(html) {
                 console.log('html: ', html);
-                $('#permissionsTab').html(html);
+                $('#returnedBooksTab').html(html);
+            }
+        });
+        $.ajax({
+            url: '{{ route('profile.get_requested_books') }}',
+            success: function(html) {
+                console.log('html: ', html);
+                $('#requestedBooksTab').html(html);
+            }
+        });
+        $.ajax({
+            url: '{{ route('profile.get_reserved_books') }}',
+            success: function(html) {
+                console.log('html: ', html);
+                $('#reservedBooksTab').html(html);
             }
         });
     </script>

@@ -1,5 +1,7 @@
 <h2 class="small-title">Issued Books</h2>
-
+@if ($books->count() == 0)
+    No Books
+@endif
 <div class="row row-cols-1 row-cols-sm-2 g-2">
     <div class="col-12 col-xl-8 col-xxl-9 mb-5">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-3 g-2 mb-5">
@@ -34,7 +36,3 @@
     </div>
 
 </div>
-
-@if ($books->count() == 0)
-    No Books
-@endif

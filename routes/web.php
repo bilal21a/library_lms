@@ -60,6 +60,8 @@ Route::post('return_book_data', [IssuedBooksController::class, 'return_book_data
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('profile/get_issued_books', [ProfileController::class, 'get_issued_books'])->name('profile.get_issued_books');
 Route::get('profile/get_returned_books', [ProfileController::class, 'get_returned_books'])->name('profile.get_returned_books');
+Route::get('profile/get_requested_books', [ProfileController::class, 'get_requested_books'])->name('profile.get_requested_books');
+Route::get('profile/get_reserved_books', [ProfileController::class, 'get_reserved_books'])->name('profile.get_reserved_books');
 
 // Request Books
 Route::get('requested_books', [RequestedBooksController::class, 'index'])->name('requested_books.index');

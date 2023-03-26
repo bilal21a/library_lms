@@ -1,7 +1,7 @@
-<h2 class="small-title">Returned Books</h2>
+<h2 class="small-title">Reserved Books</h2>
 
 @if ($books->count() == 0)
-    No Books
+    No Books found
 @endif
 
 <div class="row row-cols-1 row-cols-sm-2 g-2">
