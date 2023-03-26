@@ -7,7 +7,7 @@
             <div class="row">
                 <!-- Title Start -->
                 <div class="col-12 col-md-7">
-                    <h1 class="mb-0 pb-0 display-4" id="title">Library Report</h1>
+                    <h1 class="mb-0 pb-0 display-4" id="title">Dashboard</h1>
                 </div>
                 <!-- Title End -->
             </div>
@@ -20,7 +20,7 @@
                     <div class="h-100 row g-0 card-body align-items-center">
                         <div class="col-auto">
                             <div
-                                class="border border-foreground sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                class="border border-white sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
                                 <i data-acorn-icon="book" class="text-white"></i>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="h-100 row g-0 card-body align-items-center">
                         <div class="col-auto">
                             <div
-                                class="border border-foreground sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                class="border border-white sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
                                 <i data-acorn-icon="book" class="text-white"></i>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                     <div class="h-100 row g-0 card-body align-items-center">
                         <div class="col-auto">
                             <div
-                                class="border border-foreground sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
+                                class="border border-white sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center">
                                 <i data-acorn-icon="book" class="text-white"></i>
                             </div>
                         </div>

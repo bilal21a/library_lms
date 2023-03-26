@@ -1,5 +1,5 @@
 <div id="nav" class="nav-container d-flex" data-vertical-unpinned="10000" data-vertical-mobile="600"
-     data-disable-pinning="true">
+    data-disable-pinning="true">
 
 
     <div class="nav-content d-flex">
@@ -17,18 +17,18 @@
 
 
         @php
-
+            
             $user_name = auth()->user()->name;
-
+            
             $background = 'ECF5FF';
             $text = '1ea8e7';
             $avatar = 'https://ui-avatars.com/api/?background=' . $background . '&color=' . $text . '&name=' . $user_name;
-
+            
         @endphp
-            <!-- User Menu Start -->
+        <!-- User Menu Start -->
         <div class="user-container d-flex">
             <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false">
+                aria-expanded="false">
                 <img src="{{ $avatar }}" class="img-fluid rounded-xl profile" alt="thumb" id="contactImage">
                 <div class="name mt-1">{{ auth()->user()->name }}</div>
             </a>
@@ -63,48 +63,18 @@
         <!-- Menu Start -->
         <div class="menu-container flex-grow-1">
             <ul id="menu" class="menu">
-                <li>
-                    <a class="{{ request()->is('category') ? 'active' : '' }}" href="{{ route('categories.user') }}">
-                        <i class="bi bi-person" data-acorn-size="18"></i>
-                        <span class="label">User Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('books') ? 'active' : '' }}" href="{{ route('book.user') }}">
-                        <i class="bi bi-person" data-acorn-size="18"></i>
-                        <span class="label">User Books</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('book*') ? 'active' : '' }}" href="{{ route('book.index') }}">
-                        <i class="bi bi-person" data-acorn-size="18"></i>
-                        <span class="label">Books</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('issuedBooks*') ? 'active' : '' }}" href="{{ route('issuedBooks.index') }}">
-                        <i class="bi bi-person" data-acorn-size="18"></i>
-                        <span class="label">Issued books</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
-                        <i class="bi bi-cart3" data-acorn-size="18"></i>
-                        <span class="label">Categories</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('author*') ? 'active' : '' }}" href="{{ route('author.index') }}">
-                        <i class="bi bi-shop" data-acorn-size="18"></i>
-                        <span class="label">Authors</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="{{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                        <i class="bi bi-shop" data-acorn-size="18"></i>
-                        <span class="label">Users Management</span>
-                    </a>
-                </li>
+                @role('admin')
+                    @include('layouts.partials.roles_sidebars.admin_sidebar')
+                @endrole
+                @role('librarian')
+                    @include('layouts.partials.roles_sidebars.librarian_sidebar')
+                @endrole
+                @role('student')
+                    @include('layouts.partials.roles_sidebars.student_sidebar')
+                @endrole
+                @role('faculty')
+                    @include('layouts.partials.roles_sidebars.faculty_sidebar')
+                @endrole
             </ul>
         </div>
         <div class="mobile-buttons-container">
