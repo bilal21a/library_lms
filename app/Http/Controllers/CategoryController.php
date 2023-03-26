@@ -28,13 +28,17 @@ class CategoryController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 $view_btn = $data->books->count() > 0 ? $this->viewButton($data->id, "View Books") : '';
-                $edit_delete_btn = $this->get_buttons($data->id);
+                if ($data->books->count() == 0) {
+                    $edit_delete_btn =  $this->edit_button($data->id) . $this->delete_button($data->id);
+                } else {
+                    $edit_delete_btn = $this->edit_button($data->id);
+                }
                 return $view_btn . $edit_delete_btn;
             })
             ->addColumn('bg_color', function ($data) {
-                return '<span class="badge" style="background:'.$data->background.'">&nbsp;&nbsp;</span>';
+                return '<span class="badge" style="background:' . $data->background . '">&nbsp;&nbsp;</span>';
             })
-            ->rawColumns(['action','bg_color'])
+            ->rawColumns(['action', 'bg_color'])
             ->make(true);
     }
 
@@ -174,13 +178,13 @@ class CategoryController extends Controller
 
     public function user_categories(Request $request)
     {
-        if ($request->name){
-            $data['categories']= Category::where('name', 'LIKE', '%' . $request->name . '%')->get();
-            $data['search_string']= $request->name;
-        }else{
-            $data['categories']=Category::get();
+        if ($request->name) {
+            $data['categories'] = Category::where('name', 'LIKE', '%' . $request->name . '%')->get();
+            $data['search_string'] = $request->name;
+        } else {
+            $data['categories'] = Category::get();
         }
-        $data['popular_books']=Book::take(5)->get();
-        return view('category.user_categories',$data);
+        $data['popular_books'] = Book::take(5)->get();
+        return view('category.user_categories', $data);
     }
 }

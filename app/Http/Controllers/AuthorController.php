@@ -24,7 +24,11 @@ class AuthorController extends Controller
         $data = Author::select(['id', 'name']);
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-                return $this->get_buttons($data->id);
+                if ($data->books->count() == 0) {
+                    return $this->edit_button($data->id) . $this->delete_button($data->id);
+                } else {
+                    return $this->edit_button($data->id);
+                }
             })
             ->make(true);
     }
