@@ -6,17 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class IssuedBooks extends Model
 {
-    protected $appends = ['book_info','user_info'];
+    // protected $appends = ['book_info','user_info'];
 
-    public function getBookInfoAttribute()
+    // public function getBookInfoAttribute()
+    // {
+    //     $book = Book::find($this->book_id);
+    //     return $book;
+    // }
+
+    // public function getUserInfoAttribute()
+    // {
+    //     $user = User::find($this->user_id);
+    //     return $user;
+    // }
+
+    public function book()
     {
-        $book = Book::find($this->book_id);
-        return $book;
+        return $this->belongsTo(Book::class);
     }
 
-    public function getUserInfoAttribute()
+    public function user()
     {
-        $user = User::find($this->user_id);
-        return $user;
+        return $this->belongsTo(User::class);
     }
 }

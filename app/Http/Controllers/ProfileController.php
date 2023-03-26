@@ -18,18 +18,18 @@ class ProfileController extends Controller
 
     public function get_issued_books()
     {
-        $books = IssuedBooks::where('user_id',auth()->id())->where('return_status', 'issued')->get();
+        $books = IssuedBooks::with('book')->where('user_id',auth()->id())->where('return_status', 'issued')->get();
         return view('profile.issued_books', compact('books'));
     }
     public function get_returned_books()
     {
-        $issuebook = IssuedBooks::where('user_id',auth()->id())->where('return_status', 'return')->pluck('book_id');
+        $issuebook = IssuedBooks::with('book')->where('user_id',auth()->id())->where('return_status', 'return')->pluck('book_id');
         $books=Book::whereIn('id', $issuebook)->get();
         return view('profile.returned_books',compact('books'));
     }
     public function get_requested_books()
     {
-        $books = RequestedBooks::where('user_id',auth()->id())->get();
+        $books = RequestedBooks::with('book')->where('user_id',auth()->id())->get();
         return view('profile.requested_books',compact('books'));
     }
     public function get_reserved_books()

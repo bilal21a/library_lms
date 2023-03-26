@@ -60,7 +60,7 @@ class RenewRequestController extends Controller
     {
         if ($book_id != null) {
             $data['book_id'] = $book_id;
-            $data['issued_book_info'] = IssuedBooks::find($book_id);
+            $data['issued_book_info'] = IssuedBooks::with('book')->find($book_id);
         } else {
             $data['users'] = User::get();
             $data['books'] = IssuedBooks::where('return_status','Issued')->get();

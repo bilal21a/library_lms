@@ -25,7 +25,7 @@ class IssuedBooksController extends Controller
 
     public function get_data()
     {
-        $data = IssuedBooks::select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
+        $data = IssuedBooks::with('user', 'book')->select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
         return DataTables::of($data)
             ->addColumn('lib_id', function ($data) {
                 return 'lib_' . $data->id;
@@ -34,13 +34,10 @@ class IssuedBooksController extends Controller
                 return $this->get_buttons($data->id);
             })
             ->addColumn('user_name', function ($data) {
-                $user = User::find($data->user_id);
-
-                return $user->name;
+                return $data->user->name;
             })
             ->addColumn('book_name', function ($data) {
-                $book = Book::find($data->book_id);
-                return $book->name;
+                return $data->book->name;
             })
             ->make(true);
     }
@@ -77,7 +74,7 @@ class IssuedBooksController extends Controller
         if ($validate->fails()) {
             return response()->json($validate->errors()->first(), 500);
         }
-        $book=Book::find($request->book_name);
+        $book = Book::find($request->book_name);
         // dd($book);
         if ($book->remaining < 1) {
             return response()->json('Currently Book not Available', 500);
@@ -89,7 +86,7 @@ class IssuedBooksController extends Controller
         $user->return_date = $request->return_date;
         $user->return_status = 'Issued';
         $user->save();
-        $book->remaining=$book->remaining-1;
+        $book->remaining = $book->remaining - 1;
         $book->save();
 
         return 'Success';
@@ -155,7 +152,7 @@ class IssuedBooksController extends Controller
     {
 
         if ($request->returnRadio == 'user_name') {
-            $block ='user_id';
+            $block = 'user_id';
         } else {
             $validate = Validator::make(
                 $request->all(),
@@ -170,15 +167,15 @@ class IssuedBooksController extends Controller
             $request['id'] = explode("_", $request->id)[1];
         }
 
-        $issued_books = IssuedBooks::where('return_status','Issued')->where($block, $request->$block)->get();
+        $issued_books = IssuedBooks::with('book')->where('return_status', 'Issued')->where($block, $request->$block)->get();
 
         return $issued_books;
     }
     public function return_book($id)
     {
-        $return_book=IssuedBooks::find($id);
-        $data=Book::find($return_book->book_id);
-        return view('issued_books.modal.returnBookDetail', compact('return_book','data'));
+        $return_book = IssuedBooks::find($id);
+        $data = Book::find($return_book->book_id);
+        return view('issued_books.modal.returnBookDetail', compact('return_book', 'data'));
     }
 
     /**
@@ -190,8 +187,8 @@ class IssuedBooksController extends Controller
     public function destroy($id)
     {
         $data = IssuedBooks::find($id);
-        $book=Book::find($data->book_id);
-        $book->remaining=$book->remaining+1;
+        $book = Book::find($data->book_id);
+        $book->remaining = $book->remaining + 1;
         $book->save();
         $data->delete();
         return 'Deleted Succesfully';
@@ -199,13 +196,13 @@ class IssuedBooksController extends Controller
 
     public function return_book_data(Request $request)
     {
-        $issued_books=IssuedBooks::find($request->id);
-        $issued_books->fine=$request->fine;
-        $issued_books->return_status='return';
-        $issued_books->return_date=now();
+        $issued_books = IssuedBooks::find($request->id);
+        $issued_books->fine = $request->fine;
+        $issued_books->return_status = 'return';
+        $issued_books->return_date = now();
         $issued_books->save();
-        $book=Book::where('id', $issued_books->book_id)->first();
-        $book->remaining= $book->remaining+1;
+        $book = Book::where('id', $issued_books->book_id)->first();
+        $book->remaining = $book->remaining + 1;
         $book->save();
 
         return 'Success';

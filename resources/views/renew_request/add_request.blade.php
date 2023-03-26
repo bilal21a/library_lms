@@ -23,7 +23,7 @@
 
                                     @if (isset($book_id) && $book_id != null)
                                     @php
-                                        $book_info=$issued_book_info->book_info;
+                                        $book_info=$issued_book_info->book;
                                     @endphp
                                         <div class="row g-0 align-items-center">
                                             @if ($book_info->image_url != null)

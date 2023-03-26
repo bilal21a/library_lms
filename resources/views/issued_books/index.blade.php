@@ -121,7 +121,7 @@
                             <div class="col">
                                 <div class="card-body d-flex flex-column ps-0 pt-0 pb-0 h-100 justify-content-center">
                                     <div class="d-flex flex-column">
-                                        <div class="text-primary book_name">${element.book_info.name}</div>
+                                        <div class="text-primary book_name">${element.book.name}</div>
                                         <div class="text-small text-muted issue_date">issued date: ${element.issued_date}</div>
                                         <div class="text-small text-muted release_date">return date: ${element.return_date}</div>
                                     </div>
