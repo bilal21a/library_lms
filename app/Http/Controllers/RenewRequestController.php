@@ -32,7 +32,7 @@ class RenewRequestController extends Controller
                 return  'lib_' . $data->issued_book->id;
             })
             ->addColumn('user_name', function ($data) {
-                return $data->issued_book->user->name;
+                return $data->issued_book-> user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 return $data->issued_book->book->name;
@@ -44,6 +44,7 @@ class RenewRequestController extends Controller
                     return "Approved";
                 }
             })
+            ->rawColumns(['action', 'issuedBookID', 'user_name', 'book_name', 'approved'])
             ->make(true);
     }
 

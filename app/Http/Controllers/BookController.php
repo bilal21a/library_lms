@@ -21,6 +21,7 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(auth()->user()->complete_name());
         $cat_id = $request->cat_id;
         $category = Category::find($cat_id);
         return view('books.index', compact('cat_id', 'category'));

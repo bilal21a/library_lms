@@ -32,7 +32,7 @@ class ReserveRequestController extends Controller
                 return Carbon::parse($data->reserve_request)->format('d M,Y');
             })
             ->addColumn('user_name', function ($data) {
-                return $data->user->name;
+                return $data-> user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 return $data->book->name;
@@ -44,6 +44,7 @@ class ReserveRequestController extends Controller
                     return "Approved";
                 }
             })
+            ->rawColumns(['action', 'created_at', 'user_name', 'book_name', 'approved'])
             ->make(true);
     }
 

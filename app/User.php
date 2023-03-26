@@ -37,4 +37,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function complete_name()
+    {
+        return $this->name.'-'. $this->getRoleNames()[0];
+    }
+    public function complete_name_styled()
+    {
+        $role= $this->getRoleNames()[0];
+        $color= $role=='student' ? 'tertiary':($role=='faculty' ? 'quaternary':'primary');
+        return '<span>'. $this->name. '&nbsp;<span class="badge bg-'. $color.'">'. $this->getRoleNames()[0].'</span></span>';
+    }
 }

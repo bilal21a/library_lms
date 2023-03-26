@@ -34,11 +34,12 @@ class IssuedBooksController extends Controller
                 return $this->get_buttons($data->id);
             })
             ->addColumn('user_name', function ($data) {
-                return $data->user->name;
+                return $data->user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 return $data->book->name;
             })
+            ->rawColumns(['lib_id', 'action', 'user_name', 'book_name'])
             ->make(true);
     }
 
