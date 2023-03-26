@@ -8,6 +8,7 @@ use App\ReservedRequest;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -57,6 +58,16 @@ class ReserveRequestController extends Controller
 
     public function save_reserved_request(Request $request)
     {
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'user_name' => 'required',
+                'book_name' => 'required',
+            ],
+        );
+        if ($validate->fails()) {
+            return response()->json($validate->errors()->first(), 500);
+        }
         $data = new ReservedRequest();
         $data->user_id = $request->user_name;
         $data->book_id = $request->book_name;

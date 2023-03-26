@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\RequestedBooks;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -47,6 +48,18 @@ class RequestedBooksController extends Controller
 
     public function save_request(Request $request)
     {
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'book_name' => 'required',
+                'author_name' => 'required',
+                'subject' => 'required',
+                'desc' => 'required',
+            ],
+        );
+        if ($validate->fails()) {
+            return response()->json($validate->errors()->first(), 500);
+        }
         // dd($request->all());
         $data=new RequestedBooks();
         $data->user_id=$request->user_name;

@@ -46,9 +46,6 @@
                                             class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Book Name"
                                             value="">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('book_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                     <div class="fv-row mb-5 fv-plugins-icon-container">
                                         <label class="required fw-bold fs-6 mb-2">Author Name</label>
@@ -56,9 +53,6 @@
                                             class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Author Name"
                                             value="">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('author_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
                                     <div class="fv-row mb-5 fv-plugins-icon-container">
                                         <label class="required fw-bold fs-6 mb-2">Subject</label>
@@ -66,9 +60,6 @@
                                             class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Subject"
                                             value="">
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('subject')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
 
                                     <div class="fv-row mb-5 fv-plugins-icon-container">
@@ -76,9 +67,6 @@
                                         <textarea class="form-control form-control-solid mb-3 mb-lg-0" name="desc" placeholder="Description" rows="3"
                                             data-gramm="false" wt-ignore-input="true" data-quillbot-element="nKdK-cy_QRiPJhUzQXilU"></textarea>
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('desc')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
 
                                     <div class="d-flex justify-content-end">

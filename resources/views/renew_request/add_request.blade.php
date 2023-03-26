@@ -89,7 +89,7 @@
                                     <div class="fv-row mb-5 fv-plugins-icon-container">
                                         <label class="form-label">New Return Date</label>
                                         <input type="date" class="form-control" name="return_date" id="datePickerBasic"
-                                            min="{{ date('Y-m-d') }}" />
+                                            min="{{ date('Y-m-d') }}" required/>
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
                                         @error('return_date')
                                             <span class="text-danger">{{ $message }}</span>
