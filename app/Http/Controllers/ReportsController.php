@@ -20,7 +20,7 @@ class ReportsController extends Controller
     public function reports_getData($type)
     {
         if ($type== 'total_books') {
-            return Book::count();
+            return Book::sum('qty');
         }
         if ($type== 'issued_books') {
             return IssuedBooks::where('return_status','Issued')->count();
