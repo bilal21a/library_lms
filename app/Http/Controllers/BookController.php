@@ -47,7 +47,14 @@ class BookController extends Controller
             ->addColumn('author', function ($data) {
                 return $data->author->name;
             })
-            ->rawColumns(['action', 'category', 'author'])
+            ->addColumn('name', function ($data) {
+                if (strlen($data->name) > 70) {
+                    return substr($data->name, 0, 70) . '...';
+                } else {
+                    return $data->name;
+                }
+            })
+            ->rawColumns(['name', 'action', 'category', 'author'])
             ->make(true);
     }
 
@@ -220,12 +227,12 @@ class BookController extends Controller
     public function user_books(Request $request)
     {
         $data['books'] =
-        Book::query()->when($request->name != null, function ($query) use ($request) {
-            return $query->where('name', 'LIKE', '%' . $request->name . '%');
-        })->when($request->category, function ($query) use ($request){
-            return $query->where('category_id', $request->category);
-        })
-        ->get();
+            Book::query()->when($request->name != null, function ($query) use ($request) {
+                return $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })->when($request->category, function ($query) use ($request) {
+                return $query->where('category_id', $request->category);
+            })
+            ->get();
         if ($request->name != null) {
             $data['search_string'] = $request->name;
         }
@@ -237,13 +244,13 @@ class BookController extends Controller
         return view('books.user_books', $data);
     }
 
-    public function view_book($id, $user_info=null)
+    public function view_book($id, $user_info = null)
     {
-        $data['data']=Book::find($id);
-        if ($user_info!=null) {
-            $data['books'] = IssuedBooks::with('user')->where('book_id',$id)->where('return_status','Issued')->get();
+        $data['data'] = Book::find($id);
+        if ($user_info != null) {
+            $data['books'] = IssuedBooks::with('user')->where('book_id', $id)->where('return_status', 'Issued')->get();
             return view('books.modal.view_status', $data);
-        }else{
+        } else {
             return view('books.modal.user_book', $data);
         }
     }

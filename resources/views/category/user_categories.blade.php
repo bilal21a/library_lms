@@ -84,7 +84,7 @@
                                     @foreach ($popular_books as $book)
                                         <div class="col-12 col-md-6 col-xl-12 mb-2"
                                             onclick="book_detail({{ $book->id }})">
-                                            <div class="card sh-11 sh-sm-14">
+                                            <div class="card">
                                                 <div class="row g-0 h-100">
                                                     <div class="col-auto">
                                                         <img src="{{ $book->image_url }}" alt="books"
