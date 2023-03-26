@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
 
     // profile routes
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/getData/{type}', [ProfileController::class, 'getData'])->name('profile.getData');
     Route::get('profile/get_issued_books', [ProfileController::class, 'get_issued_books'])->name('profile.get_issued_books');
     Route::get('profile/get_returned_books', [ProfileController::class, 'get_returned_books'])->name('profile.get_returned_books');
     Route::get('profile/get_requested_books', [ProfileController::class, 'get_requested_books'])->name('profile.get_requested_books');

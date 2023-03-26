@@ -80,7 +80,9 @@
                                             <span>Issued Books</span>
                                             <i data-acorn-icon="book" class="text-primary"></i>
                                         </div>
-                                        <div class="cta-1 text-primary">14</div>
+                                        <div class="cta-1 text-primary issued_books">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +93,9 @@
                                             <span>Returned Books</span>
                                             <i data-acorn-icon="book" class="text-primary"></i>
                                         </div>
-                                        <div class="cta-1 text-primary">14</div>
+                                        <div class="cta-1 text-primary returned_books">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +106,9 @@
                                             <span>Requested Books</span>
                                             <i data-acorn-icon="book" class="text-primary"></i>
                                         </div>
-                                        <div class="cta-1 text-primary">14</div>
+                                        <div class="cta-1 text-primary requested_books">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +119,9 @@
                                             <span>Reserved Books</span>
                                             <i data-acorn-icon="book" class="text-primary"></i>
                                         </div>
-                                        <div class="cta-1 text-primary">14</div>
+                                        <div class="cta-1 text-primary reserved_books">
+                                            <div class="spinner-border text-primary" role="status"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,11 +139,11 @@
                 {{-- Returned Books Data will Render Here --}}
                 <div class="tab-pane fade" id="returnedBooksTab" role="tabpanel">
                 </div>
-                
+
                 {{-- Requested Books Data will Render Here --}}
                 <div class="tab-pane fade" id="requestedBooksTab" role="tabpanel">
                 </div>
-                
+
                 {{-- Reserved Books Data will Render Here --}}
                 <div class="tab-pane fade" id="reservedBooksTab" role="tabpanel">
                 </div>
@@ -175,6 +183,26 @@
                 console.log('html: ', html);
                 $('#reservedBooksTab').html(html);
             }
+        });
+
+        var arr = ['issued_books', 'returned_books', 'requested_books', 'reserved_books']
+
+        $.each(arr, function(index, value) {
+            var myUrl = '{{ route('profile.getData', ':value') }}'
+            url = myUrl.replace(':value', value);
+
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $(`.${value}`).html(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error getting ' + value + ': ' + textStatus + ' - ' + errorThrown);
+                }
+            });
         });
     </script>
 @endsection
