@@ -24,4 +24,8 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    protected $casts = [
+        'qty' => 'integer',
+        'remaining' => 'integer',
+    ];
 }

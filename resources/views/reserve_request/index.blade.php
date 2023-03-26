@@ -12,7 +12,8 @@
             </div>
         </div>
 
-        <a href="{{route('reserve_request.add_reserved_request')}}" class="btn btn-icon btn-icon-start btn-primary mb-4" type="button">
+        <a href="{{ route('reserve_request.add_reserved_request') }}" class="btn btn-icon btn-icon-start btn-primary mb-4"
+            type="button">
             <i data-acorn-icon="plus"></i>
             <span>Reserve Book</span>
         </a>
@@ -20,11 +21,11 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['id', 'User Name', 'Book Name', 'Approved',  'Actions'];
+            $tableData = ['id', 'User Name', 'Book Name', 'Approved', 'Actions'];
         @endphp
         @include('common.table.table')
     </div>
-
+    @include('common.modal.add_edit_modal')
 @endsection
 
 @section('js_after')
@@ -37,7 +38,7 @@
     {{-- **Save Data** --}}
 
     <script>
-          function deleteData(id) {
+        function deleteData(id) {
             let singleDeleteDraw = {
                 ...dataTable
             };
@@ -73,5 +74,52 @@
                 }
             })
         }
+
+        function approveData(id) {
+            $('#myModal').modal('show');
+            var approveData_url = '{{ route('renew_request.show_reserve_approve_req', ':id') }}'
+            url = approveData_url.replace(':id', id);
+            event.preventDefault();
+            $('#modalTitle').html("Approve Reserve Request");
+            $('#add_data_form').html('');
+            $.get({
+                url: url,
+                success: function(data) {
+                    $('#edit_data_form').html(data);
+                },
+            });
+        }
+
+        $('#edit_data_form').on('submit', function(e) {
+            e.preventDefault();
+            let singleDeleteDraw = {
+                ...dataTable
+            };
+
+            var formData = new FormData(this);
+            console.log('formData: ', formData);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('reserve_request.approve_reserve') }}",
+                data: formData,
+                success: function(response) {
+                    myalert("success", response, 5000);
+                    singleDeleteDraw._fnDraw();
+                    $('#myModal').modal('hide')
+                },
+                error: function(xhr, status, error) {
+                    console.log('error: ', xhr.responseJSON);
+                    myalert("error", xhr.responseJSON, 10000);
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
     </script>
 @endsection

@@ -78,7 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('add_reserved_request', [ReserveRequestController::class, 'add_reserved_request'])->name('reserve_request.add_reserved_request');
     Route::post('save_reserved_request', [ReserveRequestController::class, 'save_reserved_request'])->name('reserve_request.save_reserved_request');
     Route::get('delete_reserved_request/{id}', [ReserveRequestController::class, 'delete_reserved_request'])->name('reserve_request.delete_reserved_request');
-    Route::get('approve_reserved_request/{id}', [ReserveRequestController::class, 'approve_reserved_request'])->name('reserve_request.approve_reserved_request');
+    Route::get('show_reserve_approve_req/{id}', [ReserveRequestController::class, 'show_reserve_approve_req'])->name('renew_request.show_reserve_approve_req');
+    Route::post('approve_reserve', [ReserveRequestController::class, 'approve_reserve'])->name('reserve_request.approve_reserve');
 
     // Renew Request
     Route::get('renew_request', [RenewRequestController::class, 'index'])->name('renew_request.index');

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 mb-5">
 
-                    <h1 class="mb-0 pb-0 display-4" id="title">Add Requested</h1>
+                    <h1 class="mb-0 pb-0 display-4" id="title">Generate Book Request</h1>
                 </div>
             </div>
         </div>
@@ -77,10 +77,11 @@
                 url: "{{ route('reserve_request.save_reserved_request') }}",
                 data: formData,
                 success: function(response) {
-
                     myalert("success", response, 5000);
-
-                    document.getElementById("requested_books").reset();
+                    document.getElementById("reserve_books").reset();
+                    setTimeout(function() {
+                        window.location.href = document.referrer;
+                    }, 3000);
                 },
                 error: function(xhr, status, error) {
                     myalert("error", xhr.responseJSON, 10000);
