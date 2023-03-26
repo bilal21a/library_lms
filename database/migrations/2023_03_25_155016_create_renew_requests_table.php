@@ -18,6 +18,7 @@ class CreateRenewRequestsTable extends Migration
             $table->integer('user_id');
             $table->integer('issued_book_id');
             $table->date('return_date');
+            $table->integer('approved')->default(0);
             $table->timestamps();
         });
     }
