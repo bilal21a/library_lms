@@ -21,7 +21,8 @@
                                 <img src="{{ $category->image_url }}" class="card-img-top sh-19" alt="card image">
                                 <div class="card-body pb-0">
                                     <h5 class="heading mb-3">
-                                        <a href="{{ route('book.user',['category'=>$category->id]) }}" class="body-link stretched-link">
+                                        <a href="{{ route('book.user', ['category' => $category->id]) }}"
+                                            class="body-link stretched-link">
                                             <span class="clamp-line sh-5" data-line="2"
                                                 style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">
                                                 <span class="badge"
@@ -75,45 +76,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <h2 class="small-title">Most Popular Books</h2>
-                        <div class="mb-5">
-                            <div class="row mb-n2">
-                                @foreach ($popular_books as $book)
-                                    <div class="col-12 col-md-6 col-xl-12 mb-2" onclick="book_detail({{ $book->id }})">
-                                        <div class="card sh-11 sh-sm-14">
-                                            <div class="row g-0 h-100">
-                                                <div class="col-auto">
-                                                    <img src="{{ $book->image_url }}" alt="books"
-                                                        class="card-img card-img-horizontal sw-10 sw-sm-14">
-                                                </div>
-                                                <div class="col position-static">
-                                                    <div class="card-body ">
-                                                        <div class="d-flex flex-column">
-                                                            <a href="#"
-                                                                class="stretched-link body-link">
-                                                                <div class="clamp-line" data-line="2"
-                                                                    style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">
-                                                                    {{ $book->name }}</div>
-                                                                <div class="text-muted mb-3">
-                                                                    @if (strlen($book->desc) > 30)
-                                                                        {{ substr($book->desc, 0, 30) . '...' }}
-                                                                    @else
-                                                                        {{ $book->desc }}
-                                                                    @endif
-                                                                </div>
-                                                            </a>
+                    @if ($popular_books->count() > 0)
+                        <div class="col-12">
+                            <h2 class="small-title">Most Popular Books</h2>
+                            <div class="mb-5">
+                                <div class="row mb-n2">
+                                    @foreach ($popular_books as $book)
+                                        <div class="col-12 col-md-6 col-xl-12 mb-2"
+                                            onclick="book_detail({{ $book->id }})">
+                                            <div class="card sh-11 sh-sm-14">
+                                                <div class="row g-0 h-100">
+                                                    <div class="col-auto">
+                                                        <img src="{{ $book->image_url }}" alt="books"
+                                                            class="card-img card-img-horizontal sw-10 sw-sm-14">
+                                                    </div>
+                                                    <div class="col position-static">
+                                                        <div class="card-body ">
+                                                            <div class="d-flex flex-column">
+                                                                <a href="#" class="stretched-link body-link">
+                                                                    <div class="clamp-line" data-line="2"
+                                                                        style="overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2;">
+                                                                        {{ $book->name }}</div>
+                                                                    <div class="text-muted mb-3">
+                                                                        @if (strlen($book->desc) > 30)
+                                                                            {{ substr($book->desc, 0, 30) . '...' }}
+                                                                        @else
+                                                                            {{ $book->desc }}
+                                                                        @endif
+                                                                    </div>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
