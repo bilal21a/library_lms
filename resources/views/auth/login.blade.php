@@ -5,6 +5,12 @@
             background: url("{{ asset('acron/img/background/background-blue.webp') }}") no-repeat center center fixed;
             background-size: cover;
         }
+
+        .logo-default {
+            width: 304px !important;
+            min-height: 55px !important;
+            background-repeat: round !important;
+        }
     </style>
 @endsection
 @section('content')
