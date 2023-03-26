@@ -15,26 +15,13 @@
         </div>
         <!-- Logo End -->
 
-        <!-- Language Switch Start -->
-        <div class="language-switch-container">
-            <button class="btn btn-empty language-button dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">EN</button>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">DE</a>
-                <a href="#" class="dropdown-item active">EN</a>
-                <a href="#" class="dropdown-item">ES</a>
-            </div>
-        </div>
-        <!-- Language Switch End -->
 
         @php
 
-            $user = 'dummy@gmail.com';
-            $user = explode('@', $user);
-            $user_name = substr($user[0], 0, 10);
+            $user_name = auth()->user()->name;
 
             $background = 'ECF5FF';
-            $text = '4F8CEE';
+            $text = '1ea8e7';
             $avatar = 'https://ui-avatars.com/api/?background=' . $background . '&color=' . $text . '&name=' . $user_name;
 
         @endphp
@@ -43,23 +30,16 @@
             <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false">
                 <img src="{{ $avatar }}" class="img-fluid rounded-xl profile" alt="thumb" id="contactImage">
-                <div class="name mt-1">Dummy </div>
+                <div class="name mt-1">{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-end user-menu wide">
                 <div class="row mb-1 ms-0 me-0">
-
                     <div class="col-6">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#">
-                                    <i data-acorn-icon="mobile" class="me-1" data-acorn-size="17"></i>
-                                    <span class="align-middle">Devices</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i data-acorn-icon="wallet" class="me-1" data-acorn-size="17"></i>
-                                    <span class="align-middle">Billing</span>
+                                <a href="{{ route('logout') }}">
+                                    <i data-acorn-icon="logout" class="me-1" data-acorn-size="17"></i>
+                                    <span class="align-middle">logout</span>
                                 </a>
                             </li>
                         </ul>
@@ -72,11 +52,6 @@
 
         <!-- Icons Menu Start -->
         <ul class="list-unstyled list-inline text-center menu-icons">
-            <li class="list-inline-item">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#searchPagesModal">
-                    <i data-acorn-icon="search" data-acorn-size="18"></i>
-                </a>
-            </li>
             <li class="list-inline-item">
                 <a href="#" id="colorButton">
                     <i data-acorn-icon="light-on" class="light" data-acorn-size="18"></i>

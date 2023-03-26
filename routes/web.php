@@ -95,5 +95,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 Auth::routes();
-
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
