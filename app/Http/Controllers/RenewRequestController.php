@@ -35,7 +35,11 @@ class RenewRequestController extends Controller
                 return $data->issued_book->user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
-                return $data->issued_book->book->name;
+                if (strlen($data->issued_book->book->name) > 70) {
+                    return substr($data->issued_book->book->name, 0, 70) . '...';
+                } else {
+                    return $data->issued_book->book->name;
+                }
             })
             ->addColumn('approved', function ($data) {
                 if ($data->approved == 0) {
@@ -82,7 +86,7 @@ class RenewRequestController extends Controller
         $data['issue'] = IssuedBooks::find($id);
         $data['user'] = $data['issue']->user;
         $data['book'] = $data['issue']->book;
-        return view('renew_request.modal.renew_add',$data);
+        return view('renew_request.modal.renew_add', $data);
     }
 
     public function show_renew_approve_req($id)

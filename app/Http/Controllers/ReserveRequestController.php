@@ -20,7 +20,7 @@ class ReserveRequestController extends Controller
     }
     public function get_reserved_request(Request $request)
     {
-        $data = ReservedRequest::select(['id', 'user_id', 'book_id', 'approved','created_at'])->get();
+        $data = ReservedRequest::select(['id', 'user_id', 'book_id', 'approved', 'created_at'])->get();
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 if ($data->approved == 0) {
@@ -33,10 +33,14 @@ class ReserveRequestController extends Controller
                 return Carbon::parse($data->reserve_request)->format('d M,Y');
             })
             ->addColumn('user_name', function ($data) {
-                return $data-> user->complete_name_styled();
+                return $data->user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
-                return $data->book->name;
+                if (strlen($data->book->name) > 70) {
+                    return substr($data->book->name, 0, 70) . '...';
+                } else {
+                    return $data->book->name;
+                }
             })
             ->addColumn('approved', function ($data) {
                 if ($data->approved == 0) {

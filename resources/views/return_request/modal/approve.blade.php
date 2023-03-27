@@ -36,22 +36,17 @@
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
     <label class="required fw-bold fs-6 mb-2">Fine</label>
-    <input type="number" name="fine" class="form-control form-control-solid mb-3 mb-lg-0"
-        placeholder="Fine" value="0" required>
+    <input type="number" name="fine" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Fine"
+        value="0" required>
     <div class="fv-plugins-message-container invalid-feedback"></div>
 </div>
 
 <input type="hidden" name="id" value="{{ $return->id }}">
 
-@if ($data->remaining < 1)
-    <div class="alert alert-danger" role="alert">
-        <a href="#" class="alert-link">{{ $data->name }}</a> Book is not available in Library
-    </div>
-@else
-    <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
-        <button class="btn btn-primary" type="submit">
-            <span class="indicator-label">Approve</span>
-        </button>
-    </div>
-@endif
+
+<div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
+    <button class="btn btn-primary" type="submit">
+        <span class="indicator-label">Approve</span>
+    </button>
+</div>

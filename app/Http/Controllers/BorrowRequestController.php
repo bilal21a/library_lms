@@ -34,7 +34,11 @@ class BorrowRequestController extends Controller
                     return $data->user->complete_name_styled();
                 })
                 ->addColumn('book_name', function ($data) {
-                    return $data->book->name;
+                    if (strlen($data->book->name) > 70) {
+                        return substr($data->book->name, 0, 70) . '...';
+                    } else {
+                        return $data->book->name;
+                    }
                 })
                 ->addColumn('approved', function ($data) {
                     if ($data->approved == 0) {
@@ -43,7 +47,7 @@ class BorrowRequestController extends Controller
                         return "Approved";
                     }
                 })
-                ->rawColumns(['action', 'user_name', 'book_name','approved'])
+                ->rawColumns(['action', 'user_name', 'book_name', 'approved'])
                 ->make(true);
         }
     }

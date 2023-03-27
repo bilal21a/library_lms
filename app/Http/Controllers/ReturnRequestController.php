@@ -35,7 +35,11 @@ class ReturnRequestController extends Controller
                 return $data->user->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
-                return $data->issued_book->book->name;
+                if (strlen($data->issued_book->book->name) > 70) {
+                    return substr($data->issued_book->book->name, 0, 70) . '...';
+                } else {
+                    return $data->issued_book->book->name;
+                }
             })
             ->addColumn('approved', function ($data) {
                 if ($data->approved == 0) {
