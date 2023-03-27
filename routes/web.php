@@ -84,7 +84,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('return_request', [ReturnRequestController::class, 'index'])->name('return_request.index');
         Route::get('get_return_request', [ReturnRequestController::class, 'get_return_request'])->name('return_request.get_return_request');
         Route::get('return_request/add_return_request', [ReturnRequestController::class, 'add_return_request'])->name('return_request.add_return_request');
-        Route::post('save_return_request', [ReturnRequestController::class, 'save_return_request'])->name('return_request.save_return_request');
         Route::get('show_return_approve_req/{id}', [ReturnRequestController::class, 'show_return_approve_req'])->name('return_request.show_return_approve_req');
         Route::post('approve_return',[ReturnRequestController::class, 'approve_return'])->name('return_request.approve_return');
         Route::get('delete_return_request/{id}', [ReturnRequestController::class, 'delete_return_request'])->name('return_request.delete_return_request');
@@ -105,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('save_request', [RequestedBooksController::class, 'save_request'])->name('requested_books.save_request');
         Route::post('save_borrow_request', [BorrowRequestController::class, 'save_borrow_request'])->name('borrow_request.save_borrow_request');
         Route::post('save_reserved_request', [ReserveRequestController::class, 'save_reserved_request'])->name('reserve_request.save_reserved_request');
+        Route::match(['get', 'post'], 'save_return_request', [ReturnRequestController::class, 'save_return_request'])->name('return_request.save_return_request');
     });
 
     Route::group(['middleware' => ['role:student|faculty']], function () {

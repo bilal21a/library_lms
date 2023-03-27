@@ -15,4 +15,23 @@ class IssuedBooks extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function checkrenew()
+    {
+        $renew = RenewRequest::where('issued_book_id', $this->id)->where('user_id', auth()->id())->where('approved', 0)->count();
+        if ($renew > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function checkreturn()
+    {
+        $return = ReturnRequest::where('issued_book_id', $this->id)->where('user_id', auth()->id())->where('approved', 0)->count();
+        if ($return > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

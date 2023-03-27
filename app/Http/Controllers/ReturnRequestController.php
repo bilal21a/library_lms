@@ -19,7 +19,7 @@ class ReturnRequestController extends Controller
 
     public function get_return_request(Request $request)
     {
-        $data = ReturnRequest::with('issued_book')->select(['id', 'user_id','approved', 'issued_book_id'])->latest();
+        $data = ReturnRequest::with('issued_book')->select(['id', 'user_id', 'approved', 'issued_book_id'])->latest();
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 if ($data->approved == 0) {
@@ -29,7 +29,7 @@ class ReturnRequestController extends Controller
                 }
             })
             ->addColumn('issued_book_id', function ($data) {
-                return 'lib_'.$data->issued_book_id;
+                return 'lib_' . $data->issued_book_id;
             })
             ->addColumn('user_name', function ($data) {
                 return $data->user->complete_name_styled();
@@ -57,11 +57,14 @@ class ReturnRequestController extends Controller
 
     public function save_return_request(Request $request)
     {
-        $issued=IssuedBooks::find($request->issued_book_id);
+        $issued = IssuedBooks::find($request->issued_book_id);
         $data = new ReturnRequest();
         $data->user_id = $issued->user_id;
         $data->issued_book_id =  $request->issued_book_id;
         $data->save();
+        if ($request->redirect == true) {
+            return redirect()->back();
+        }
         return 'Success';
     }
 
@@ -88,7 +91,7 @@ class ReturnRequestController extends Controller
         $issue->return_status = "return";
         $issue->fine = $request->fine;
         $issue->save();
-        
+
         $book = Book::find($issue->book_id);
         $book->remaining = $book->remaining + 1;
         $book->save();

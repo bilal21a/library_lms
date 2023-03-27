@@ -42,6 +42,7 @@ class Book extends Model
             return false;
         }
     }
+ 
     protected $casts = [
         'qty' => 'integer',
         'remaining' => 'integer',
