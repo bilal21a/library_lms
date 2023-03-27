@@ -86,6 +86,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('get_return_request', [ReturnRequestController::class, 'get_return_request'])->name('return_request.get_return_request');
         Route::get('return_request/add_return_request', [ReturnRequestController::class, 'add_return_request'])->name('return_request.add_return_request');
         Route::post('save_return_request', [ReturnRequestController::class, 'save_return_request'])->name('return_request.save_return_request');
+        Route::get('show_return_approve_req/{id}', [ReturnRequestController::class, 'show_return_approve_req'])->name('return_request.show_return_approve_req');
+        Route::post('approve_return',[ReturnRequestController::class, 'approve_return'])->name('return_request.approve_return');
         Route::get('delete_return_request/{id}', [ReturnRequestController::class, 'delete_return_request'])->name('return_request.delete_return_request');
 
         // Borrow Request

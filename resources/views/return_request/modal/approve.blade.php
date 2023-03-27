@@ -1,5 +1,5 @@
 @php
-    $data = $renew->issued_book->book;
+    $data = $return->issued_book->book;
 @endphp
 <div class="row g-0 align-items-center">
     @if ($data->image_url != null)
@@ -25,22 +25,33 @@
     <h4>Availability</h4>
     <p class="text-alternate">{{ $data->remaining }}</p>
 </div>
+<div class="mb-3">
+    <h4>Issued Date</h4>
+    <p class="text-alternate">{{ $return->issued_book->issued_date }}</p>
+</div>
+<div class="mb-3">
+    <h4>Return Date</h4>
+    <p class="text-alternate">{{ $return->issued_book->return_date }}</p>
+</div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
-    <label class="required fw-bold fs-6 mb-2">New Return Date</label>
-    <input type="date" name="return_date" class="form-control form-control-solid mb-3 mb-lg-0"
-        placeholder="Return Date" value="{{ $renew->return_date }}" required>
+    <label class="required fw-bold fs-6 mb-2">Fine</label>
+    <input type="number" name="fine" class="form-control form-control-solid mb-3 mb-lg-0"
+        placeholder="Fine" value="0" required>
     <div class="fv-plugins-message-container invalid-feedback"></div>
-    @error('password')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
 </div>
 
-<input type="hidden" name="id" value="{{ $renew->id }}">
+<input type="hidden" name="id" value="{{ $return->id }}">
 
-<div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
-    <button class="btn btn-primary" type="submit">
-        <span class="indicator-label">Approve</span>
-    </button>
-</div>
+@if ($data->remaining < 1)
+    <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">{{ $data->name }}</a> Book is not available in Library
+    </div>
+@else
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary" type="submit">
+            <span class="indicator-label">Approve</span>
+        </button>
+    </div>
+@endif

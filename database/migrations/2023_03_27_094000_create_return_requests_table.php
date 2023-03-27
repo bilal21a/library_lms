@@ -16,7 +16,8 @@ class CreateReturnRequestsTable extends Migration
         Schema::create('return_requests', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('issue_book_id');
+            $table->integer('issued_book_id');
+            $table->integer('approved')->nullable()->default(0);
 
             $table->timestamps();
         });

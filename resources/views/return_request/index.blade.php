@@ -21,7 +21,7 @@
         {{-- -----Table----- --}}
         @php
             $tableName = 'datatable';
-            $tableData = ['issuedBook ID', 'User Name', 'Book Name', 'Action'];
+            $tableData = ['issuedBook ID', 'User Name', 'Book Name', 'Approved', 'Action'];
         @endphp
         @include('common.table.table')
     </div>
@@ -32,7 +32,7 @@
 @section('js_after')
     {{-- **Show Data** --}}
     <script>
-        var tabelDataArray = ['id', 'user_id', 'issue_book_id', 'action'];
+        var tabelDataArray = ['issued_book_id', 'user_name', 'book_name', 'approved', 'action'];
         var get_data_url = "{{ route('return_request.get_return_request') }}"
     </script>
     @include('common.js.get_data')
@@ -78,10 +78,10 @@
 
         function approveData(id) {
             $('#myModal').modal('show');
-            var approveData_url = '{{ route('renew_request.show_renew_approve_req', ':id') }}'
+            var approveData_url = '{{ route('return_request.show_return_approve_req', ':id') }}'
             url = approveData_url.replace(':id', id);
             event.preventDefault();
-            $('#modalTitle').html("Approve Renew Request");
+            $('#modalTitle').html("Approve Return Request");
             $('#add_data_form').html('');
             $.get({
                 url: url,
@@ -106,7 +106,7 @@
             });
             $.ajax({
                 type: "POST",
-                url: "{{ route('renew_request.approve_renew') }}",
+                url: "{{ route('return_request.approve_return') }}",
                 data: formData,
                 success: function(response) {
                     myalert("success", response, 5000);

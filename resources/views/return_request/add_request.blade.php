@@ -26,7 +26,7 @@
                                         <select id="issue_id_select" name="issued_book_id" class="form-select">
                                             <option value="" selected disabled>Select Issued Book ID</option>
                                             @foreach ($books as $book)
-                                                <option value="{{ $book->id }}">lib_{{ $book->id }}</option>
+                                                <option value="{{ $book->id }}">lib_{{ $book->book->id }}</option>
                                             @endforeach
                                         </select>
                                         <div class="fv-plugins-message-container invalid-feedback"></div>
@@ -34,22 +34,6 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="fv-row mb-5 fv-plugins-icon-container">
-                                        <label class="required fw-bold fs-6 mb-2">Select User</label>
-                                        <select id="inputState" name="user_name" class="form-select">
-                                            <option value="" selected disabled>Choose...</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->complete_name() }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="fv-plugins-message-container invalid-feedback"></div>
-                                        @error('user_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-
-
 
                                     <div class="fv-row mb-5 fv-plugins-icon-container">
                                         <label class="form-label">New Return Date</label>
