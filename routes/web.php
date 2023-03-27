@@ -93,6 +93,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('get_borrow_request', [BorrowRequestController::class, 'get_borrow_request'])->name('borrow_request.get_borrow_request');
         Route::get('borrow_request/add_borrow_request', [BorrowRequestController::class, 'add_borrow_request'])->name('borrow_request.add_borrow_request');
         Route::post('save_borrow_request', [BorrowRequestController::class, 'save_borrow_request'])->name('borrow_request.save_borrow_request');
+        Route::get('show_borrow_approve_req/{id}', [BorrowRequestController::class, 'show_borrow_approve_req'])->name('borrow_request.show_borrow_approve_req');
+        Route::post('approve_borrow', [BorrowRequestController::class, 'approve_borrow'])->name('borrow_request.approve_borrow');
         Route::get('delete_borrow_request/{id}', [BorrowRequestController::class, 'delete_borrow_request'])->name('borrow_request.delete_borrow_request');
     });
     Route::group(['middleware' => ['role:librarian|student|faculty']], function () {

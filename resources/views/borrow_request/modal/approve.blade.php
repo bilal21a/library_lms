@@ -1,5 +1,5 @@
 @php
-    $data = $renew->issued_book->book;
+    $data = $borrow->book;
 @endphp
 <div class="row g-0 align-items-center">
     @if ($data->image_url != null)
@@ -27,20 +27,29 @@
 </div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
-    <label class="required fw-bold fs-6 mb-2">New Return Date</label>
-    <input type="date" name="return_date" class="form-control form-control-solid mb-3 mb-lg-0"
-        placeholder="Return Date" value="{{ $renew->return_date }}" required>
+    <label class="required fw-bold fs-6 mb-2">Issue Date</label>
+    <input type="date" name="issue_date" class="form-control form-control-solid mb-3 mb-lg-0"
+        placeholder="Return Date" value="{{ $borrow->issue_date }}" required>
     <div class="fv-plugins-message-container invalid-feedback"></div>
-    @error('password')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
+</div>
+<div class="fv-row mb-5 fv-plugins-icon-container">
+    <label class="required fw-bold fs-6 mb-2">Return Date</label>
+    <input type="date" name="return_date" class="form-control form-control-solid mb-3 mb-lg-0"
+        placeholder="Return Date" value="{{ $borrow->return_date }}" required>
+    <div class="fv-plugins-message-container invalid-feedback"></div>
 </div>
 
-<input type="hidden" name="id" value="{{ $renew->id }}">
+<input type="hidden" name="id" value="{{ $borrow->id }}">
 
-<div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
-    <button class="btn btn-primary" type="submit">
-        <span class="indicator-label">Approve</span>
-    </button>
-</div>
+@if ($data->remaining < 1)
+    <div class="alert alert-danger" role="alert">
+        <a href="#" class="alert-link">{{ $data->name }}</a> Book is not available in Library
+    </div>
+@else
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary me-2" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary" type="submit">
+            <span class="indicator-label">Approve</span>
+        </button>
+    </div>
+@endif

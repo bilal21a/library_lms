@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 mb-5">
 
-                    <h1 class="mb-0 pb-0 display-4" id="title">Return Book</h1>
+                    <h1 class="mb-0 pb-0 display-4" id="title">Borrow Book</h1>
                 </div>
             </div>
         </div>

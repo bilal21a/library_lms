@@ -23,6 +23,12 @@
     </a>
 </li>
 <li>
+    <a class="{{ request()->is('requested_books*') ? 'active' : '' }}" href="{{ route('requested_books.index') }}">
+        <i data-acorn-icon="book" class="d-inline-block"></i>
+        <span class="label">Requested Books</span>
+    </a>
+</li>
+<li>
     <a class="{{ request()->is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">
         <i data-acorn-icon="category" class="d-inline-block"></i>
         <span class="label">Categories</span>
