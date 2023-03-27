@@ -23,6 +23,18 @@
     </a>
 </li>
 <li>
+    <a class="{{ request()->is('borrow_request*') ? 'active' : '' }}" href="{{ route('borrow_request.index') }}">
+        <i data-acorn-icon="book" class="d-inline-block"></i>
+        <span class="label">Borrow Requests</span>
+    </a>
+</li>
+<li>
+    <a class="{{ request()->is('return_request*') ? 'active' : '' }}" href="{{ route('return_request.index') }}">
+        <i data-acorn-icon="book" class="d-inline-block"></i>
+        <span class="label">Return Requests</span>
+    </a>
+</li>
+<li>
     <a class="{{ request()->is('requested_books*') ? 'active' : '' }}" href="{{ route('requested_books.index') }}">
         <i data-acorn-icon="book" class="d-inline-block"></i>
         <span class="label">Requested Books</span>

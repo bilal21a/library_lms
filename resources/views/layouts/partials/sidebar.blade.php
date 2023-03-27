@@ -14,12 +14,8 @@
             </a>
         </div>
         <!-- Logo End -->
-
-
         @php
-            
             $user_name = auth()->user()->name;
-            
             $background = 'ECF5FF';
             $text = '1ea8e7';
             $avatar = 'https://ui-avatars.com/api/?background=' . $background . '&color=' . $text . '&name=' . $user_name;
