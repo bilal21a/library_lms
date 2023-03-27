@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowRequestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IssuedBooksController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RenewRequestController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RequestedBooksController;
 use App\Http\Controllers\ReserveRequestController;
+use App\Http\Controllers\ReturnRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -78,6 +80,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('show_renew_approve_req/{id}', [RenewRequestController::class, 'show_renew_approve_req'])->name('renew_request.show_renew_approve_req');
         Route::post('approve_renew', [RenewRequestController::class, 'approve_renew'])->name('renew_request.approve_renew');
         Route::get('get_issue_data_on_renew/{id}', [RenewRequestController::class, 'get_issue_data_on_renew'])->name('renew_request.get_issue_data_on_renew');
+
+        // Return Request
+        Route::get('return_request', [ReturnRequestController::class, 'index'])->name('return_request.index');
+        Route::get('get_return_request', [ReturnRequestController::class, 'get_return_request'])->name('return_request.get_return_request');
+        Route::get('return_request/add_return_request', [ReturnRequestController::class, 'add_return_request'])->name('return_request.add_return_request');
+        Route::post('save_return_request', [ReturnRequestController::class, 'save_return_request'])->name('return_request.save_return_request');
+        Route::get('delete_return_request/{id}', [ReturnRequestController::class, 'delete_return_request'])->name('return_request.delete_return_request');
+
+        // Borrow Request
+        Route::get('borrow_request', [BorrowRequestController::class, 'index'])->name('borrow_request.index');
+        Route::get('get_borrow_request', [BorrowRequestController::class, 'get_borrow_request'])->name('borrow_request.get_borrow_request');
+        Route::get('borrow_request/add_borrow_request', [BorrowRequestController::class, 'add_borrow_request'])->name('borrow_request.add_borrow_request');
+        Route::post('save_borrow_request', [BorrowRequestController::class, 'save_borrow_request'])->name('borrow_request.save_borrow_request');
+        Route::get('delete_borrow_request/{id}', [BorrowRequestController::class, 'delete_borrow_request'])->name('borrow_request.delete_borrow_request');
     });
     Route::group(['middleware' => ['role:librarian|student|faculty']], function () {
         Route::get('books/view_book/{id}/{user_info?}', [BookController::class, 'view_book'])->name('book.view_book');
