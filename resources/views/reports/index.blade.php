@@ -12,6 +12,10 @@
                 <!-- Title End -->
             </div>
         </div>
+        <a href="{{ route('reports.print') }}" class="btn btn-icon btn-icon-start btn-primary mb-4 download_btn" type="button">
+            <i data-acorn-icon="arrow-double-right"></i>
+            <span>Generate Report</span>
+        </a>
         <!-- Title and Top Buttons End -->
 
         <div class="row g-2">

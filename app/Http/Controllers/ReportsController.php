@@ -16,6 +16,10 @@ class ReportsController extends Controller
     {
         return view('reports.index');
     }
+    public function reports_print()
+    {
+        return view('reports.print');
+    }
 
     public function reports_getData($type)
     {

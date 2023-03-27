@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('reports', [ReportsController::class, 'index'])->name('reports.index');
+        Route::get('reports_print', [ReportsController::class, 'reports_print'])->name('reports.print');
         Route::get('reports_get/{type}', [ReportsController::class, 'reports_getData'])->name('reports.getData');
 
         // Users Management
