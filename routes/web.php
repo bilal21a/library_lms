@@ -68,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('reserve_request', [ReserveRequestController::class, 'index'])->name('reserve_request.index');
         Route::get('get_reserved_request', [ReserveRequestController::class, 'get_reserved_request'])->name('reserve_request.get_reserved_request');
         Route::get('reserve_request/add_reserved_request', [ReserveRequestController::class, 'add_reserved_request'])->name('reserve_request.add_reserved_request');
-        Route::post('save_reserved_request', [ReserveRequestController::class, 'save_reserved_request'])->name('reserve_request.save_reserved_request');
         Route::get('delete_reserved_request/{id}', [ReserveRequestController::class, 'delete_reserved_request'])->name('reserve_request.delete_reserved_request');
         Route::get('show_reserve_approve_req/{id}', [ReserveRequestController::class, 'show_reserve_approve_req'])->name('renew_request.show_reserve_approve_req');
         Route::post('approve_reserve', [ReserveRequestController::class, 'approve_reserve'])->name('reserve_request.approve_reserve');
@@ -94,7 +93,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('borrow_request', [BorrowRequestController::class, 'index'])->name('borrow_request.index');
         Route::get('get_borrow_request', [BorrowRequestController::class, 'get_borrow_request'])->name('borrow_request.get_borrow_request');
         Route::get('borrow_request/add_borrow_request', [BorrowRequestController::class, 'add_borrow_request'])->name('borrow_request.add_borrow_request');
-        Route::post('save_borrow_request', [BorrowRequestController::class, 'save_borrow_request'])->name('borrow_request.save_borrow_request');
         Route::get('show_borrow_approve_req/{id}', [BorrowRequestController::class, 'show_borrow_approve_req'])->name('borrow_request.show_borrow_approve_req');
         Route::post('approve_borrow', [BorrowRequestController::class, 'approve_borrow'])->name('borrow_request.approve_borrow');
         Route::get('delete_borrow_request/{id}', [BorrowRequestController::class, 'delete_borrow_request'])->name('borrow_request.delete_borrow_request');
@@ -105,6 +103,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('save_renew_request', [RenewRequestController::class, 'save_renew_request'])->name('renew_request.save_renew_request');
         Route::get('add_request', [RequestedBooksController::class, 'add_request'])->name('requested_books.add_request');
         Route::post('save_request', [RequestedBooksController::class, 'save_request'])->name('requested_books.save_request');
+        Route::post('save_borrow_request', [BorrowRequestController::class, 'save_borrow_request'])->name('borrow_request.save_borrow_request');
+        Route::post('save_reserved_request', [ReserveRequestController::class, 'save_reserved_request'])->name('reserve_request.save_reserved_request');
     });
 
     Route::group(['middleware' => ['role:student|faculty']], function () {

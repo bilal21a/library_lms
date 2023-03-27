@@ -57,7 +57,6 @@ class BorrowRequestController extends Controller
 
     public function save_borrow_request(Request $request)
     {
-
         $user = new BorrowRequest();
         $user->book_id = $request->book_name;
         $user->user_id = $request->user_name;

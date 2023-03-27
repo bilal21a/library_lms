@@ -49,8 +49,38 @@
                 Book</button>
         </div>
     @endif
+@else
+    @if ($data->checkborrowed())
+        <div class="">
+            <div class="alert alert-primary" role="alert">You have Borrowed This Book</div>
+        </div>
+    @else
+        <div class="borrowbox" style="display:none">
+            <div class="fv-row mb-5 fv-plugins-icon-container">
+                <label class="form-label">Issued Date</label>
+                <input type="date" class="form-control" id="issue_date" />
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="fv-row mb-5 fv-plugins-icon-container">
+                <label class="form-label">Return Date</label>
+                <input type="date" class="form-control" id="return_date" />
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <input type="hidden" id="book_id" value="{{ $data->id }}">
+            <input type="hidden" id="user_id" value="{{ auth()->id() }}">
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-primary me-2 BorrowMe" onClick="BorrowMe()">Borrow
+                Book</button>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-primary me-2 saveBorrow" style="display: none"
+                onClick="saveBorrow({{ $data->id }})">Borrow Book</button>
+        </div>
+    @endif
 @endif
 <div class="reservebox"></div>
+
 
 <script>
     function reserveMe(id) {
@@ -70,6 +100,36 @@
                 $('.reserveMe').hide();
                 $('.reservebox').html(
                     '<div class="alert alert-primary" role="alert">You have reserved This Book</div>');
+            },
+        });
+    }
+
+    function BorrowMe() {
+        $('.borrowbox').show()
+        $('.BorrowMe').hide()
+        $('.saveBorrow').show()
+    }
+
+    function saveBorrow(id) {
+        console.log('id: ', id);
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('borrow_request.save_borrow_request') }}",
+            data: {
+                issue_date: $('#issue_date').val(),
+                return_date: $('#return_date').val(),
+                book_name: $('#book_id').val(),
+                user_name: $('#user_id').val(),
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                console.log('data: ', data);
+                $('.saveBorrow').hide();
+                $('.borrowbox').html(
+                    '<div class="alert alert-primary" role="alert">Borrowed Request Sent to Librarian</div>'
+                    );
             },
         });
     }

@@ -33,6 +33,15 @@ class Book extends Model
             return false;
         }
     }
+    public function checkborrowed()
+    {
+        $reserve=BorrowRequest::where('book_id',$this->id)->where('user_id',auth()->id())->where('approved',0)->count();
+        if ($reserve>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     protected $casts = [
         'qty' => 'integer',
         'remaining' => 'integer',
