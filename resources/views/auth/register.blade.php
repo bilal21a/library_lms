@@ -72,10 +72,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">{{ __('E-Mail Address') }}</label>
+                                    <label for="email" class="form-label">{{ __('E-Mail Address') }} <br><small class="text-muted">Allowed formats @gmail.com @yahoo.com</small></label>
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="name">
+                                        value="{{ old('email') }}" pattern="^[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com$" required autocomplete="name">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">

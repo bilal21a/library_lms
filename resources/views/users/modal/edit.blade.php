@@ -9,9 +9,11 @@
 </div>
 
 <div class="fv-row mb-5 fv-plugins-icon-container">
-    <label class="required fw-bold fs-6 mb-2">Email</label>
+    <label class="required fw-bold fs-6 mb-2">Email
+        <br><small class="text-muted">Allowed formats @gmail.com @yahoo.com</small>
+    </label>
     <input type="email" name="email" class="form-control form-control-solid mb-3 mb-lg-0"
-        placeholder="example@domain.com" value="{{ $user->email }}" disabled>
+        placeholder="example@domain.com" pattern="^[a-zA-Z0-9._%+-]+@(gmail|yahoo)\.com$" value="{{ $user->email }}" disabled>
     <div class="fv-plugins-message-container invalid-feedback"></div>
     @error('email')
         <span class="text-danger">{{ $message }}</span>
