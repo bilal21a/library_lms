@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('get_issuedBooks', [IssuedBooksController::class, 'get_data'])->name('get_issuedBooks');
         Route::post('return_issuedBooks', [IssuedBooksController::class, 'return_issuedBooks'])->name('return_issuedBooks');
         Route::get('return_book/{id}', [IssuedBooksController::class, 'return_book'])->name('return_book');
+        Route::post('check_book_availability', [IssuedBooksController::class, 'check_book_availability'])->name('check_book_availability');
         Route::post('return_book_data', [IssuedBooksController::class, 'return_book_data'])->name('return_book_data');
         // Request Books
         Route::get('requested_books', [RequestedBooksController::class, 'index'])->name('requested_books.index');

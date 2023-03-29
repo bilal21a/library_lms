@@ -211,4 +211,10 @@ class IssuedBooksController extends Controller
 
         return 'Success';
     }
+
+    public function check_book_availability(Request $request)
+    {
+        $book = Book::find($request->book_id);
+        return $book->remaining;
+    }
 }
