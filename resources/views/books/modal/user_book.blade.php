@@ -58,7 +58,8 @@
         <div class="borrowbox" style="display:none">
             <div class="fv-row mb-5 fv-plugins-icon-container">
                 <label class="form-label">Issued Date</label>
-                <input type="date" class="form-control" id="issue_date" />
+                <input type="date" class="form-control" id="issue_date" min="{{ date('Y-m-d') }}"
+                    value="{{ date('Y-m-d') }}" />
                 <div class="fv-plugins-message-container invalid-feedback"></div>
             </div>
             <div class="fv-row mb-5 fv-plugins-icon-container">
@@ -112,25 +113,29 @@
 
     function saveBorrow(id) {
         console.log('id: ', id);
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('borrow_request.save_borrow_request') }}",
-            data: {
-                issue_date: $('#issue_date').val(),
-                return_date: $('#return_date').val(),
-                book_name: $('#book_id').val(),
-                user_name: $('#user_id').val(),
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(data) {
-                console.log('data: ', data);
-                $('.saveBorrow').hide();
-                $('.borrowbox').html(
-                    '<div class="alert alert-primary" role="alert">Borrowed Request Sent to Librarian</div>'
+        var issue_date = $('#issue_date').val();
+        var return_date = $('#return_date').val();
+        if (issue_date != '' && return_date != '') {
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('borrow_request.save_borrow_request') }}",
+                data: {
+                    issue_date: issue_date,
+                    return_date: return_date,
+                    book_name: $('#book_id').val(),
+                    user_name: $('#user_id').val(),
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    console.log('data: ', data);
+                    $('.saveBorrow').hide();
+                    $('.borrowbox').html(
+                        '<div class="alert alert-primary" role="alert">Borrowed Request Sent to Librarian</div>'
                     );
-            },
-        });
+                },
+            });
+        }
     }
 </script>
