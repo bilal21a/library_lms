@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         $role= $this->getRoleNames()[0];
         $color= $role=='student' ? 'tertiary':($role=='faculty' ? 'quaternary':'primary');
-        return '<span>'. $this->name. '&nbsp;<span class="badge bg-'. $color.'">'. $this->getRoleNames()[0].'</span></span>';
+        if ($this->deleted_at!=null) {
+            return '<s><span>' . $this->name . '&nbsp;<span class="badge bg-' . $color . '">' . $this->getRoleNames()[0] . '</span></s>';
+        }else{
+            return '<span>' . $this->name . '&nbsp;<span class="badge bg-' . $color . '">' . $this->getRoleNames()[0] . '</span>';
+        }
     }
 }

@@ -13,13 +13,18 @@ class RequestedBooksController extends Controller
 {
     public function index()
     {
-     return view('requested_books.index');
+        return view('requested_books.index');
     }
 
     public function get_requested_books(Request $request)
     {
-        $data = RequestedBooks::select(['id', 'user_id', 'book_name', 'author_name', 'subject', 'desc']);
+        $data = RequestedBooks::with(['user' => function ($query) {
+            $query->withTrashed();
+        }])->select(['id', 'user_id', 'book_name', 'author_name', 'subject', 'desc']);
         return DataTables::of($data)
+            ->addColumn('user_name', function ($data) {
+                return $data->user->complete_name_styled();
+            })
             ->addColumn('action', function ($data) {
                 return ' <button class="btn btn-sm btn-icon btn-icon-start btn-outline-primary ms-1" onclick="deleteData(' . $data->id . ')" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none"
@@ -36,6 +41,7 @@ class RequestedBooksController extends Controller
                 <span class="d-none d-xxl-inline-block">Delete</span>
             </button';
             })
+            ->rawColumns(['action', 'user_name'])
             ->make(true);
     }
 
@@ -43,7 +49,7 @@ class RequestedBooksController extends Controller
     {
         $users = User::get();
 
-        return view('requested_books.add_request',compact('users'));
+        return view('requested_books.add_request', compact('users'));
     }
 
     public function save_request(Request $request)
@@ -61,23 +67,22 @@ class RequestedBooksController extends Controller
             return response()->json($validate->errors()->first(), 500);
         }
         // dd($request->all());
-        $data=new RequestedBooks();
-        $data->user_id=$request->user_name;
-        $data->book_name=$request->book_name;
-        $data->author_name=$request->author_name;
-        $data->subject=$request->subject;
-        $data->desc=$request->desc;
-        $data->book_id=2;
+        $data = new RequestedBooks();
+        $data->user_id = $request->user_name;
+        $data->book_name = $request->book_name;
+        $data->author_name = $request->author_name;
+        $data->subject = $request->subject;
+        $data->desc = $request->desc;
+        $data->book_id = 2;
         $data->save();
         return 'Success';
-
     }
 
     public function delete_book_request($id)
     {
-       $data=RequestedBooks::find($id);
-       $data->delete();
+        $data = RequestedBooks::find($id);
+        $data->delete();
 
-       return 'Deleted Successfully';
+        return 'Deleted Successfully';
     }
 }

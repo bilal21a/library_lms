@@ -21,7 +21,9 @@ class BorrowRequestController extends Controller
 
     public function get_borrow_request(Request $request)
     { {
-            $data = BorrowRequest::select(['id', 'user_id', 'book_id', 'issue_date', 'return_date', 'approved']);
+            $data = BorrowRequest::with(['user' => function ($query) {
+                $query->withTrashed();
+            }], 'book')->select(['id', 'user_id', 'book_id', 'issue_date', 'return_date', 'approved']);
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
                     if ($data->approved == 0) {

@@ -19,7 +19,9 @@ class ReturnRequestController extends Controller
 
     public function get_return_request(Request $request)
     {
-        $data = ReturnRequest::with('issued_book')->select(['id', 'user_id', 'approved', 'issued_book_id'])->latest();
+        $data = ReturnRequest::with(['user' => function ($query) {
+            $query->withTrashed();
+        }],'issued_book')->select(['id', 'user_id', 'approved', 'issued_book_id'])->latest();
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 if ($data->approved == 0) {

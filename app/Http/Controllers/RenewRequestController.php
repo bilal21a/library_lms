@@ -32,7 +32,7 @@ class RenewRequestController extends Controller
                 return  'lib_' . $data->issued_book->id;
             })
             ->addColumn('user_name', function ($data) {
-                return $data->issued_book->user->complete_name_styled();
+                return $data->issued_book->user()->withTrashed()->first()->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 if (strlen($data->issued_book->book->name) > 70) {

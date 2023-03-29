@@ -33,7 +33,7 @@ class ReserveRequestController extends Controller
                 return Carbon::parse($data->reserve_request)->format('d M,Y');
             })
             ->addColumn('user_name', function ($data) {
-                return $data->user->complete_name_styled();
+                return $data->user()->withTrashed()->first()->complete_name_styled();
             })
             ->addColumn('book_name', function ($data) {
                 if (strlen($data->book->name) > 70) {

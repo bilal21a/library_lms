@@ -24,13 +24,16 @@ class IssuedBooksController extends Controller
 
     public function get_data()
     {
-        $data = IssuedBooks::with('user', 'book')->select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
+        $data = IssuedBooks::with(['user' => function ($query) {
+            $query->withTrashed();
+        }], 'book')->select(['id', 'user_id', 'book_id', 'issued_date', 'return_date', 'return_status', 'fine']);
         return DataTables::of($data)
             ->addColumn('lib_id', function ($data) {
                 return 'lib_' . $data->id;
             })
             ->addColumn('action', function ($data) {
-                return $this->get_buttons($data->id);
+
+                return ($data->user->deleted_at != null ? '' : $this->edit_button($data->id)) . $this->delete_button($data->id);
             })
             ->addColumn('user_name', function ($data) {
                 return $data->user->complete_name_styled();
